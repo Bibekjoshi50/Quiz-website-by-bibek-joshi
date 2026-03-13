@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bibek Creative Quiz 🎓</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--crimson:#C0392B;--crimson2:#8B0000;--blue:#1A3C6E;--blue2:#122d52;--gold:#F4C430;--gold2:#c9960e;--green:#27AE60;--red:#E74C3C;--purple:#8E44AD;--orange:#E67E22;--bg:#FDF6EC;--card:#FFFFFF;--text:#1a1a2e;--muted:#7f8c8d;--radius:18px;--shadow:0 8px 32px rgba(26,60,110,.13)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 8% 15%,rgba(192,57,43,.07) 0%,transparent 50%),radial-gradient(circle at 92% 85%,rgba(26,60,110,.07) 0%,transparent 50%),repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(244,196,48,.04) 40px,rgba(244,196,48,.04) 80px);pointer-events:none;z-index:0}
+.wrapper{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:16px 14px 70px}
+header{text-align:center;padding:24px 0 18px}
+.logo-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--crimson),var(--crimson2));color:#fff;border-radius:50px;padding:8px 18px;margin-bottom:12px;font-family:'Baloo 2',cursive;font-weight:800;font-size:.9rem;box-shadow:0 4px 14px rgba(192,57,43,.4)}
+h1{font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(1.7rem,5vw,2.6rem);color:var(--blue);line-height:1.1}
+h1 span{color:var(--crimson)}
+.tagline{color:var(--muted);font-size:.9rem;margin-top:4px}
+.screen{display:none;animation:fadeUp .35s ease}.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:16px}
+.card-title{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;color:var(--blue);margin-bottom:13px;display:flex;align-items:center;gap:7px}
+.setup-grid{display:grid;gap:13px}
+.field label{display:block;font-weight:800;font-size:.79rem;color:var(--blue);margin-bottom:6px;letter-spacing:.3px;text-transform:uppercase}
+.field select,.field input[type=text]{width:100%;padding:10px 14px;border:2.5px solid #e0e0e0;border-radius:11px;font-family:'Nunito',sans-serif;font-size:.95rem;color:var(--text);background:#fafafa;transition:border-color .2s;appearance:none}
+.field select:focus,.field input:focus{outline:none;border-color:var(--blue);background:#fff}
+.select-wrap{position:relative}.select-wrap::after{content:'▾';position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--blue);pointer-events:none}
+.chip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px}
+.chip{padding:9px 5px;border-radius:11px;border:2.5px solid #e0e0e0;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.79rem;color:var(--text);text-align:center;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:2px}
+.chip .icon{font-size:1.4rem}.chip:hover{border-color:var(--blue);background:#eef2ff}.chip.selected{border-color:var(--blue);background:var(--blue);color:#fff}
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.diff-chip{padding:11px 5px;border-radius:11px;border:2.5px solid #e0e0e0;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.79rem;color:var(--text);text-align:center;transition:all .15s}
+.diff-chip.sel-easy{border-color:var(--green);background:var(--green);color:#fff}
+.diff-chip.sel-medium{border-color:var(--gold2);background:var(--gold);color:#1a1a2e}
+.diff-chip.sel-hard{border-color:var(--orange);background:var(--orange);color:#fff}
+.diff-chip.sel-expert{border-color:var(--purple);background:var(--purple);color:#fff}
+.diff-chip.sel-mixed{border-color:var(--blue);background:var(--blue);color:#fff}
+.btn-start{width:100%;padding:14px;background:linear-gradient(135deg,var(--crimson),var(--crimson2));color:#fff;border:none;border-radius:13px;font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:700;cursor:pointer;margin-top:6px;box-shadow:0 6px 20px rgba(192,57,43,.35);transition:transform .15s,box-shadow .15s}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(192,57,43,.45)}
+.sec-label{font-size:.73rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.sec-label::after{content:'';flex:1;height:1px;background:#e8e8e8}
+/* QUIZ */
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;flex-wrap:wrap;gap:7px}
+.quiz-meta{font-weight:800;color:var(--blue);font-size:.86rem;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.diff-badge{display:inline-block;padding:2px 9px;border-radius:50px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+.diff-badge.easy{background:#eafaf1;color:var(--green)}.diff-badge.medium{background:#fef9e7;color:var(--gold2)}.diff-badge.hard{background:#fef0e7;color:var(--orange)}.diff-badge.expert{background:#f4ecf7;color:var(--purple)}.diff-badge.mixed{background:#eef2ff;color:var(--blue)}
+.timer-badge{background:var(--blue);color:#fff;border-radius:50px;padding:5px 13px;font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;min-width:60px;text-align:center;transition:background .3s}
+.timer-badge.urgent{background:var(--crimson);animation:pulse .7s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.progress-bar-wrap{height:8px;background:#e8e8e8;border-radius:50px;overflow:hidden;margin-bottom:16px}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--crimson));border-radius:50px;transition:width .4s ease}
+.score-bar-live{display:flex;align-items:center;gap:7px;margin-bottom:11px}
+.score-bar-live span{font-size:.78rem;font-weight:800;color:var(--blue);white-space:nowrap}
+.score-bar-track{flex:1;height:6px;background:#e8e8e8;border-radius:50px;overflow:hidden}
+.score-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:50px;transition:width .4s}
+.q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;flex-wrap:wrap;gap:3px}
+.q-number{font-size:.74rem;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.q-type-tag{font-size:.69rem;font-weight:800;padding:2px 8px;border-radius:50px;text-transform:uppercase;letter-spacing:.4px}
+.q-text{font-family:'Baloo 2',cursive;font-size:1.15rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:16px}
+.options{display:grid;gap:8px}
+.opt-btn{padding:11px 14px;border-radius:11px;border:2.5px solid #e0e0e0;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.93rem;font-weight:600;color:var(--text);text-align:left;transition:all .15s;display:flex;align-items:center;gap:9px}
+.opt-letter{width:25px;height:25px;border-radius:50%;background:#e8e8e8;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0;transition:all .15s}
+.opt-btn:hover:not(:disabled){border-color:var(--blue);background:#eef2ff}.opt-btn:hover:not(:disabled) .opt-letter{background:var(--blue);color:#fff}
+.opt-btn.correct{border-color:var(--green);background:#eafaf1;color:var(--green)}.opt-btn.correct .opt-letter{background:var(--green);color:#fff}
+.opt-btn.wrong{border-color:var(--red);background:#fdf2f2;color:var(--red)}.opt-btn.wrong .opt-letter{background:var(--red);color:#fff}
+.opt-btn:disabled{cursor:default}
+.feedback-row{display:flex;align-items:flex-start;gap:8px;margin-top:12px;padding:11px;border-radius:11px;font-size:.88rem;line-height:1.5;opacity:0;transform:translateY(5px);transition:all .3s;pointer-events:none}
+.feedback-row.show{opacity:1;transform:none;pointer-events:auto}
+.feedback-row.correct-fb{background:#eafaf1;color:#1e8449}.feedback-row.wrong-fb{background:#fdf2f2;color:#922b21}
+.feedback-icon{font-size:1.2rem;flex-shrink:0}
+.btn-next{margin-top:14px;width:100%;padding:12px;background:var(--blue);color:#fff;border:none;border-radius:11px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;cursor:pointer;transition:background .2s,transform .15s;display:none}
+.btn-next:hover{background:var(--blue2);transform:translateY(-1px)}.btn-next.visible{display:block}
+
+/* ══ LEAVE QUIZ MODAL ══ */
+#leave-modal{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+#leave-modal.show{opacity:1;pointer-events:auto}
+.leave-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(6px)}
+.leave-box{position:relative;z-index:1;background:#fff;border-radius:24px;padding:32px 28px;max-width:340px;width:90%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.25);transform:scale(.7) translateY(30px);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+#leave-modal.show .leave-box{transform:scale(1) translateY(0)}
+.leave-icon{font-size:3.8rem;display:block;margin-bottom:10px;animation:warnShake .5s ease}
+@keyframes warnShake{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(8deg)}}
+.leave-title{font-family:'Baloo 2',cursive;font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:6px}
+.leave-sub{font-size:.9rem;color:var(--muted);line-height:1.5;margin-bottom:8px}
+.leave-progress-info{background:#f5f6fa;border-radius:12px;padding:12px 14px;margin:12px 0;text-align:left}
+.leave-progress-info .lpi-row{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;margin-bottom:4px}
+.leave-progress-info .lpi-row:last-child{margin-bottom:0}
+.leave-progress-info .lpi-label{color:var(--muted);font-weight:600}
+.leave-progress-info .lpi-val{font-family:'Baloo 2',cursive;font-weight:800;color:var(--blue)}
+.leave-progress-info .lpi-val.green{color:var(--green)}
+.leave-progress-info .lpi-val.red{color:var(--red)}
+.leave-actions{display:grid;gap:9px;margin-top:18px}
+.btn-leave-confirm{padding:13px;background:linear-gradient(135deg,var(--crimson),var(--crimson2));color:#fff;border:none;border-radius:12px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(192,57,43,.3);transition:transform .15s}
+.btn-leave-confirm:hover{transform:translateY(-1px)}
+.btn-leave-stay{padding:13px;background:linear-gradient(135deg,var(--green),#1e8449);color:#fff;border:none;border-radius:12px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(39,174,96,.3);transition:transform .15s}
+.btn-leave-stay:hover{transform:translateY(-1px)}
+.btn-leave-save{padding:11px;background:transparent;border:2.5px solid var(--blue);color:var(--blue);border-radius:12px;font-family:'Baloo 2',cursive;font-size:.98rem;font-weight:700;cursor:pointer;transition:all .15s}
+.btn-leave-save:hover{background:var(--blue);color:#fff}
+
+/* Leave button in quiz header */
+.btn-leave-quiz{background:rgba(192,57,43,.1);border:2px solid rgba(192,57,43,.3);color:var(--crimson);border-radius:50px;padding:5px 12px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px}
+.btn-leave-quiz:hover{background:var(--crimson);color:#fff;border-color:var(--crimson)}
+
+/* Partial result banner */
+.partial-banner{background:linear-gradient(135deg,#fef9e7,#fff8e1);border:2.5px solid var(--gold2);border-radius:14px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.partial-banner .pb-icon{font-size:1.8rem;flex-shrink:0}
+.partial-banner .pb-text .pb-title{font-family:'Baloo 2',cursive;font-weight:800;color:var(--gold2);font-size:.95rem}
+.partial-banner .pb-text .pb-sub{font-size:.8rem;color:var(--muted);margin-top:2px}
+
+/* ══ ANSWER OVERLAY POPUP ══ */
+#answer-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .25s}
+#answer-overlay.show{opacity:1;pointer-events:auto}
+.overlay-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
+.overlay-box{position:relative;z-index:1;border-radius:28px;padding:36px 32px;text-align:center;max-width:360px;width:90%;transform:scale(.6) translateY(40px);transition:transform .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+#answer-overlay.show .overlay-box{transform:scale(1) translateY(0)}
+.overlay-box.correct-box{background:linear-gradient(145deg,#1a7a4a,#27AE60)}
+.overlay-box.wrong-box{background:linear-gradient(145deg,#8B0000,#C0392B)}
+.overlay-box.timeout-box{background:linear-gradient(145deg,#7a5a00,#c9960e)}
+.overlay-main-icon{font-size:5rem;margin-bottom:8px;display:block;animation:iconBounce .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes iconBounce{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.2) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+.overlay-title{font-family:'Baloo 2',cursive;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:6px}
+.overlay-sub{font-size:.95rem;color:rgba(255,255,255,.85);margin-bottom:14px;line-height:1.4}
+.overlay-pts{display:inline-block;background:rgba(255,255,255,.22);border-radius:50px;padding:6px 18px;font-family:'Baloo 2',cursive;font-weight:800;color:#fff;font-size:1.15rem;margin-bottom:16px}
+.overlay-close-btn{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);color:#fff;border-radius:12px;padding:10px 28px;font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s}
+.overlay-close-btn:hover{background:rgba(255,255,255,.35)}
+/* Auto-advance countdown ring */
+.auto-ring-wrap{margin:12px auto 0;position:relative;width:52px;height:52px;display:none}
+.auto-ring-wrap.show{display:block}
+.auto-ring-bg{fill:none;stroke:rgba(255,255,255,.25);stroke-width:5}
+.auto-ring-fg{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;transform-origin:center;transform:rotate(-90deg);transition:stroke-dashoffset .9s linear}
+.auto-ring-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',cursive;font-weight:800;font-size:1.1rem;color:#fff}
+.auto-ring-label{font-size:.72rem;color:rgba(255,255,255,.7);margin-top:4px;text-align:center}
+
+/* Streak fire animation */
+.streak-fire{font-size:2.5rem;animation:fireShake .4s infinite alternate}
+@keyframes fireShake{from{transform:rotate(-8deg) scale(1)}to{transform:rotate(8deg) scale(1.1)}}
+
+/* Screen flash effects */
+.correct-flash{animation:flashGreen .5s ease}
+.wrong-flash{animation:flashRed .5s ease}
+@keyframes flashGreen{0%,100%{background:var(--bg)}40%{background:#d5f5e3}}
+@keyframes flashRed{0%,100%{background:var(--bg)}40%{background:#fde8e8}}
+
+/* Floating score pop */
+.score-pop{position:fixed;font-family:'Baloo 2',cursive;font-weight:800;font-size:1.6rem;color:var(--green);pointer-events:none;z-index:10000;animation:scorePop 1.2s forwards}
+@keyframes scorePop{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(1.3)}}
+
+/* Confetti canvas */
+#confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:9998}
+
+/* Audio toggle button */
+.audio-toggle{position:fixed;bottom:22px;right:16px;background:var(--blue);color:#fff;border:none;border-radius:50px;padding:8px 15px;font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:700;cursor:pointer;z-index:100;box-shadow:0 4px 14px rgba(26,60,110,.35);transition:background .2s}
+.audio-toggle:hover{background:var(--blue2)}
+
+/* RESULTS */
+.result-hero{text-align:center;padding:6px 0 18px}
+.result-emoji{font-size:4rem;margin-bottom:7px;animation:bounce .6s ease}
+@keyframes bounce{0%,100%{transform:scale(1)}40%{transform:scale(1.2)}70%{transform:scale(.95)}}
+.result-score{font-family:'Baloo 2',cursive;font-size:3rem;font-weight:800;color:var(--blue);line-height:1}
+.result-score span{color:var(--crimson)}
+.result-label{color:var(--muted);font-size:.88rem;margin-top:3px}
+.result-name{font-family:'Baloo 2',cursive;font-size:.95rem;font-weight:700;color:var(--blue);margin-top:4px}
+.result-message{font-family:'Baloo 2',cursive;font-size:1.15rem;font-weight:700;color:var(--text);margin-top:9px}
+.iq-box{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:13px;padding:14px;margin:12px 0;text-align:center}
+.iq-box .iq-val{font-family:'Baloo 2',cursive;font-size:2.3rem;font-weight:800}
+.iq-box .iq-lbl{font-size:.79rem;opacity:.8;margin-top:2px}
+.iq-box .iq-desc{font-size:.87rem;margin-top:5px;font-weight:700}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.stat-box{text-align:center;padding:12px 4px;border-radius:11px;background:#f5f6fa}
+.stat-box .val{font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800}
+.stat-box .lbl{font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.st-c .val{color:var(--green)}.st-w .val{color:var(--red)}.st-t .val{color:var(--gold2)}.st-s .val{color:var(--blue)}
+/* LEADERBOARD */
+.lb-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:11px;background:#f5f6fa;margin-bottom:7px;transition:background .15s}
+.lb-row:hover{background:#eef2ff}
+.lb-rank{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;color:var(--blue);width:28px;text-align:center;flex-shrink:0}
+.lb-rank.gold{color:#c9960e}.lb-rank.silver{color:#7f8c8d}.lb-rank.bronze{color:#a04000}
+.lb-info{flex:1;min-width:0}
+.lb-name{font-weight:800;font-size:.9rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-sub{font-size:.75rem;color:var(--muted)}
+.lb-score{font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:800;color:var(--crimson);flex-shrink:0}
+.lb-pct{font-size:.75rem;color:var(--muted);text-align:right}
+/* HISTORY */
+.hist-item{padding:10px 13px;border-radius:11px;background:#f5f6fa;margin-bottom:7px;display:flex;align-items:center;gap:10px}
+.hist-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.hist-info{flex:1;min-width:0}
+.hist-title{font-weight:700;font-size:.87rem;color:var(--text)}
+.hist-sub{font-size:.74rem;color:var(--muted);margin-top:1px}
+.hist-score{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--blue);flex-shrink:0}
+/* TABS */
+.tab-bar{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px}
+.tab-btn{padding:8px 14px;border-radius:50px;border:2px solid #e0e0e0;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;color:var(--muted);white-space:nowrap;transition:all .15s;flex-shrink:0}
+.tab-btn.active{border-color:var(--blue);background:var(--blue);color:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+/* REVIEW */
+.review-list{display:grid;gap:8px}
+.review-item{padding:11px;border-radius:11px;border-left:4px solid;background:#fafafa}
+.review-item.r-c{border-color:var(--green)}.review-item.r-w{border-color:var(--red)}
+.r-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px}
+.r-tag{font-size:.66rem;font-weight:800;padding:2px 6px;border-radius:50px;text-transform:uppercase}
+.r-q{font-weight:700;font-size:.86rem;margin-bottom:3px;color:var(--text)}
+.r-info{font-size:.8rem;color:var(--muted)}
+.ans-c{color:var(--green);font-weight:800}.ans-w{color:var(--red);font-weight:800}
+/* RESULT ACTIONS */
+.result-actions{display:grid;gap:8px;margin-top:14px}
+.btn-outline{padding:11px;border-radius:11px;border:2.5px solid var(--blue);background:transparent;color:var(--blue);font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;cursor:pointer;transition:all .15s}
+.btn-outline:hover{background:var(--blue);color:#fff}
+.btn-danger{padding:9px;border-radius:11px;border:2px solid var(--red);background:transparent;color:var(--red);font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .15s}
+.btn-danger:hover{background:var(--red);color:#fff}
+.error-box{background:#fdf2f2;border:2px solid var(--red);border-radius:11px;padding:12px;margin-top:11px;color:var(--red);font-weight:700;text-align:center;font-size:.86rem}
+/* SAVE TOAST */
+.save-toast{position:fixed;bottom:20px;right:20px;background:var(--green);color:#fff;padding:10px 18px;border-radius:50px;font-family:'Baloo 2',cursive;font-weight:700;font-size:.9rem;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.save-toast.show{opacity:1;transform:translateY(0)}
+/* LOADING */
+.loading-state{text-align:center;padding:40px 20px}
+.spinner{width:46px;height:46px;border-radius:50%;border:5px solid #e0e0e0;border-top-color:var(--crimson);animation:spin .8s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* WELCOME BACK */
+.welcome-back{background:linear-gradient(135deg,#eef2ff,#fff);border:2px solid var(--blue);border-radius:13px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.wb-icon{font-size:2rem;flex-shrink:0}
+.wb-info .wb-name{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--blue)}
+.wb-info .wb-sub{font-size:.8rem;color:var(--muted);margin-top:2px}
+.empty-state{text-align:center;padding:30px 20px;color:var(--muted)}
+.empty-state .empty-icon{font-size:3rem;margin-bottom:8px}
+.empty-state p{font-size:.9rem}
+@media(max-width:480px){.stats-row{grid-template-columns:repeat(2,1fr)}.diff-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+<header>
+  <div class="logo-badge"><span>🎓</span> Bibek Creative Quiz</div>
+  <h1>Learn. Play. <span>Shine.</span></h1>
+  <p class="tagline">with <strong>Bibek Sir</strong> · Classes 6–10 · Nepal 🇳🇵</p>
+</header>
+
+<!-- SAVE TOAST -->
+<div class="save-toast" id="save-toast">💾 Progress saved!</div>
+
+<!-- ══ SETUP ══ -->
+<div id="screen-setup" class="screen active">
+  <div id="welcome-back-box" style="display:none"></div>
+  <div class="card">
+    <div class="card-title">👤 Student Info</div>
+    <div class="setup-grid">
+      <div class="field">
+        <label>Your Name</label>
+        <input type="text" id="student-name" placeholder="Enter your name…" maxlength="30">
+      </div>
+      <div class="field">
+        <label>Your Class</label>
+        <div class="select-wrap">
+          <select id="sel-class">
+            <option value="6">Class 6</option><option value="7">Class 7</option>
+            <option value="8" selected>Class 8</option><option value="9">Class 9</option>
+            <option value="10">Class 10</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📚 Choose Category</div>
+    <div class="sec-label">Academic Subjects</div>
+    <div class="chip-grid" id="subject-grid">
+      <button class="chip selected" data-subj="Mathematics"><span class="icon">➕</span>Mathematics</button>
+      <button class="chip" data-subj="Science"><span class="icon">🔬</span>Science</button>
+      <button class="chip" data-subj="Social Studies"><span class="icon">🌏</span>Social Studies</button>
+      <button class="chip" data-subj="English"><span class="icon">📖</span>English</button>
+      <button class="chip" data-subj="Nepali Language"><span class="icon">🏔️</span>Nepali</button>
+      <button class="chip" data-subj="Computer Science"><span class="icon">💻</span>Computer</button>
+    </div>
+    <div class="sec-label" style="margin-top:13px">Nepal Special & IQ</div>
+    <div class="chip-grid">
+      <button class="chip" data-subj="Nepal GK"><span class="icon">🗺️</span>Nepal GK</button>
+      <button class="chip" data-subj="Nepali Culture"><span class="icon">🎉</span>Culture &amp; Festivals</button>
+      <button class="chip" data-subj="Nepal History"><span class="icon">🏯</span>Nepal History</button>
+      <button class="chip" data-subj="Nepal Geography"><span class="icon">⛰️</span>Geography</button>
+      <button class="chip" data-subj="IQ and Logic"><span class="icon">🧠</span>IQ &amp; Logic</button>
+      <button class="chip" data-subj="Mixed All"><span class="icon">🎲</span>Mixed All</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">⚙️ Quiz Settings</div>
+    <div class="setup-grid">
+      <div class="field">
+        <label>🎯 Difficulty</label>
+        <div class="diff-grid" id="diff-grid">
+          <button class="diff-chip" data-diff="Easy">🟢 Easy</button>
+          <button class="diff-chip" data-diff="Medium">🟡 Medium</button>
+          <button class="diff-chip" data-diff="Hard">🟠 Hard</button>
+          <button class="diff-chip" data-diff="Expert">🔴 Expert</button>
+          <button class="diff-chip selected sel-mixed" data-diff="Mixed" style="grid-column:span 2">🎲 Mixed Levels</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>❓ Questions</label>
+        <div class="select-wrap">
+          <select id="sel-count">
+            <option value="5">5 (Quick)</option><option value="10" selected>10</option>
+            <option value="15">15</option><option value="20">20</option>
+            <option value="25">25 (Full Test)</option><option value="30">30 (Mega)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>⏱ Time per Question</label>
+        <div class="select-wrap">
+          <select id="sel-time">
+            <option value="15">15s (Lightning)</option><option value="30">30s</option>
+            <option value="45">45s</option><option value="60" selected>60s (Default)</option>
+            <option value="90">90s (IQ Mode)</option>
+            <option value="120">120s (Relaxed)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>⚡ Auto-Advance After Answer</label>
+        <div class="select-wrap">
+          <select id="sel-auto">
+            <option value="0">Off — Click Next manually</option>
+            <option value="2">2 seconds (Fast)</option>
+            <option value="3" selected>3 seconds (Default)</option>
+            <option value="5">5 seconds (Read explanation)</option>
+            <option value="8">8 seconds (Slow learner)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-start" id="btn-start">🚀 Start Quiz!</button>
+  <div id="setup-error" class="error-box" style="display:none"></div>
+  <!-- MY STATS BUTTON -->
+  <div style="margin-top:12px;display:grid;gap:8px">
+    <button class="btn-outline" id="btn-view-stats" onclick="showScreen('screen-stats')">📊 My Stats &amp; Leaderboard</button>
+  </div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div id="screen-quiz" class="screen">
+  <div class="quiz-header">
+    <div class="quiz-meta">
+      <button class="btn-leave-quiz" id="btn-leave-quiz" title="Leave Quiz">✕ Leave</button>
+      <span id="quiz-subj">Math</span>·<span id="quiz-class">Class 8</span>
+      <span class="diff-badge mixed" id="quiz-diff-badge">Mixed</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:7px">
+      <span style="font-size:.75rem;color:var(--muted);font-weight:700">⏱</span>
+      <div class="timer-badge" id="timer-badge">30</div>
+    </div>
+  </div>
+  <div class="score-bar-live">
+    <span id="score-live">0 pts</span>
+    <div class="score-bar-track"><div class="score-bar-fill" id="score-bar-fill" style="width:0%"></div></div>
+    <span id="streak-label" style="font-size:.78rem;font-weight:800;color:var(--orange)"></span>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+  <div class="card">
+    <div class="q-meta">
+      <div class="q-number" id="q-number">Q 1/10</div>
+      <div class="q-type-tag" id="q-type-tag" style="background:#eef2ff;color:var(--blue)">General</div>
+    </div>
+    <div class="q-text" id="q-text">Loading…</div>
+    <div class="options" id="options"></div>
+    <div class="feedback-row" id="feedback-row">
+      <span class="feedback-icon" id="feedback-icon"></span>
+      <span id="feedback-text"></span>
+    </div>
+    <button class="btn-next" id="btn-next">Next →</button>
+  </div>
+</div>
+
+<!-- ══ RESULTS ══ -->
+<div id="screen-results" class="screen">
+  <div class="card result-hero">
+    <div class="result-emoji" id="result-emoji">🏆</div>
+    <div class="result-score" id="result-score">8<span>/10</span></div>
+    <div class="result-label" id="result-pct">80%</div>
+    <div class="result-name" id="result-name">Student</div>
+    <div class="result-message" id="result-message">Great job!</div>
+  </div>
+  <div class="card">
+    <div class="iq-box">
+      <div class="iq-val" id="iq-val">105</div>
+      <div class="iq-lbl">Quiz IQ Score</div>
+      <div class="iq-desc" id="iq-desc">Above Average</div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box st-c"><div class="val" id="stat-correct">0</div><div class="lbl">✅ Correct</div></div>
+      <div class="stat-box st-w"><div class="val" id="stat-wrong">0</div><div class="lbl">❌ Wrong</div></div>
+      <div class="stat-box st-t"><div class="val" id="stat-time">0s</div><div class="lbl">⏱ Avg</div></div>
+      <div class="stat-box st-s"><div class="val" id="stat-streak">0</div><div class="lbl">🔥 Streak</div></div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-start" id="btn-retry">🔄 Try Again</button>
+      <button class="btn-outline" onclick="showScreen('screen-stats')">📊 View Leaderboard</button>
+      <button class="btn-outline" id="btn-new">⚙️ Change Settings</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📋 Answer Review</div>
+    <div class="review-list" id="review-list"></div>
+  </div>
+</div>
+
+<!-- ══ STATS / LEADERBOARD ══ -->
+<div id="screen-stats" class="screen">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tab-lb')">🏆 Leaderboard</button>
+    <button class="tab-btn" onclick="switchTab('tab-hist')">📜 My History</button>
+    <button class="tab-btn" onclick="switchTab('tab-subj')">📊 By Subject</button>
+  </div>
+
+  <div class="tab-content active" id="tab-lb">
+    <div class="card">
+      <div class="card-title">🏆 Top Students</div>
+      <div id="lb-list"><div class="loading-state"><div class="spinner"></div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-hist">
+    <div class="card">
+      <div class="card-title">📜 My Quiz History</div>
+      <div id="hist-list"><div class="loading-state"><div class="spinner"></div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-subj">
+    <div class="card">
+      <div class="card-title">📊 Performance by Subject</div>
+      <div id="subj-list"><div class="loading-state"><div class="spinner"></div></div></div>
+    </div>
+  </div>
+
+  <div style="display:grid;gap:8px;margin-top:4px">
+    <button class="btn-outline" onclick="showScreen('screen-setup')">← Back to Quiz</button>
+    <button class="btn-danger" id="btn-clear-data">🗑️ Clear My Data</button>
+  </div>
+</div>
+
+</div><!-- /wrapper -->
+
+<!-- LEAVE QUIZ MODAL -->
+<div id="leave-modal">
+  <div class="leave-backdrop" id="leave-backdrop"></div>
+  <div class="leave-box">
+    <span class="leave-icon">🚪</span>
+    <div class="leave-title">Leave Quiz?</div>
+    <div class="leave-sub">You're in the middle of a quiz. What would you like to do?</div>
+    <div class="leave-progress-info" id="leave-progress-info">
+      <div class="lpi-row"><span class="lpi-label">📝 Questions done</span><span class="lpi-val" id="lpi-done">0 / 10</span></div>
+      <div class="lpi-row"><span class="lpi-label">✅ Correct so far</span><span class="lpi-val green" id="lpi-correct">0</span></div>
+      <div class="lpi-row"><span class="lpi-label">🏆 Points earned</span><span class="lpi-val" id="lpi-pts">0 pts</span></div>
+      <div class="lpi-row"><span class="lpi-label">⏱ Time spent</span><span class="lpi-val" id="lpi-time">0s</span></div>
+    </div>
+    <div class="leave-actions">
+      <button class="btn-leave-stay" id="btn-leave-stay">▶ Continue Quiz</button>
+      <button class="btn-leave-save" id="btn-leave-save">💾 Save Partial &amp; Leave</button>
+      <button class="btn-leave-confirm" id="btn-leave-confirm">🗑️ Quit Without Saving</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFETTI CANVAS -->
+<canvas id="confetti-canvas" style="position:fixed;inset:0;pointer-events:none;z-index:9998;width:100%;height:100%"></canvas>
+
+<!-- ANSWER OVERLAY -->
+<div id="answer-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .25s">
+  <div id="overlay-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px)"></div>
+  <div id="overlay-box" class="overlay-box">
+    <span class="overlay-main-icon" id="overlay-icon">✅</span>
+    <div class="overlay-title" id="overlay-title">Correct!</div>
+    <div class="overlay-sub" id="overlay-sub">Well done!</div>
+    <div id="overlay-pts" class="overlay-pts" style="display:none">+10 pts</div>
+    <button class="overlay-close-btn" id="overlay-close-btn">Continue →</button>
+    <div class="auto-ring-wrap" id="auto-ring-wrap">
+      <svg width="52" height="52" viewBox="0 0 52 52">
+        <circle class="auto-ring-bg" cx="26" cy="26" r="22"/>
+        <circle class="auto-ring-fg" id="auto-ring-fg" cx="26" cy="26" r="22" stroke-dasharray="138.2" stroke-dashoffset="0"/>
+      </svg>
+      <div class="auto-ring-num" id="auto-ring-num">3</div>
+    </div>
+    <div class="auto-ring-label" id="auto-ring-label" style="display:none">auto-next</div>
+
+<!-- AUDIO TOGGLE -->
+<button class="audio-toggle" id="audio-toggle">🔊 Audio ON</button>
+
+<script>
+// ══════════════════════════════════════════════
+// 🎵 AUDIO + VISUAL FEEDBACK ENGINE
+// ══════════════════════════════════════════════
+let audioEnabled = true;
+let overlayCallback = null;
+
+// Audio toggle
+document.getElementById('audio-toggle').addEventListener('click', () => {
+  audioEnabled = !audioEnabled;
+  document.getElementById('audio-toggle').textContent = audioEnabled ? '🔊 Audio ON' : '🔇 Audio OFF';
+});
+
+// Web Audio Context for sound effects
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function playTone(freq, duration, type='sine', vol=0.3) {
+  if (!audioEnabled) return;
+  try {
+    const ctx = getAudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = type; osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    gain.gain.setValueAtTime(vol, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    osc.start(ctx.currentTime); osc.stop(ctx.currentTime + duration);
+  } catch(e) {}
+}
+
+function playCorrectSound() {
+  if (!audioEnabled) return;
+  // Happy ascending chime
+  setTimeout(() => playTone(523, 0.15, 'sine', 0.3), 0);
+  setTimeout(() => playTone(659, 0.15, 'sine', 0.3), 120);
+  setTimeout(() => playTone(784, 0.15, 'sine', 0.3), 240);
+  setTimeout(() => playTone(1047, 0.35, 'sine', 0.28), 360);
+}
+
+function playWrongSound() {
+  if (!audioEnabled) return;
+  // Sad descending buzz
+  setTimeout(() => playTone(330, 0.18, 'sawtooth', 0.25), 0);
+  setTimeout(() => playTone(277, 0.18, 'sawtooth', 0.22), 160);
+  setTimeout(() => playTone(220, 0.35, 'sawtooth', 0.2), 320);
+}
+
+function playTimeoutSound() {
+  if (!audioEnabled) return;
+  setTimeout(() => playTone(440, 0.12, 'square', 0.2), 0);
+  setTimeout(() => playTone(415, 0.12, 'square', 0.18), 140);
+  setTimeout(() => playTone(392, 0.3,  'square', 0.15), 280);
+}
+
+function playStreakSound() {
+  if (!audioEnabled) return;
+  [523,659,784,880,1047,1319].forEach((f,i) => setTimeout(() => playTone(f, 0.14, 'sine', 0.28), i*80));
+}
+
+// Web Speech API
+const CORRECT_PHRASES = [
+  "Congratulations! You said the right answer!",
+  "Excellent! That is correct! Well done!",
+  "Amazing! You got it right! Keep going!",
+  "Fantastic! Correct answer! You are brilliant!",
+  "Perfect! That's the right answer! Great job!",
+  "Outstanding! You nailed it! Wonderful!",
+];
+const WRONG_PHRASES = [
+  "Oops! That is the wrong answer. Try harder next time!",
+  "Oh no! That answer is incorrect. Don't give up!",
+  "Wrong answer. But keep going, you can do better!",
+  "That's not right. Study well and try again!",
+  "Incorrect answer. Learn from this and keep trying!",
+];
+const TIMEOUT_PHRASES = [
+  "Time is up! The clock ran out. Be faster next time!",
+  "Oh no! Time ran out! Try to answer more quickly!",
+];
+
+function speak(text) {
+  if (!audioEnabled) return;
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'en-US'; utt.rate = 0.92; utt.pitch = 1.1; utt.volume = 1;
+  // Try to pick a nice voice
+  const voices = window.speechSynthesis.getVoices();
+  const pref = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Female') || v.name.includes('Google') || v.name.includes('Samantha') || v.name.includes('Karen')));
+  if (pref) utt.voice = pref;
+  window.speechSynthesis.speak(utt);
+}
+
+// Confetti engine
+const confCanvas = document.getElementById('confetti-canvas');
+const confCtx = confCanvas.getContext('2d');
+let confParticles = [];
+let confAnimId = null;
+
+function resizeConf() {
+  confCanvas.width = window.innerWidth;
+  confCanvas.height = window.innerHeight;
+}
+resizeConf();
+window.addEventListener('resize', resizeConf);
+
+function launchConfetti(count = 90, colors = ['#F4C430','#27AE60','#1A3C6E','#fff','#C0392B','#8E44AD']) {
+  resizeConf();
+  confParticles = [];
+  for (let i = 0; i < count; i++) {
+    confParticles.push({
+      x: Math.random() * confCanvas.width,
+      y: -10 - Math.random() * 100,
+      w: 8 + Math.random() * 10,
+      h: 6 + Math.random() * 8,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * 360,
+      vx: (Math.random() - 0.5) * 4,
+      vy: 2 + Math.random() * 4,
+      vr: (Math.random() - 0.5) * 6,
+      alpha: 1,
+    });
+  }
+  if (confAnimId) cancelAnimationFrame(confAnimId);
+  animConf();
+}
+
+function animConf() {
+  confCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
+  confParticles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+    p.vy += 0.08; // gravity
+    if (p.y > confCanvas.height - 20) p.alpha -= 0.04;
+    confCtx.save();
+    confCtx.globalAlpha = Math.max(0, p.alpha);
+    confCtx.translate(p.x, p.y);
+    confCtx.rotate(p.rot * Math.PI / 180);
+    confCtx.fillStyle = p.color;
+    confCtx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+    confCtx.restore();
+  });
+  confParticles = confParticles.filter(p => p.alpha > 0);
+  if (confParticles.length > 0) confAnimId = requestAnimationFrame(animConf);
+  else confCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
+}
+
+// Floating +pts popup
+function showScorePop(pts, x, y) {
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = `+${pts} pts`;
+  el.style.left = (x || window.innerWidth/2 - 40) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1300);
+}
+
+// Overlay system
+const overlay = document.getElementById('answer-overlay');
+const overlayBox = document.getElementById('overlay-box');
+const overlayIcon = document.getElementById('overlay-icon');
+const overlayTitle = document.getElementById('overlay-title');
+const overlaySub = document.getElementById('overlay-sub');
+const overlayPts = document.getElementById('overlay-pts');
+const overlayCloseBtn = document.getElementById('overlay-close-btn');
+
+document.getElementById('overlay-backdrop').addEventListener('click', closeOverlay);
+overlayCloseBtn.addEventListener('click', closeOverlay);
+
+let autoAdvanceTimer = null;
+let autoAdvanceInterval = null;
+
+function showOverlay(type, pts, streakCount, explanation) {
+  overlay.classList.add('show');
+  overlayCloseBtn.textContent = 'Continue →';
+  if (type === 'correct') {
+    overlayBox.className = 'overlay-box correct-box';
+    const isStreak = streakCount >= 3;
+    overlayIcon.textContent = isStreak ? '🔥' : '🎉';
+    overlayTitle.textContent = isStreak ? `${streakCount}× Streak! 🔥` : 'Correct! 🎊';
+    overlaySub.innerHTML = `<strong>${CORRECT_PHRASES[Math.floor(Math.random()*CORRECT_PHRASES.length)]}</strong><br><br><span style="font-size:.88rem;opacity:.9">${explanation}</span>`;
+    overlayPts.style.display = 'inline-block';
+    overlayPts.textContent = `+${pts} pts`;
+  } else if (type === 'wrong') {
+    overlayBox.className = 'overlay-box wrong-box';
+    overlayIcon.textContent = '❌';
+    overlayTitle.textContent = 'Wrong Answer!';
+    overlaySub.innerHTML = `<strong>${WRONG_PHRASES[Math.floor(Math.random()*WRONG_PHRASES.length)]}</strong><br><br><span style="font-size:.88rem;opacity:.9">${explanation}</span>`;
+    overlayPts.style.display = 'none';
+  } else {
+    overlayBox.className = 'overlay-box timeout-box';
+    overlayIcon.textContent = '⏰';
+    overlayTitle.textContent = "Time's Up!";
+    overlaySub.innerHTML = `<strong>${TIMEOUT_PHRASES[Math.floor(Math.random()*TIMEOUT_PHRASES.length)]}</strong><br><br><span style="font-size:.88rem;opacity:.9">${explanation}</span>`;
+    overlayPts.style.display = 'none';
+  }
+
+  // Auto-advance countdown ring
+  const ringWrap = document.getElementById('auto-ring-wrap');
+  const ringFg   = document.getElementById('auto-ring-fg');
+  const ringNum  = document.getElementById('auto-ring-num');
+  const ringLbl  = document.getElementById('auto-ring-label');
+  clearTimeout(autoAdvanceTimer);
+  clearInterval(autoAdvanceInterval);
+
+  if (S.autoAdvance > 0) {
+    const total = S.autoAdvance;
+    const circumference = 138.2;
+    let left = total;
+    ringWrap.classList.add('show');
+    ringLbl.style.display = 'block';
+    ringNum.textContent = left;
+    ringFg.style.strokeDashoffset = '0';
+    // tick every second
+    autoAdvanceInterval = setInterval(() => {
+      left--;
+      ringNum.textContent = left;
+      ringFg.style.strokeDashoffset = String(circumference * (1 - left/total));
+      if (left <= 0) {
+        clearInterval(autoAdvanceInterval);
+        closeOverlay();
+      }
+    }, 1000);
+    // fallback
+    autoAdvanceTimer = setTimeout(closeOverlay, (total + 0.5) * 1000);
+  } else {
+    ringWrap.classList.remove('show');
+    ringLbl.style.display = 'none';
+  }
+}
+
+function closeOverlay() {
+  clearTimeout(autoAdvanceTimer);
+  clearInterval(autoAdvanceInterval);
+  document.getElementById('auto-ring-wrap').classList.remove('show');
+  document.getElementById('auto-ring-label').style.display = 'none';
+  overlay.classList.remove('show');
+  if (overlayCallback) { overlayCallback(); overlayCallback = null; }
+}
+
+// Flash the whole screen body
+function flashScreen(type) {
+  document.body.classList.remove('correct-flash','wrong-flash');
+  void document.body.offsetWidth; // reflow
+  document.body.classList.add(type === 'correct' ? 'correct-flash' : 'wrong-flash');
+  setTimeout(() => document.body.classList.remove('correct-flash','wrong-flash'), 600);
+}
+
+// ══════════════════════════════════════════════
+// MASSIVE BUILT-IN QUESTION BANK
+// ══════════════════════════════════════════════
+const QB = {
+  "Mathematics": [
+    {q:"What is the value of π (pi) approximately?",opts:["3.14","3.41","2.14","3.12"],ans:0,exp:"Pi (π) is approximately 3.14159... commonly rounded to 3.14.",diff:"Easy",type:"Math"},
+    {q:"What is the square root of 144?",opts:["11","12","13","14"],ans:1,exp:"12 × 12 = 144, so √144 = 12.",diff:"Easy",type:"Math"},
+    {q:"If a triangle has angles 60°, 70°, and x°, what is x?",opts:["40°","50°","60°","70°"],ans:1,exp:"Sum of angles in a triangle = 180°. So x = 180 - 60 - 70 = 50°.",diff:"Easy",type:"Math"},
+    {q:"What is 15% of 200?",opts:["25","30","35","40"],ans:1,exp:"15% of 200 = (15/100) × 200 = 30.",diff:"Easy",type:"Math"},
+    {q:"Simplify: 3/4 + 1/2",opts:["4/6","5/4","7/8","1/2"],ans:1,exp:"1/2 = 2/4, so 3/4 + 2/4 = 5/4.",diff:"Easy",type:"Math"},
+    {q:"What is 2³ × 2²?",opts:["2⁵","2⁶","4⁵","2⁴"],ans:0,exp:"When multiplying same base, add exponents: 2³ × 2² = 2^(3+2) = 2⁵ = 32.",diff:"Medium",type:"Math"},
+    {q:"The area of a circle with radius 7 cm is: (use π = 22/7)",opts:["154 cm²","144 cm²","132 cm²","176 cm²"],ans:0,exp:"Area = πr² = (22/7) × 7 × 7 = 22 × 7 = 154 cm².",diff:"Medium",type:"Math"},
+    {q:"If x + 5 = 13, what is 2x?",opts:["8","16","13","6"],ans:1,exp:"x = 13 - 5 = 8, therefore 2x = 16.",diff:"Easy",type:"Math"},
+    {q:"A shopkeeper buys goods for Rs.500 and sells for Rs.600. What is the profit percentage?",opts:["15%","20%","25%","10%"],ans:1,exp:"Profit = 100, Profit% = (100/500)×100 = 20%.",diff:"Medium",type:"Math"},
+    {q:"What is LCM of 12 and 18?",opts:["6","24","36","72"],ans:2,exp:"LCM of 12 and 18 is 36 (smallest number divisible by both).",diff:"Easy",type:"Math"},
+    {q:"Solve: 5x - 3 = 2x + 9",opts:["x=4","x=3","x=6","x=2"],ans:0,exp:"5x - 2x = 9 + 3 → 3x = 12 → x = 4.",diff:"Medium",type:"Math"},
+    {q:"What is the HCF of 48 and 64?",opts:["8","12","16","24"],ans:2,exp:"Factors: 48=2⁴×3, 64=2⁶. HCF = 2⁴ = 16.",diff:"Medium",type:"Math"},
+    {q:"The perimeter of a square with side 9 cm is:",opts:["27 cm","36 cm","45 cm","18 cm"],ans:1,exp:"Perimeter of square = 4 × side = 4 × 9 = 36 cm.",diff:"Easy",type:"Math"},
+    {q:"What is the value of (−3)²?",opts:["−9","9","6","−6"],ans:1,exp:"(−3)² = (−3) × (−3) = 9. Negative × negative = positive.",diff:"Easy",type:"Math"},
+    {q:"If a:b = 3:5 and b:c = 2:3, what is a:c?",opts:["2:5","6:15","1:5","3:10"],ans:1,exp:"a:b:c = 3×2 : 5×2 : 5×3 = 6:10:15, so a:c = 6:15.",diff:"Hard",type:"Math"},
+    {q:"The mean of 5, 10, 15, 20, 25 is:",opts:["10","12","15","20"],ans:2,exp:"Mean = (5+10+15+20+25)/5 = 75/5 = 15.",diff:"Easy",type:"Math"},
+    {q:"A train travels 360 km in 4 hours. What is its speed?",opts:["80 km/h","90 km/h","100 km/h","72 km/h"],ans:1,exp:"Speed = Distance/Time = 360/4 = 90 km/h.",diff:"Easy",type:"Math"},
+    {q:"What is the value of sin 90°?",opts:["0","1","−1","undefined"],ans:1,exp:"sin 90° = 1. This is a fundamental trigonometric value.",diff:"Medium",type:"Math"},
+    {q:"If compound interest on Rs.1000 at 10% per annum for 2 years, the amount is:",opts:["Rs.1200","Rs.1210","Rs.1100","Rs.1220"],ans:1,exp:"A = P(1+r/100)ⁿ = 1000(1.1)² = 1000×1.21 = Rs.1210.",diff:"Hard",type:"Math"},
+    {q:"The volume of a cube with side 5 cm is:",opts:["25 cm³","75 cm³","100 cm³","125 cm³"],ans:3,exp:"Volume of cube = side³ = 5³ = 125 cm³.",diff:"Easy",type:"Math"},
+    {q:"What is the sum of interior angles of a hexagon?",opts:["540°","720°","900°","360°"],ans:1,exp:"Sum = (n−2)×180 = (6−2)×180 = 4×180 = 720°.",diff:"Medium",type:"Math"},
+    {q:"Factorize: x² − 9",opts:["(x+3)(x−3)","(x−3)²","(x+9)(x−1)","(x+3)²"],ans:0,exp:"x²−9 = x²−3² = (x+3)(x−3) using difference of squares.",diff:"Medium",type:"Math"},
+    {q:"A pipe fills a tank in 6 hours. Another empties it in 12 hours. Both open: tank fills in?",opts:["4 hrs","12 hrs","6 hrs","9 hrs"],ans:1,exp:"Net rate = 1/6 − 1/12 = 1/12. Time = 12 hours.",diff:"Hard",type:"Math"},
+    {q:"What is the median of 3, 7, 2, 9, 5?",opts:["5","7","6","4"],ans:0,exp:"Arranged: 2,3,5,7,9. Middle value (3rd) = 5.",diff:"Easy",type:"Math"},
+    {q:"Simplify: (a²b³)² ÷ a²b⁴",opts:["a²b²","b²a","a⁴b⁶","a²b⁴"],ans:0,exp:"(a²b³)² = a⁴b⁶. Then a⁴b⁶ ÷ a²b⁴ = a²b².",diff:"Hard",type:"Math"},
+  ],
+  "Science": [
+    {q:"Which gas is most abundant in Earth's atmosphere?",opts:["Oxygen","Nitrogen","Carbon Dioxide","Argon"],ans:1,exp:"Nitrogen makes up about 78% of Earth's atmosphere.",diff:"Easy",type:"Science"},
+    {q:"What is the chemical formula of water?",opts:["H₂O","HO₂","H₂O₂","OH"],ans:0,exp:"Water consists of 2 hydrogen atoms and 1 oxygen atom: H₂O.",diff:"Easy",type:"Science"},
+    {q:"Which organ pumps blood throughout the body?",opts:["Liver","Lungs","Heart","Kidney"],ans:2,exp:"The heart is a muscular organ that pumps blood through the circulatory system.",diff:"Easy",type:"Science"},
+    {q:"What is the SI unit of force?",opts:["Joule","Watt","Newton","Pascal"],ans:2,exp:"Newton (N) is the SI unit of force. 1 Newton = 1 kg⋅m/s².",diff:"Easy",type:"Science"},
+    {q:"Photosynthesis occurs in which part of a plant?",opts:["Root","Stem","Flower","Chloroplast (in leaves)"],ans:3,exp:"Photosynthesis takes place in chloroplasts, found mainly in leaves.",diff:"Easy",type:"Science"},
+    {q:"What is the speed of light in vacuum?",opts:["3×10⁸ m/s","3×10⁶ m/s","3×10⁵ m/s","3×10⁹ m/s"],ans:0,exp:"Speed of light = 3×10⁸ m/s (300,000 km/s).",diff:"Medium",type:"Science"},
+    {q:"DNA stands for:",opts:["Deoxyribonucleic Acid","Dinitrogen Acid","Deoxyribose Nucleotide Acid","None"],ans:0,exp:"DNA = Deoxyribonucleic Acid — carries genetic information.",diff:"Medium",type:"Science"},
+    {q:"Which planet is called the Red Planet?",opts:["Venus","Jupiter","Mars","Saturn"],ans:2,exp:"Mars appears red due to iron oxide (rust) on its surface.",diff:"Easy",type:"Science"},
+    {q:"What is the powerhouse of the cell?",opts:["Nucleus","Ribosome","Mitochondria","Vacuole"],ans:2,exp:"Mitochondria produce energy (ATP) through cellular respiration — called the powerhouse.",diff:"Easy",type:"Science"},
+    {q:"Newton's First Law is also called:",opts:["Law of Gravitation","Law of Inertia","Law of Action-Reaction","Law of Acceleration"],ans:1,exp:"Newton's First Law (Law of Inertia): an object stays at rest or in motion unless acted upon by force.",diff:"Medium",type:"Science"},
+    {q:"Which acid is present in our stomach?",opts:["Sulfuric acid","Nitric acid","Hydrochloric acid","Acetic acid"],ans:2,exp:"Hydrochloric acid (HCl) in the stomach helps digest food.",diff:"Medium",type:"Science"},
+    {q:"The ozone layer protects Earth from:",opts:["Acid rain","UV radiation","Earthquakes","Volcanic eruptions"],ans:1,exp:"The ozone layer absorbs harmful ultraviolet (UV) radiation from the Sun.",diff:"Easy",type:"Science"},
+    {q:"Which blood group is the universal donor?",opts:["A","B","AB","O"],ans:3,exp:"Blood group O (negative) is the universal donor — can donate to any blood group.",diff:"Medium",type:"Science"},
+    {q:"Sound travels fastest through:",opts:["Air","Water","Vacuum","Steel"],ans:3,exp:"Sound travels fastest through solids like steel (~5100 m/s) because molecules are closely packed.",diff:"Hard",type:"Science"},
+    {q:"What is the chemical symbol for gold?",opts:["Go","Gd","Au","Ag"],ans:2,exp:"Gold's symbol Au comes from Latin 'Aurum'.",diff:"Medium",type:"Science"},
+    {q:"Malaria is caused by:",opts:["Bacteria","Virus","Protozoan (Plasmodium)","Fungus"],ans:2,exp:"Malaria is caused by Plasmodium protozoa, transmitted through Anopheles mosquito bites.",diff:"Medium",type:"Science"},
+    {q:"Which vitamin is produced by the skin in sunlight?",opts:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],ans:3,exp:"Skin produces Vitamin D when exposed to sunlight (UV-B rays).",diff:"Medium",type:"Science"},
+    {q:"What is the process of conversion of solid to gas called?",opts:["Evaporation","Condensation","Sublimation","Melting"],ans:2,exp:"Sublimation is direct conversion from solid to gas (e.g., dry ice, naphthalene).",diff:"Hard",type:"Science"},
+    {q:"The pH of pure water is:",opts:["5","6","7","8"],ans:2,exp:"Pure water has pH 7 — neutral (neither acidic nor basic).",diff:"Easy",type:"Science"},
+    {q:"Which gas do plants absorb during photosynthesis?",opts:["Oxygen","Nitrogen","Carbon Dioxide","Hydrogen"],ans:2,exp:"Plants absorb CO₂ from air and use sunlight + water to produce food and release oxygen.",diff:"Easy",type:"Science"},
+  ],
+  "Nepal GK": [
+    {q:"What is the national flower of Nepal?",opts:["Rose","Lotus","Rhododendron (Laligurans)","Marigold"],ans:2,exp:"Rhododendron (Laligurans in Nepali) is Nepal's national flower, found abundantly in the hills.",diff:"Easy",type:"Nepal GK"},
+    {q:"What is the national bird of Nepal?",opts:["Peacock","Eagle","Danfe (Himalayan Monal)","Crow"],ans:2,exp:"Danfe (Himalayan Monal) is Nepal's national bird — colorful and found in high mountains.",diff:"Easy",type:"Nepal GK"},
+    {q:"What is the national animal of Nepal?",opts:["Tiger","Elephant","Cow (Gai)","Snow Leopard"],ans:2,exp:"The Cow (Gai) is Nepal's national animal and is sacred in Hindu culture.",diff:"Easy",type:"Nepal GK"},
+    {q:"Nepal's national sport is:",opts:["Cricket","Football","Volleyball","Kabaddi"],ans:2,exp:"Volleyball was declared Nepal's national sport in 2017 BS.",diff:"Easy",type:"Nepal GK"},
+    {q:"What is unique about Nepal's national flag?",opts:["It is circular","It is the only non-rectangular national flag","It has 3 colors","It shows a dragon"],ans:1,exp:"Nepal's flag is the only non-rectangular (double pennon) national flag in the world.",diff:"Easy",type:"Nepal GK"},
+    {q:"How many provinces does Nepal have?",opts:["5","6","7","8"],ans:2,exp:"Nepal has 7 provinces since the 2015 constitution: Koshi, Madhesh, Bagmati, Gandaki, Lumbini, Karnali, Sudurpashchim.",diff:"Easy",type:"Nepal GK"},
+    {q:"The capital of Nepal is:",opts:["Pokhara","Biratnagar","Kathmandu","Lalitpur"],ans:2,exp:"Kathmandu is the capital and largest city of Nepal.",diff:"Easy",type:"Nepal GK"},
+    {q:"Nepal's currency is called:",opts:["Rupiah","Taka","Rupee","Dinar"],ans:2,exp:"Nepal uses the Nepali Rupee (रुपैयाँ) as its currency.",diff:"Easy",type:"Nepal GK"},
+    {q:"Which mountain is the highest in the world, located in Nepal?",opts:["K2","Kanchenjunga","Mount Everest","Makalu"],ans:2,exp:"Mount Everest (8,849 m) in Nepal is the highest peak in the world.",diff:"Easy",type:"Nepal GK"},
+    {q:"How many UNESCO World Heritage Sites are in the Kathmandu Valley?",opts:["5","6","7","8"],ans:2,exp:"Kathmandu Valley has 7 UNESCO sites: Pashupatinath, Boudhanath, Swayambhunath, Changu Narayan, and 3 Durbar Squares.",diff:"Medium",type:"Nepal GK"},
+    {q:"Where was Gautama Buddha born?",opts:["Kathmandu","Pokhara","Lumbini","Bhaktapur"],ans:2,exp:"Gautama Buddha was born in Lumbini, now in Rupandehi district of Nepal, around 563 BCE.",diff:"Easy",type:"Nepal GK"},
+    {q:"Nepal became a Federal Democratic Republic in which year (BS)?",opts:["2063","2065","2072","2060"],ans:1,exp:"Nepal was declared a Federal Democratic Republic on Jestha 15, 2065 BS (May 28, 2008 AD).",diff:"Medium",type:"Nepal GK"},
+    {q:"The total area of Nepal is approximately:",opts:["97,181 km²","147,181 km²","247,181 km²","47,181 km²"],ans:1,exp:"Nepal covers approximately 147,181 square kilometers.",diff:"Medium",type:"Nepal GK"},
+    {q:"Nepal shares its border with which two countries?",opts:["India and Pakistan","India and Bangladesh","India and China","China and Pakistan"],ans:2,exp:"Nepal is landlocked between India (south, east, west) and China/Tibet (north).",diff:"Easy",type:"Nepal GK"},
+    {q:"The first president of Nepal was:",opts:["Ram Baran Yadav","Bidhya Devi Bhandari","Yadav Prasad Pant","Pushpa Kamal Dahal"],ans:0,exp:"Ram Baran Yadav became Nepal's first President when Nepal was declared a Republic in 2008.",diff:"Medium",type:"Nepal GK"},
+    {q:"Nepal's national language is:",opts:["Maithili","Bhojpuri","Nepali","Newari"],ans:2,exp:"Nepali (also called Gorkhali) is Nepal's official and national language.",diff:"Easy",type:"Nepal GK"},
+    {q:"Sagarmatha National Park is famous for:",opts:["Rhinos","Tigers","Mount Everest","Snow Leopards only"],ans:2,exp:"Sagarmatha (Everest) National Park contains the world's highest peak and is a UNESCO site.",diff:"Easy",type:"Nepal GK"},
+    {q:"The tallest waterfall in Nepal is:",opts:["Jalbire Falls","Devi Falls","Seti Gorge","Kali Gandaki Falls"],ans:1,exp:"Devi Falls (Patale Chhango) in Pokhara is one of Nepal's most famous and powerful waterfalls.",diff:"Hard",type:"Nepal GK"},
+    {q:"Nepal's new constitution was promulgated in which year?",opts:["2063 BS","2070 BS","2072 BS","2075 BS"],ans:2,exp:"Nepal's constitution was promulgated on Ashwin 3, 2072 BS (September 20, 2015 AD).",diff:"Medium",type:"Nepal GK"},
+    {q:"The national anthem of Nepal begins with which word?",opts:["Sayaun","Nepal","Hamro","Priya"],ans:0,exp:"Nepal's national anthem begins with 'Sayaun thunga phulka hami...' meaning 'We are hundreds of flowers.'",diff:"Medium",type:"Nepal GK"},
+  ],
+  "Nepali Culture": [
+    {q:"Dashain is celebrated to worship which goddess?",opts:["Saraswati","Laxmi","Durga","Parvati"],ans:2,exp:"Dashain celebrates the victory of goddess Durga over the demon Mahishasura — good over evil.",diff:"Easy",type:"Culture"},
+    {q:"How many days does Dashain last?",opts:["5 days","10 days","15 days","7 days"],ans:2,exp:"Dashain lasts 15 days, starting from Ghatasthapana to Kojagrat Purnima.",diff:"Easy",type:"Culture"},
+    {q:"The most important day of Tihar for brothers and sisters is:",opts:["Kaag Tihar","Kukur Tihar","Bhai Tika","Laxmi Puja"],ans:2,exp:"Bhai Tika (5th day of Tihar) is when sisters apply tika on brothers' foreheads for their long life.",diff:"Easy",type:"Culture"},
+    {q:"Kukur Tihar is a day to worship:",opts:["Crows","Dogs","Cows","Brothers"],ans:1,exp:"Kukur Tihar (2nd day of Tihar) is dedicated to worshipping dogs, who are considered Yama's messengers.",diff:"Easy",type:"Culture"},
+    {q:"Teej is mainly celebrated by:",opts:["Men","Children","Women","Elders"],ans:2,exp:"Teej is a Hindu festival where women fast and pray for their husband's health and long life.",diff:"Easy",type:"Culture"},
+    {q:"Gai Jatra is celebrated by which community?",opts:["Brahmin","Chhetri","Newar","Gurung"],ans:2,exp:"Gai Jatra is a Newar festival of the Kathmandu Valley, celebrating those who died the previous year.",diff:"Medium",type:"Culture"},
+    {q:"Indra Jatra festival takes place in:",opts:["Pokhara","Bhaktapur","Kathmandu","Lumbini"],ans:2,exp:"Indra Jatra is held in Kathmandu, featuring the Kumari chariot procession and worship of Lord Indra.",diff:"Easy",type:"Culture"},
+    {q:"Lhosar is the New Year festival of which groups?",opts:["Tharu people","Brahmin and Chhetri","Tamang, Gurung and Sherpa","Madhesi people"],ans:2,exp:"Lhosar is celebrated as New Year by Tamang, Gurung, Sherpa, and other Himalayan communities.",diff:"Medium",type:"Culture"},
+    {q:"The national dress of Nepali men is:",opts:["Kurta Suruwal","Dhoti","Daura Suruwal","Lungi"],ans:2,exp:"Daura Suruwal (with Dhaka topi) is Nepal's national dress for men.",diff:"Easy",type:"Culture"},
+    {q:"Momo is a type of:",opts:["Sweet dessert","Fried snack","Steamed dumpling","Curry"],ans:2,exp:"Momo is a traditional Nepali/Tibetan steamed dumpling filled with meat or vegetables.",diff:"Easy",type:"Culture"},
+    {q:"Sel Roti is traditionally made during which festival?",opts:["Holi","Teej and Tihar","Buddha Jayanti","Janai Purnima"],ans:1,exp:"Sel Roti — a ring-shaped fried bread — is traditionally prepared during Teej and Tihar festivals.",diff:"Medium",type:"Culture"},
+    {q:"The Kumari is a:",opts:["Goddess of music","Living goddess (virgin girl)","Festival dance","Sacred cow"],ans:1,exp:"Kumari is a living goddess — a prepubescent girl worshipped as the goddess Taleju in Nepal.",diff:"Medium",type:"Culture"},
+    {q:"Bisket Jatra (Nepali New Year festival) is celebrated in:",opts:["Kathmandu","Pokhara","Bhaktapur","Janakpur"],ans:2,exp:"Bisket Jatra is celebrated in Bhaktapur as the Newari New Year festival with a chariot procession.",diff:"Medium",type:"Culture"},
+    {q:"Chhath Puja is mainly celebrated in which region of Nepal?",opts:["Hilly region","Himalayan region","Terai (Madhesh)","Kathmandu Valley"],ans:2,exp:"Chhath Puja is a major festival in the Terai region, celebrating the Sun God (Surya).",diff:"Medium",type:"Culture"},
+    {q:"Janai Purnima is a festival for changing the:",opts:["Sacred thread (Janai)","Clothes","Name","House"],ans:0,exp:"On Janai Purnima, Brahmin and Chhetri men change their sacred thread (Janai/Yagyopavit).",diff:"Medium",type:"Culture"},
+    {q:"Maruni is a traditional dance of which community?",opts:["Newars","Tharus","Gurungs and Magars","Sherpas"],ans:2,exp:"Maruni is a popular folk dance of the Gurung and Magar communities performed during festivals.",diff:"Hard",type:"Culture"},
+    {q:"Gundruk is a Nepali food made from:",opts:["Fermented meat","Fermented leafy vegetables","Dried fish","Spiced lentils"],ans:1,exp:"Gundruk is a traditional Nepali food made from fermented green leafy vegetables (mustard, radish leaves).",diff:"Medium",type:"Culture"},
+    {q:"The Tharu people are indigenous to which region of Nepal?",opts:["Himalayan region","Hilly region","Terai","Kathmandu Valley"],ans:2,exp:"The Tharu are an indigenous group of the Terai (plains) region of Nepal.",diff:"Medium",type:"Culture"},
+    {q:"Dashain tika is given by:",opts:["Friends","Priests only","Elders/seniors of the family","Government officials"],ans:2,exp:"During Dashain (Vijaya Dashami), elders apply tika (red, white, and yellow mixture with jamara) to younger family members.",diff:"Easy",type:"Culture"},
+    {q:"Maghe Sankranti marks the beginning of which Nepali month?",opts:["Falgun","Chaitra","Magh","Poush"],ans:2,exp:"Maghe Sankranti (Makar Sankranti) marks the beginning of the month of Magh and the end of the cold season.",diff:"Medium",type:"Culture"},
+  ],
+  "Nepal History": [
+    {q:"Who unified Nepal in 1768 AD?",opts:["Mahendra Shah","Prithvi Narayan Shah","Tribhuvan Shah","Jung Bahadur Rana"],ans:1,exp:"Prithvi Narayan Shah, King of Gorkha, unified Nepal through military campaigns, making Kathmandu the capital.",diff:"Easy",type:"History"},
+    {q:"The Rana oligarchy started in Nepal after which event?",opts:["Unification of Nepal","Kot Massacre (1846)","Anglo-Nepal War","French Revolution"],ans:1,exp:"Jung Bahadur Rana seized power after the Kot Massacre in 1846 and established 104 years of Rana rule.",diff:"Medium",type:"History"},
+    {q:"The Anglo-Nepal War (Gorkha War) resulted in which treaty?",opts:["Treaty of Kathmandu","Treaty of Sagauli","Treaty of Delhi","Treaty of Pokhara"],ans:1,exp:"The Treaty of Sugauli (1816) ended the Anglo-Nepal War, Nepal ceded territory to British India.",diff:"Medium",type:"History"},
+    {q:"The first democracy movement in Nepal was in:",opts:["2007 BS (1950 AD)","2046 BS (1990 AD)","2062 BS (2006 AD)","2065 BS (2008 AD)"],ans:0,exp:"The first democracy movement in 2007 BS ended the Rana regime and restored King Tribhuvan's power.",diff:"Medium",type:"History"},
+    {q:"The Panchayat system in Nepal was introduced by King:",opts:["Tribhuvan","Mahendra","Birendra","Gyanendra"],ans:1,exp:"King Mahendra introduced the Partyless Panchayat system in 1960, abolishing multiparty democracy.",diff:"Medium",type:"History"},
+    {q:"Jana Andolan II (People's Movement II) occurred in:",opts:["1990","2006","2008","2001"],ans:1,exp:"Jana Andolan II (2006) ended direct royal rule, restored parliament and led to Nepal becoming a republic.",diff:"Medium",type:"History"},
+    {q:"Nepal was declared a Federal Democratic Republic in:",opts:["2006","2007","2008","2009"],ans:2,exp:"On May 28, 2008 (Jestha 15, 2065 BS), Nepal was officially declared a Federal Democratic Republic.",diff:"Medium",type:"History"},
+    {q:"The Kot Massacre took place in which year?",opts:["1840","1846","1856","1860"],ans:1,exp:"The Kot Massacre took place in 1846 AD when Jung Bahadur Rana killed many nobles and seized power.",diff:"Hard",type:"History"},
+    {q:"Which dynasty built the magnificent temples in the Kathmandu Valley?",opts:["Shah dynasty","Rana dynasty","Licchavi dynasty","Malla dynasty"],ans:3,exp:"The Malla dynasty (12th-18th century) built most of the famous temples, palaces, and art in Kathmandu Valley.",diff:"Medium",type:"History"},
+    {q:"King Tribhuvan of Nepal is called:",opts:["Father of the Nation","Unifier of Nepal","Father of Democracy","Light of Nepal"],ans:2,exp:"King Tribhuvan is called 'Father of Democracy' (Prajapitak) for leading the movement against Rana rule.",diff:"Easy",type:"History"},
+    {q:"The Licchavi period in Nepal is famous for:",opts:["Rana rule","Democracy","Art, architecture and cultural flourishing","Industrial development"],ans:2,exp:"The Licchavi period (300-879 AD) is considered a golden age — known for art, culture, and architecture in Nepal.",diff:"Hard",type:"History"},
+    {q:"Nepal's first elected prime minister after 1990 democracy was:",opts:["Man Mohan Adhikari","Girija Prasad Koirala","Krishna Prasad Bhattarai","Surya Bahadur Thapa"],ans:1,exp:"Girija Prasad Koirala of Nepali Congress became Nepal's first elected PM after the 1990 restoration of democracy.",diff:"Hard",type:"History"},
+  ],
+  "Nepal Geography": [
+    {q:"Mount Everest is located in which district of Nepal?",opts:["Solukhumbu","Taplejung","Sankhuwasabha","Dolpa"],ans:0,exp:"Mount Everest (Sagarmatha) is located in Solukhumbu district of Koshi Province.",diff:"Medium",type:"Geography"},
+    {q:"The three ecological zones of Nepal are:",opts:["Desert, Forest, Grassland","Terai, Hills, Mountains","Rivers, Lakes, Glaciers","East, Middle, West"],ans:1,exp:"Nepal has three ecological zones: Terai (plains), Pahad (hills), and Himal (Himalayan mountains).",diff:"Easy",type:"Geography"},
+    {q:"Which is the deepest lake in Nepal?",opts:["Phewa Lake","Rara Lake","Tilicho Lake","Gosaikunda"],ans:1,exp:"Rara Lake in Mugu district is Nepal's deepest and largest freshwater lake.",diff:"Medium",type:"Geography"},
+    {q:"Chitwan National Park is famous for:",opts:["Snow leopards","One-horned rhinoceros","Himalayan Monal","Red pandas"],ans:1,exp:"Chitwan National Park is UNESCO-listed and famous for its one-horned rhinoceros and Bengal tigers.",diff:"Easy",type:"Geography"},
+    {q:"The province with the capital Pokhara is:",opts:["Lumbini","Bagmati","Gandaki","Karnali"],ans:2,exp:"Gandaki Province has Pokhara as its capital — known as the 'Tourism Capital of Nepal.'",diff:"Medium",type:"Geography"},
+    {q:"Koshi, Gandaki, and Karnali are Nepal's:",opts:["Provinces","Mountain ranges","Major river systems","National parks"],ans:2,exp:"Koshi, Gandaki, and Karnali are Nepal's three major river drainage systems flowing from north to south.",diff:"Medium",type:"Geography"},
+    {q:"Nepal's southernmost region is called:",opts:["Himalayan region","Hilly region","Terai","Midhill"],ans:2,exp:"The Terai is Nepal's flat southern plains region bordering India, with the most fertile land.",diff:"Easy",type:"Geography"},
+    {q:"The highest lake in the world, located in Nepal, is:",opts:["Rara Lake","Phewa Lake","Tilicho Lake","Gosaikunda"],ans:2,exp:"Tilicho Lake (4,919 m) in Manang district is one of the world's highest lakes.",diff:"Hard",type:"Geography"},
+    {q:"Kanchenjunga, the world's 3rd highest peak, is on the border of Nepal and:",opts:["China","Bhutan","India","Bangladesh"],ans:2,exp:"Kanchenjunga (8,586 m) sits on the Nepal-India (Sikkim) border.",diff:"Medium",type:"Geography"},
+    {q:"The capital of Sudurpashchim Province is:",opts:["Surkhet","Dhangadhi","Darchula","Mahendranagar"],ans:1,exp:"Dhangadhi is the capital city of Sudurpashchim (Far-Western) Province of Nepal.",diff:"Medium",type:"Geography"},
+    {q:"Pokhara is famous for its view of which mountain range?",opts:["Everest range","Annapurna range","Langtang range","Kangchenjunga range"],ans:1,exp:"Pokhara offers breathtaking views of the Annapurna range, including Machhapuchhre (Fishtail Mountain).",diff:"Easy",type:"Geography"},
+    {q:"Lumbini, birthplace of Buddha, is in which province?",opts:["Gandaki","Bagmati","Lumbini Province","Karnali"],ans:2,exp:"Lumbini is in Lumbini Province (Rupandehi district) — the province was named after this UNESCO site.",diff:"Easy",type:"Geography"},
+  ],
+  "IQ and Logic": [
+    {q:"Find the next number: 2, 4, 8, 16, ?",opts:["24","32","30","28"],ans:1,exp:"Each number is doubled: 2×2=4, 4×2=8, 8×2=16, 16×2=32.",diff:"Easy",type:"IQ"},
+    {q:"Find the next letter: A, C, E, G, ?",opts:["H","I","J","K"],ans:1,exp:"Alternate letters of the alphabet: A, C, E, G, I (skipping B,D,F,H).",diff:"Easy",type:"IQ"},
+    {q:"Book is to Author as Painting is to:",opts:["Canvas","Museum","Artist","Color"],ans:2,exp:"A book is created by an author; a painting is created by an artist. Same creator relationship.",diff:"Easy",type:"IQ"},
+    {q:"Which one does NOT belong? Apple, Mango, Banana, Carrot",opts:["Apple","Mango","Banana","Carrot"],ans:3,exp:"Apple, Mango, Banana are fruits. Carrot is a vegetable — the odd one out.",diff:"Easy",type:"IQ"},
+    {q:"If NEPAL = 14-5-16-1-12 (A=1, B=2...), what is the code for CAT?",opts:["3-1-20","2-1-19","4-2-21","3-2-19"],ans:0,exp:"C=3, A=1, T=20. CAT = 3-1-20.",diff:"Medium",type:"IQ"},
+    {q:"Hari is facing North. He turns 90° clockwise, then 180° clockwise. Which direction is he facing?",opts:["North","East","West","South"],ans:2,exp:"North → turn 90° clockwise → East → turn 180° → West.",diff:"Medium",type:"IQ"},
+    {q:"A is B's father. C is B's sister. D is C's mother. What is A to D?",opts:["Son","Brother","Husband","Uncle"],ans:2,exp:"A is B's father, D (C's mother) is B's mother. So A and D are husband and wife.",diff:"Medium",type:"IQ"},
+    {q:"Find the odd one out: 121, 144, 169, 196, 210",opts:["121","196","210","169"],ans:2,exp:"121=11², 144=12², 169=13², 196=14² are all perfect squares. 210 is not a perfect square.",diff:"Medium",type:"IQ"},
+    {q:"Series: 1, 4, 9, 16, 25, ?",opts:["30","36","42","49"],ans:1,exp:"This is the sequence of perfect squares: 1², 2², 3², 4², 5², 6² = 36.",diff:"Easy",type:"IQ"},
+    {q:"If 5 workers build a wall in 12 days, 3 workers will build it in how many days?",opts:["15 days","20 days","25 days","18 days"],ans:1,exp:"Total work = 5×12 = 60 worker-days. For 3 workers: 60÷3 = 20 days.",diff:"Medium",type:"IQ"},
+    {q:"Which number should replace ?: 2, 6, 12, 20, 30, ?",opts:["40","42","44","45"],ans:1,exp:"Differences: +4, +6, +8, +10, +12. So 30+12=42. Pattern: n(n+1).",diff:"Hard",type:"IQ"},
+    {q:"Sita is older than Gita. Gita is older than Rita. Who is the youngest?",opts:["Sita","Gita","Rita","Cannot say"],ans:2,exp:"Sita > Gita > Rita. Rita is the youngest.",diff:"Easy",type:"IQ"},
+    {q:"A clock shows 3:15. What is the angle between hour and minute hands?",opts:["0°","7.5°","15°","22.5°"],ans:1,exp:"At 3:15, minute hand is at 90°. Hour hand: 3h×30 + 15×0.5 = 90+7.5=97.5°. Angle = 97.5-90=7.5°.",diff:"Expert",type:"IQ"},
+    {q:"If all Roses are Flowers, and some Flowers are Red, which statement MUST be true?",opts:["All roses are red","Some roses are red","No roses are red","Some roses may be red"],ans:3,exp:"Since only 'some' flowers are red, roses may or may not be red — we can only say some roses may be red.",diff:"Hard",type:"IQ"},
+    {q:"Complete: 3, 7, 13, 21, 31, ?",opts:["41","43","45","42"],ans:1,exp:"Differences: +4, +6, +8, +10, +12. Next: 31+12=43.",diff:"Medium",type:"IQ"},
+    {q:"Unscramble: ALPNE is an anagram of which country?",opts:["PLANE","PANEL","NEPAL","PENAL"],ans:2,exp:"ALPNE rearranged = NEPAL (our own country!).",diff:"Easy",type:"IQ"},
+  ],
+  "English": [
+    {q:"Choose the correct sentence:",opts:["She don't know","She doesn't knows","She doesn't know","She not know"],ans:2,exp:"'She doesn't know' is correct. With he/she/it, use 'doesn't' + base verb.",diff:"Easy",type:"English"},
+    {q:"The plural of 'child' is:",opts:["Childs","Childes","Children","Childrens"],ans:2,exp:"'Children' is the irregular plural of 'child'.",diff:"Easy",type:"English"},
+    {q:"Choose the correct spelling:",opts:["Recieve","Receive","Receve","Receeve"],ans:1,exp:"'Receive' is correct. Remember: 'i before e except after c'.",diff:"Easy",type:"English"},
+    {q:"What is the past tense of 'teach'?",opts:["Teached","Taught","Tought","Teacht"],ans:1,exp:"'Taught' is the irregular past tense of 'teach'.",diff:"Easy",type:"English"},
+    {q:"Which word is an antonym of 'brave'?",opts:["Bold","Fearless","Cowardly","Courageous"],ans:2,exp:"'Cowardly' means lacking courage — the opposite (antonym) of brave.",diff:"Easy",type:"English"},
+    {q:"Identify the noun in: 'The beautiful butterfly flew away.'",opts:["Beautiful","Flew","Butterfly","Away"],ans:2,exp:"'Butterfly' is the noun (a naming word) in this sentence.",diff:"Easy",type:"English"},
+    {q:"Which sentence is in Passive Voice?",opts:["Ram ate the apple","The apple was eaten by Ram","Ram is eating the apple","Ram will eat the apple"],ans:1,exp:"Passive voice: subject receives the action. 'The apple was eaten by Ram' — apple is the subject receiving action.",diff:"Medium",type:"English"},
+    {q:"Choose the correct article: '__ honest man'",opts:["A","An","The","No article"],ans:1,exp:"Use 'an' before vowel sounds. 'Honest' starts with a vowel sound (h is silent): 'an honest man'.",diff:"Medium",type:"English"},
+    {q:"What is a synonym of 'happy'?",opts:["Sad","Joyful","Angry","Tired"],ans:1,exp:"'Joyful' means feeling great happiness — a synonym of happy.",diff:"Easy",type:"English"},
+    {q:"The comparative form of 'good' is:",opts:["Gooder","More good","Better","Betterer"],ans:2,exp:"'Good' has an irregular comparative: better. Not 'more good' or 'gooder'.",diff:"Easy",type:"English"},
+    {q:"Fill in: She ____ in Kathmandu since 2015.",opts:["lives","lived","has been living","is living"],ans:2,exp:"'Has been living' (present perfect continuous) is used for actions continuing from a past time to now.",diff:"Hard",type:"English"},
+    {q:"What type of sentence is: 'Close the door.'",opts:["Declarative","Interrogative","Imperative","Exclamatory"],ans:2,exp:"Imperative sentences give commands or instructions. 'Close the door' is a command.",diff:"Medium",type:"English"},
+  ],
+  "Nepali Language": [
+    {q:"'आमा' शब्दको अर्थ के हो? (What does 'Aama' mean?)",opts:["Father","Mother","Sister","Brother"],ans:1,exp:"'आमा (Aama)' means Mother in Nepali.",diff:"Easy",type:"Nepali"},
+    {q:"Nepali script is called:",opts:["Arabic script","Roman script","Devanagari script","Bengali script"],ans:2,exp:"Nepali is written in Devanagari script, the same script used for Hindi and Sanskrit.",diff:"Easy",type:"Nepali"},
+    {q:"Which of these is a Nepali vowel (स्वर)?",opts:["क","ख","अ","ग"],ans:2,exp:"'अ' is a vowel (स्वर) in Nepali. क, ख, ग are consonants (व्यञ्जन).",diff:"Easy",type:"Nepali"},
+    {q:"'सानो' को विपरीतार्थक शब्द के हो? (Antonym of 'Sano'/small?)",opts:["राम्रो","ठूलो","नराम्रो","पातलो"],ans:1,exp:"'ठूलो (Thulo)' means big/large — the opposite of 'सानो (Sano)' meaning small.",diff:"Easy",type:"Nepali"},
+    {q:"Nepali belongs to which language family?",opts:["Dravidian","Sino-Tibetan","Indo-Aryan (Indo-European)","Austro-Asiatic"],ans:2,exp:"Nepali is an Indo-Aryan language, derived from Sanskrit, part of the Indo-European family.",diff:"Medium",type:"Nepali"},
+    {q:"'पुस्तक' को अर्थ के हो? (What is 'Pustak'?)",opts:["Pen","Pencil","Book","Notebook"],ans:2,exp:"'पुस्तक (Pustak)' means Book in Nepali.",diff:"Easy",type:"Nepali"},
+    {q:"How many letters are in the Nepali/Devanagari alphabet?",opts:["26","36","46","52"],ans:2,exp:"The Devanagari/Nepali alphabet has 46 letters (13 vowels and 33 consonants).",diff:"Hard",type:"Nepali"},
+    {q:"'नेपाली' भाषाको राष्ट्रिय भाषा कुन हो? Which is NOT a Nepali word for a family member?",opts:["दाइ (Dai)","बुबा (Buba)","दिदी (Didi)","टेबल (Table)"],ans:3,exp:"'टेबल (Table)' is an English borrowed word, not a traditional Nepali family term. Others: दाइ=elder brother, बुबा=father, दिदी=elder sister.",diff:"Medium",type:"Nepali"},
+  ],
+  "Computer Science": [
+    {q:"What does CPU stand for?",opts:["Central Processing Unit","Computer Processing Unit","Core Power Unit","Central Power Unit"],ans:0,exp:"CPU = Central Processing Unit — the 'brain' of a computer that processes instructions.",diff:"Easy",type:"Computer"},
+    {q:"Which of these is an input device?",opts:["Monitor","Printer","Keyboard","Speaker"],ans:2,exp:"Keyboard is an input device — it sends data TO the computer. Monitor, Printer, Speaker are output devices.",diff:"Easy",type:"Computer"},
+    {q:"What does HTML stand for?",opts:["Hyper Text Markup Language","High Transfer Markup Language","Hyper Text Making Language","Home Tool Markup Language"],ans:0,exp:"HTML = HyperText Markup Language — used to create web pages.",diff:"Easy",type:"Computer"},
+    {q:"Which is the smallest unit of data in a computer?",opts:["Byte","Kilobyte","Bit","Nibble"],ans:2,exp:"A Bit (Binary digit) is the smallest unit of data — it is either 0 or 1.",diff:"Easy",type:"Computer"},
+    {q:"1 Kilobyte (KB) = ?",opts:["100 Bytes","512 Bytes","1024 Bytes","2048 Bytes"],ans:2,exp:"1 Kilobyte = 1024 Bytes (= 2¹⁰ bytes).",diff:"Easy",type:"Computer"},
+    {q:"Which of these is an Operating System?",opts:["MS Word","Google Chrome","Windows 11","VLC Player"],ans:2,exp:"Windows 11 is an Operating System (OS) — software that manages computer hardware and software. Others are applications.",diff:"Easy",type:"Computer"},
+    {q:"The Internet was invented by:",opts:["Bill Gates","Tim Berners-Lee","Steve Jobs","Mark Zuckerberg"],ans:1,exp:"Tim Berners-Lee invented the World Wide Web (WWW) in 1989, often credited as creating the modern Internet.",diff:"Medium",type:"Computer"},
+    {q:"Which programming language is used for web styling?",opts:["Python","Java","CSS","C++"],ans:2,exp:"CSS (Cascading Style Sheets) is used to style and visually format web pages.",diff:"Medium",type:"Computer"},
+    {q:"RAM stands for:",opts:["Read Access Memory","Random Access Memory","Rapid Application Memory","Read And Modify"],ans:1,exp:"RAM = Random Access Memory — temporary/volatile memory that stores data currently in use.",diff:"Easy",type:"Computer"},
+    {q:"What does 'URL' stand for?",opts:["Universal Resource Locator","Uniform Resource Locator","United Research Link","Universal Research Locator"],ans:1,exp:"URL = Uniform Resource Locator — the web address of a page (e.g., https://www.google.com).",diff:"Easy",type:"Computer"},
+    {q:"Which of these is NOT a social media platform?",opts:["Facebook","Instagram","Microsoft Word","TikTok"],ans:2,exp:"Microsoft Word is a word processing application, not a social media platform.",diff:"Easy",type:"Computer"},
+    {q:"In binary, what is 1+1?",opts:["2","11","10","01"],ans:2,exp:"In binary: 1+1=10 (which represents decimal 2). Binary only uses 0 and 1.",diff:"Medium",type:"Computer"},
+  ],
+  "Social Studies": [
+    {q:"Who wrote the Declaration of Human Rights?",opts:["United Nations","NATO","World Bank","UNESCO"],ans:0,exp:"The Universal Declaration of Human Rights was adopted by the United Nations General Assembly on December 10, 1948.",diff:"Medium",type:"Social"},
+    {q:"The headquarters of the United Nations is in:",opts:["Geneva","Paris","London","New York"],ans:3,exp:"The UN headquarters is located in New York City, USA.",diff:"Easy",type:"Social"},
+    {q:"What is democracy?",opts:["Rule by one person","Rule by the military","Rule by the people","Rule by religion"],ans:2,exp:"Democracy is a system of government where citizens exercise power through voting and elected representatives.",diff:"Easy",type:"Social"},
+    {q:"Which is the largest continent by area?",opts:["Africa","North America","Europe","Asia"],ans:3,exp:"Asia is the world's largest continent, covering about 44.6 million km² — about 30% of Earth's land area.",diff:"Easy",type:"Social"},
+    {q:"The Silk Road was an ancient trade route connecting:",opts:["Europe and Africa","China and Europe","India and Australia","America and Asia"],ans:1,exp:"The Silk Road was a network of trade routes connecting China to Europe, facilitating trade and cultural exchange.",diff:"Medium",type:"Social"},
+    {q:"SAARC stands for:",opts:["South Asian Association for Regional Cooperation","South American Association for Regional Cooperation","Southeast Asian Alliance for Regional Countries","South Asian Alliance for Rural Cooperation"],ans:0,exp:"SAARC = South Asian Association for Regional Cooperation. Nepal is a founding member. Headquarters: Kathmandu.",diff:"Medium",type:"Social"},
+    {q:"Nepal is a member of which international organization?",opts:["ASEAN","NATO","SAARC","European Union"],ans:2,exp:"Nepal is a founding member of SAARC (South Asian Association for Regional Cooperation), formed in 1985.",diff:"Easy",type:"Social"},
+    {q:"What is the capital of India?",opts:["Mumbai","Chennai","Kolkata","New Delhi"],ans:3,exp:"New Delhi is the capital of India — Nepal's largest neighboring country.",diff:"Easy",type:"Social"},
+    {q:"The Constitution is:",opts:["A type of tax","The supreme law of a country","A military order","An international treaty"],ans:1,exp:"The Constitution is the supreme law of a country that defines government structure, rights, and duties of citizens.",diff:"Easy",type:"Social"},
+    {q:"Which river is the longest in Asia?",opts:["Ganges","Indus","Yangtze","Mekong"],ans:2,exp:"The Yangtze River in China (~6,300 km) is the longest river in Asia.",diff:"Medium",type:"Social"},
+  ]
+};
+
+// Mixed All pulls from all categories
+function getMixedQuestions(count, diffFilter) {
+  const all = [];
+  Object.values(QB).forEach(qs => all.push(...qs));
+  return filterAndSample(all, count, diffFilter);
+}
+
+function filterAndSample(pool, count, diffFilter) {
+  let filtered = diffFilter === 'Mixed' ? pool :
+    pool.filter(q => q.diff === diffFilter);
+  if (filtered.length < count) filtered = pool; // fallback
+  // Shuffle
+  const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
+
+// ══════════════════════════════════════════════
+// PERSISTENT STORAGE (using localStorage as permanent storage)
+// ══════════════════════════════════════════════
+const STORE_KEY = 'smartkhel_v3';
+
+function loadStore() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    return raw ? JSON.parse(raw) : { leaderboard: [], history: [], settings: {}, totalQuizzes: 0 };
+  } catch(e) { return { leaderboard: [], history: [], settings: {}, totalQuizzes: 0 }; }
+}
+
+function saveStore(data) {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+    showToast('💾 Auto-saved!');
+  } catch(e) { console.warn('Storage error', e); }
+}
+
+function showToast(msg) {
+  const t = $('save-toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function saveQuizResult(result) {
+  const store = loadStore();
+  // Add to history (keep last 50)
+  store.history.unshift(result);
+  if (store.history.length > 50) store.history = store.history.slice(0, 50);
+  // Update leaderboard (top score per name)
+  const existIdx = store.leaderboard.findIndex(e => e.name === result.name && e.subject === result.subject);
+  if (existIdx === -1) {
+    store.leaderboard.push({ name: result.name, subject: result.subject, score: result.score, pct: result.pct, cls: result.cls, date: result.date });
+  } else if (result.score > store.leaderboard[existIdx].score) {
+    store.leaderboard[existIdx] = { name: result.name, subject: result.subject, score: result.score, pct: result.pct, cls: result.cls, date: result.date };
+  }
+  // Sort leaderboard
+  store.leaderboard.sort((a,b) => b.score - a.score || b.pct - a.pct);
+  if (store.leaderboard.length > 100) store.leaderboard = store.leaderboard.slice(0, 100);
+  store.totalQuizzes = (store.totalQuizzes || 0) + 1;
+  // Save settings
+  store.settings = { name: result.name, cls: result.cls, subject: result.subject, diff: result.diff, autoAdvance: result.autoAdvance, timePerQ: result.timePerQ };
+  saveStore(store);
+}
+
+// ══════════════════════════════════════════════
+// APP STATE
+// ══════════════════════════════════════════════
+const S = {
+  name:'', cls:8, subject:'Mathematics', difficulty:'Mixed',
+  count:10, timePerQ:60, autoAdvance:3,
+  questions:[], current:0, answers:[], timings:[],
+  timerInterval:null, timeLeft:0, qStartTime:0,
+  score:0, streak:0, bestStreak:0, isPartial:false,
+};
+
+const $ = id => document.getElementById(id);
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  $(id).classList.add('active');
+  if (id === 'screen-stats') renderStats();
+}
+
+// ── Pickers ──
+let selSubj = 'Mathematics', selDiff = 'Mixed';
+
+document.querySelectorAll('[data-subj]').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('[data-subj]').forEach(x => x.classList.remove('selected'));
+    b.classList.add('selected'); selSubj = b.dataset.subj;
+  });
+});
+
+document.querySelectorAll('[data-diff]').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('[data-diff]').forEach(x =>
+      x.classList.remove('selected','sel-easy','sel-medium','sel-hard','sel-expert','sel-mixed'));
+    b.classList.add('selected', 'sel-' + b.dataset.diff.toLowerCase());
+    selDiff = b.dataset.diff;
+  });
+});
+
+// ── Load saved settings on startup ──
+window.addEventListener('load', () => {
+  const store = loadStore();
+  if (store.settings && store.settings.name) {
+    const wb = $('welcome-back-box');
+    wb.style.display = 'block';
+    wb.innerHTML = `<div class="welcome-back">
+      <div class="wb-icon">👋</div>
+      <div class="wb-info">
+        <div class="wb-name">Welcome back, ${store.settings.name}!</div>
+        <div class="wb-sub">Class ${store.settings.cls} · ${store.totalQuizzes || 0} quizzes completed · Last: ${store.settings.subject}</div>
+      </div>
+    </div>`;
+    $('student-name').value = store.settings.name;
+    $('sel-class').value = store.settings.cls || 8;
+    // Restore subject
+    if (store.settings.subject) {
+      selSubj = store.settings.subject;
+      document.querySelectorAll('[data-subj]').forEach(b => {
+        b.classList.toggle('selected', b.dataset.subj === selSubj);
+      });
+    }
+    // Restore difficulty
+    if (store.settings.diff) {
+      selDiff = store.settings.diff;
+      document.querySelectorAll('[data-diff]').forEach(b => {
+        if (b.dataset.diff === selDiff) {
+          b.classList.add('selected', 'sel-' + selDiff.toLowerCase());
+        } else {
+          b.classList.remove('selected','sel-easy','sel-medium','sel-hard','sel-expert','sel-mixed');
+        }
+      });
+    }
+    if (store.settings.autoAdvance !== undefined) {
+      $('sel-auto').value = store.settings.autoAdvance;
+    }
+    if (store.settings.timePerQ) {
+      $('sel-time').value = store.settings.timePerQ;
+    }
+  }
+});
+
+// ── Start ──
+$('btn-start').addEventListener('click', () => {
+  const name = $('student-name').value.trim();
+  if (!name) { showErr('Please enter your name 😊'); return; }
+  $('setup-error').style.display = 'none';
+  Object.assign(S, {
+    name, cls: +$('sel-class').value, subject: selSubj, difficulty: selDiff,
+    count: +$('sel-count').value, timePerQ: +$('sel-time').value,
+    autoAdvance: +$('sel-auto').value,
+    questions:[], answers:[], timings:[], current:0, score:0, streak:0, bestStreak:0, isPartial:false
+  });
+  startQuiz();
+});
+
+function showErr(m) { const b=$('setup-error'); b.textContent=m; b.style.display='block'; }
+
+// ── Get Questions ──
+function getQuestions() {
+  if (S.subject === 'Mixed All') return getMixedQuestions(S.count, S.difficulty);
+  const pool = QB[S.subject] || QB['Nepal GK'];
+  return filterAndSample(pool, S.count, S.difficulty);
+}
+
+// ── Quiz ──
+const DC = {
+  Easy:{bg:'#eafaf1',color:'var(--green)'},
+  Medium:{bg:'#fef9e7',color:'var(--gold2)'},
+  Hard:{bg:'#fef0e7',color:'var(--orange)'},
+  Expert:{bg:'#f4ecf7',color:'var(--purple)'},
+};
+
+function startQuiz() {
+  S.questions = getQuestions();
+  if (!S.questions.length) { showErr('Not enough questions for this filter. Try Mixed difficulty.'); return; }
+  $('quiz-subj').textContent = S.subject;
+  $('quiz-class').textContent = `Class ${S.cls}`;
+  const db = $('quiz-diff-badge');
+  db.textContent = S.difficulty;
+  db.className = 'diff-badge ' + (S.difficulty === 'Mixed' ? 'mixed' : S.difficulty.toLowerCase());
+  showScreen('screen-quiz');
+  updateLive();
+  loadQ();
+}
+
+function loadQ() {
+  const q = S.questions[S.current], total = S.questions.length;
+  $('q-number').textContent = `Q ${S.current+1}/${total}`;
+  $('q-text').textContent = q.q;
+  $('progress-bar').style.width = `${(S.current/total)*100}%`;
+  const tt = $('q-type-tag');
+  tt.textContent = `${q.diff} · ${q.type}`;
+  const dc = DC[q.diff] || DC.Medium;
+  tt.style.background = dc.bg; tt.style.color = dc.color;
+  $('feedback-row').className = 'feedback-row';
+  $('btn-next').classList.remove('visible');
+  const box = $('options');
+  box.innerHTML = '';
+  ['A','B','C','D'].forEach((L, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt-btn';
+    b.innerHTML = `<span class="opt-letter">${L}</span>${q.opts[i]}`;
+    b.addEventListener('click', () => pick(i));
+    box.appendChild(b);
+  });
+  clearInterval(S.timerInterval);
+  S.timeLeft = S.timePerQ; S.qStartTime = Date.now();
+  updateTimer();
+  S.timerInterval = setInterval(() => {
+    S.timeLeft--; updateTimer();
+    if (S.timeLeft <= 0) { clearInterval(S.timerInterval); pick(-1); }
+  }, 1000);
+}
+
+function updateTimer() {
+  const t = $('timer-badge');
+  t.textContent = S.timeLeft;
+  t.classList.toggle('urgent', S.timeLeft <= 7);
+}
+
+function calcPts(diff, tLeft, tPer) {
+  const base = {Easy:5, Medium:10, Hard:15, Expert:20}[diff] || 10;
+  return base + Math.round(base * (tLeft/tPer) * 0.5);
+}
+
+function pick(chosen) {
+  clearInterval(S.timerInterval);
+  S.timings.push(Math.round((Date.now()-S.qStartTime)/1000));
+  const q = S.questions[S.current], correct = q.ans;
+  S.answers.push({chosen, correct, diff:q.diff, type:q.type});
+
+  // Disable options and mark correct/wrong
+  $('options').querySelectorAll('.opt-btn').forEach((b, i) => {
+    b.disabled = true;
+    if (i === correct) b.classList.add('correct');
+    if (chosen !== -1 && i === chosen && chosen !== correct) b.classList.add('wrong');
+  });
+
+  const fb = $('feedback-row');
+  const nextLabel = S.current < S.questions.length-1 ? 'Next Question →' : 'See Results 🏁';
+
+  if (chosen === -1) {
+    // ── TIMEOUT ──
+    S.streak = 0;
+    fb.classList.add('wrong-fb','show');
+    $('feedback-icon').textContent = '⏰';
+    $('feedback-text').textContent = `Time's up! Correct: ${q.opts[correct]}. ${q.exp}`;
+    flashScreen('wrong');
+    playTimeoutSound();
+    setTimeout(() => speak(TIMEOUT_PHRASES[Math.floor(Math.random()*TIMEOUT_PHRASES.length)] + ' The correct answer was: ' + q.opts[correct] + '. ' + q.exp), 200);
+    showOverlay('timeout', 0, 0, `Correct answer: <strong>${q.opts[correct]}</strong>. ${q.exp}`);
+    overlayCallback = () => {
+      updateLive();
+      $('btn-next').textContent = nextLabel;
+      $('btn-next').classList.add('visible');
+    };
+
+  } else if (chosen === correct) {
+    // ── CORRECT ──
+    const p = calcPts(q.diff, S.timeLeft, S.timePerQ);
+    S.score += p; S.streak++; if(S.streak>S.bestStreak) S.bestStreak=S.streak;
+    fb.classList.add('correct-fb','show');
+    $('feedback-icon').textContent = S.streak >= 3 ? '🔥' : '✅';
+    $('feedback-text').textContent = `Correct! +${p} pts${S.streak>=3?' 🔥 '+S.streak+' streak!':''} — ${q.exp}`;
+    flashScreen('correct');
+    if (S.streak >= 3) { playStreakSound(); launchConfetti(120); }
+    else { playCorrectSound(); launchConfetti(60); }
+    // Floating score pop at random position near center
+    showScorePop(p, window.innerWidth/2 - 30 + (Math.random()-0.5)*60, window.innerHeight*0.4);
+    const phrase = CORRECT_PHRASES[Math.floor(Math.random()*CORRECT_PHRASES.length)];
+    setTimeout(() => speak(phrase + (S.streak>=3 ? ` Amazing ${S.streak} in a row!` : '') + ' ' + q.exp), 150);
+    showOverlay('correct', p, S.streak, q.exp);
+    overlayCallback = () => {
+      updateLive();
+      $('btn-next').textContent = nextLabel;
+      $('btn-next').classList.add('visible');
+    };
+
+  } else {
+    // ── WRONG ──
+    S.streak = 0;
+    fb.classList.add('wrong-fb','show');
+    $('feedback-icon').textContent = '❌';
+    $('feedback-text').textContent = `Incorrect. Correct: ${q.opts[correct]}. ${q.exp}`;
+    flashScreen('wrong');
+    playWrongSound();
+    const phrase = WRONG_PHRASES[Math.floor(Math.random()*WRONG_PHRASES.length)];
+    setTimeout(() => speak(phrase + ' The correct answer was: ' + q.opts[correct] + '. ' + q.exp), 200);
+    showOverlay('wrong', 0, 0, `Correct answer: <strong>${q.opts[correct]}</strong>. ${q.exp}`);
+    overlayCallback = () => {
+      updateLive();
+      $('btn-next').textContent = nextLabel;
+      $('btn-next').classList.add('visible');
+    };
+  }
+
+  updateLive();
+}
+
+function updateLive() {
+  const maxPts = S.questions.length * 20;
+  $('score-live').textContent = `${S.score} pts`;
+  $('score-bar-fill').style.width = `${Math.min(100,(S.score/Math.max(maxPts,1))*100)}%`;
+  $('streak-label').textContent = S.streak >= 3 ? `🔥×${S.streak}` : '';
+}
+
+// Preload voices (some browsers load them async)
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
+
+// Stop speech when navigating away
+$('btn-next').addEventListener('click', () => {
+  window.speechSynthesis && window.speechSynthesis.cancel();
+  S.current++;
+  S.current < S.questions.length ? loadQ() : showResults();
+});
+
+// ── Results ──
+function calcIQ(pct, avgT, tPer, diff) {
+  let b = 70 + pct*0.5 + Math.max(0,(tPer-avgT)/tPer)*15;
+  b += {Easy:0, Medium:5, Hard:10, Expert:15, Mixed:7}[diff] || 5;
+  return Math.round(Math.min(145,Math.max(70,b)));
+}
+function iqLabel(iq) {
+  if(iq>=135)return'🏆 Gifted / Genius';
+  if(iq>=120)return'⭐ Superior Intelligence';
+  if(iq>=110)return'😊 Above Average';
+  if(iq>=90)return'📚 Average';
+  return'💪 Keep Practicing!';
+}
+
+function showResults() {
+  showScreen('screen-results');
+  window.speechSynthesis && window.speechSynthesis.cancel();
+
+  // Inject partial banner if left early
+  const existBanner = document.getElementById('partial-quiz-banner');
+  if (existBanner) existBanner.remove();
+  if (S.isPartial) {
+    const banner = document.createElement('div');
+    banner.id = 'partial-quiz-banner';
+    banner.className = 'partial-banner';
+    const answeredReal = S.answers.filter(a => a.chosen !== -2).length;
+    banner.innerHTML = `<div class="pb-icon">⚡</div><div class="pb-text"><div class="pb-title">Partial Quiz Result</div><div class="pb-sub">You answered ${answeredReal} of ${S.questions.length} questions before leaving. Unanswered questions counted as skipped.</div></div>`;
+    const heroCard = document.querySelector('#screen-results .result-hero').parentElement;
+    heroCard.parentElement.insertBefore(banner, heroCard);
+  }
+  const total = S.questions.length;
+  const correct = S.answers.filter(a => a.chosen === a.correct).length;
+  const wrong = S.answers.filter(a => a.chosen !== a.correct && a.chosen !== -1).length;
+  const pct = Math.round((correct/total)*100);
+  const avgT = S.timings.length ? Math.round(S.timings.reduce((a,b)=>a+b,0)/S.timings.length) : 0;
+
+  $('result-score').innerHTML = `${correct}<span>/${total}</span>`;
+  $('result-pct').textContent = `${pct}% · ${S.score} Points`;
+  $('result-name').textContent = `${S.name} · ${S.subject} · Class ${S.cls}`;
+  $('stat-correct').textContent = correct;
+  $('stat-wrong').textContent = wrong;
+  $('stat-time').textContent = `${avgT}s`;
+  $('stat-streak').textContent = S.bestStreak;
+
+  const iq = calcIQ(pct, avgT, S.timePerQ, S.difficulty);
+  $('iq-val').textContent = iq;
+  $('iq-desc').textContent = iqLabel(iq);
+
+  let emoji, msg;
+  if(pct>=95){emoji='🏆';msg='Perfect! You are extraordinary!'}
+  else if(pct>=85){emoji='🌟';msg='Outstanding! Brilliant work!'}
+  else if(pct>=75){emoji='⭐';msg='Great job! Keep it up!'}
+  else if(pct>=60){emoji='😊';msg='Good effort! Practice more!'}
+  else if(pct>=40){emoji='📚';msg='Keep studying, you can do better!'}
+  else{emoji='💪';msg="Don't give up! Try again!"}
+  $('result-emoji').textContent = emoji;
+  $('result-message').textContent = msg;
+
+  // 🎵 Victory fanfare + speech
+  if (pct >= 75) {
+    launchConfetti(160, ['#F4C430','#27AE60','#1A3C6E','#fff','#8E44AD','#E67E22','#C0392B']);
+    // Rising fanfare
+    [523,659,784,880,1047].forEach((f,i) => setTimeout(()=>playTone(f,.2,'sine',.32),i*100));
+    setTimeout(()=>playTone(1319,.5,'sine',.3),550);
+  } else if (pct >= 50) {
+    launchConfetti(60);
+    [392,494,523].forEach((f,i)=>setTimeout(()=>playTone(f,.18,'sine',.25),i*110));
+  } else {
+    [330,311,294].forEach((f,i)=>setTimeout(()=>playTone(f,.2,'sawtooth',.18),i*130));
+  }
+  setTimeout(()=>speak(`Quiz complete! ${S.name}, you scored ${correct} out of ${total}. That is ${pct} percent. ${msg}`), 800);
+
+  // Review
+  const list = $('review-list'); list.innerHTML = '';
+  S.questions.forEach((q,i) => {
+    const a = S.answers[i], ok = a.chosen === a.correct;
+    const dc = DC[q.diff] || DC.Medium;
+    const your = a.chosen === -1 ? '⏰ Time out' : a.chosen === -2 ? '⏭ Skipped' : q.opts[a.chosen];
+    const div = document.createElement('div');
+    div.className = `review-item ${ok?'r-c':'r-w'}`;
+    div.innerHTML = `<div class="r-tags">
+      <span class="r-tag" style="background:#eef2ff;color:var(--blue)">${q.type}</span>
+      <span class="r-tag" style="background:${dc.bg};color:${dc.color}">${q.diff}</span>
+    </div>
+    <div class="r-q">${i+1}. ${q.q}</div>
+    <div class="r-info">${ok
+      ?`<span class="ans-c">✅ ${q.opts[a.correct]}</span>`
+      :`Your: <span class="ans-w">${your}</span> · Correct: <span class="ans-c">${q.opts[a.correct]}</span>`
+    }</div>`;
+    list.appendChild(div);
+  });
+
+  // AUTO-SAVE RESULT
+  const now = new Date();
+  saveQuizResult({
+    name: S.name, cls: S.cls, subject: S.subject, diff: S.difficulty,
+    correct, total, pct, score: S.score, iq, bestStreak: S.bestStreak,
+    autoAdvance: S.autoAdvance, timePerQ: S.timePerQ,
+    date: now.toLocaleDateString('en-NP', {day:'2-digit',month:'short',year:'numeric'}),
+    time: now.toLocaleTimeString('en-NP', {hour:'2-digit',minute:'2-digit'}),
+  });
+}
+
+$('btn-retry').addEventListener('click', () => {
+  window.speechSynthesis && window.speechSynthesis.cancel();
+  Object.assign(S, {questions:[],answers:[],timings:[],current:0,score:0,streak:0,bestStreak:0,isPartial:false});
+  startQuiz();
+});
+$('btn-new').addEventListener('click', () => {
+  window.speechSynthesis && window.speechSynthesis.cancel();
+  S.isPartial = false;
+  $('setup-error').style.display='none'; showScreen('screen-setup');
+});
+
+// ── STATS / LEADERBOARD ──
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    const tabs = ['tab-lb','tab-hist','tab-subj'];
+    b.classList.toggle('active', tabs[i] === tabId);
+  });
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  $(tabId).classList.add('active');
+}
+
+function renderStats() {
+  const store = loadStore();
+  renderLeaderboard(store);
+  renderHistory(store);
+  renderSubjectStats(store);
+}
+
+function renderLeaderboard(store) {
+  const el = $('lb-list');
+  if (!store.leaderboard.length) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">🏆</div><p>No quiz results yet!<br>Complete a quiz to appear here.</p></div>`;
+    return;
+  }
+  el.innerHTML = '';
+  const rankIcons = ['🥇','🥈','🥉'];
+  const rankClasses = ['gold','silver','bronze'];
+  store.leaderboard.slice(0,20).forEach((e,i) => {
+    const div = document.createElement('div');
+    div.className = 'lb-row';
+    div.innerHTML = `
+      <div class="lb-rank ${rankClasses[i]||''}">${rankIcons[i]||'#'+(i+1)}</div>
+      <div class="lb-info">
+        <div class="lb-name">${e.name}</div>
+        <div class="lb-sub">Class ${e.cls} · ${e.subject} · ${e.date}</div>
+      </div>
+      <div>
+        <div class="lb-score">${e.score} pts</div>
+        <div class="lb-pct">${e.pct}%</div>
+      </div>`;
+    el.appendChild(div);
+  });
+}
+
+function renderHistory(store) {
+  const el = $('hist-list');
+  if (!store.history.length) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">📜</div><p>No quiz history yet!<br>Take your first quiz.</p></div>`;
+    return;
+  }
+  el.innerHTML = '';
+  store.history.slice(0,20).forEach(e => {
+    const color = e.pct>=75?'var(--green)':e.pct>=50?'var(--gold2)':'var(--red)';
+    const div = document.createElement('div');
+    div.className = 'hist-item';
+    div.innerHTML = `
+      <div class="hist-dot" style="background:${color}"></div>
+      <div class="hist-info">
+        <div class="hist-title">${e.subject} · ${e.diff}</div>
+        <div class="hist-sub">${e.name} · Class ${e.cls} · ${e.date} ${e.time||''}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="hist-score">${e.correct}/${e.total}</div>
+        <div style="font-size:.72rem;color:var(--muted)">${e.pct}%</div>
+      </div>`;
+    el.appendChild(div);
+  });
+}
+
+function renderSubjectStats(store) {
+  const el = $('subj-list');
+  if (!store.history.length) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">📊</div><p>No data yet! Complete some quizzes.</p></div>`;
+    return;
+  }
+  // Aggregate by subject
+  const agg = {};
+  store.history.forEach(e => {
+    if (!agg[e.subject]) agg[e.subject] = {total:0, correct:0, quizzes:0, best:0};
+    agg[e.subject].total += e.total;
+    agg[e.subject].correct += e.correct;
+    agg[e.subject].quizzes++;
+    if(e.pct > agg[e.subject].best) agg[e.subject].best = e.pct;
+  });
+  el.innerHTML = '';
+  Object.entries(agg).sort((a,b)=>b[1].best-a[1].best).forEach(([subj, d]) => {
+    const avgPct = Math.round((d.correct/d.total)*100);
+    const color = avgPct>=75?'var(--green)':avgPct>=50?'var(--gold2)':'var(--red)';
+    const div = document.createElement('div');
+    div.className = 'hist-item';
+    div.innerHTML = `
+      <div class="hist-dot" style="background:${color}"></div>
+      <div class="hist-info">
+        <div class="hist-title">${subj}</div>
+        <div class="hist-sub">${d.quizzes} quiz${d.quizzes>1?'zes':''} · Best: ${d.best}%</div>
+      </div>
+      <div style="text-align:right">
+        <div class="hist-score" style="color:${color}">${avgPct}%</div>
+        <div style="font-size:.72rem;color:var(--muted)">Avg accuracy</div>
+      </div>`;
+    el.appendChild(div);
+  });
+}
+
+// Clear data
+$('btn-clear-data').addEventListener('click', () => {
+  if (confirm('Are you sure you want to delete ALL your quiz data? This cannot be undone.')) {
+    localStorage.removeItem(STORE_KEY);
+    showToast('🗑️ Data cleared!');
+    renderStats();
+  }
+});
+
+// ══════════════════════════════════════════════
+// 🚪 LEAVE QUIZ SYSTEM
+// ══════════════════════════════════════════════
+const leaveModal = document.getElementById('leave-modal');
+
+function openLeaveModal() {
+  // Pause timer
+  clearInterval(S.timerInterval);
+  window.speechSynthesis && window.speechSynthesis.cancel();
+
+  // Update progress info
+  const done = S.current; // questions answered so far (before current)
+  // Count answered ones
+  const answeredCorrect = S.answers.filter(a => a.chosen === a.correct).length;
+  const totalQ = S.questions.length;
+  const elapsed = S.timings.length
+    ? S.timings.reduce((a,b) => a+b, 0)
+    : 0;
+
+  $('lpi-done').textContent = `${done} / ${totalQ}`;
+  $('lpi-correct').textContent = answeredCorrect;
+  $('lpi-pts').textContent = `${S.score} pts`;
+  $('lpi-time').textContent = `${elapsed}s`;
+
+  leaveModal.classList.add('show');
+  // Speak warning
+  setTimeout(() => speak('Are you sure you want to leave the quiz?'), 100);
+}
+
+function closeLeaveModal() {
+  leaveModal.classList.remove('show');
+  // Resume timer if there is a current question not yet answered
+  if (S.current < S.questions.length && S.timeLeft > 0 && S.answers.length < S.current + 1) {
+    S.timerInterval = setInterval(() => {
+      S.timeLeft--;
+      updateTimer();
+      if (S.timeLeft <= 0) { clearInterval(S.timerInterval); pick(-1); }
+    }, 1000);
+  }
+}
+
+// Leave button
+$('btn-leave-quiz').addEventListener('click', openLeaveModal);
+document.getElementById('leave-backdrop').addEventListener('click', closeLeaveModal);
+
+// Stay — resume quiz
+$('btn-leave-stay').addEventListener('click', () => {
+  closeLeaveModal();
+  showToast('▶ Quiz resumed!');
+  speak('Good! Let\'s continue the quiz!');
+});
+
+// Save partial & leave — compute partial result and save it
+$('btn-leave-save').addEventListener('click', () => {
+  leaveModal.classList.remove('show');
+  window.speechSynthesis && window.speechSynthesis.cancel();
+  clearInterval(S.timerInterval);
+
+  if (S.answers.length === 0) {
+    showToast('No answers to save yet.');
+    showScreen('screen-setup');
+    return;
+  }
+
+  // Build partial result and go to results screen
+  // Fill unanswered questions as skipped
+  const answeredCount = S.answers.length;
+  const totalQ = S.questions.length;
+  // Pad remaining with "skipped"
+  for (let i = answeredCount; i < totalQ; i++) {
+    S.answers.push({ chosen: -2, correct: S.questions[i].ans, diff: S.questions[i].diff, type: S.questions[i].type });
+  }
+  S.current = totalQ; // mark as done
+
+  // Show partial banner flag
+  S.isPartial = true;
+  showResults();
+  showToast('💾 Partial result saved!');
+});
+
+// Quit without saving
+$('btn-leave-confirm').addEventListener('click', () => {
+  leaveModal.classList.remove('show');
+  clearInterval(S.timerInterval);
+  window.speechSynthesis && window.speechSynthesis.cancel();
+  // Play a little whoosh
+  playWrongSound();
+  Object.assign(S, { questions:[], answers:[], timings:[], current:0, score:0, streak:0, bestStreak:0, isPartial:false });
+  showScreen('screen-setup');
+  showToast('Quiz left. See you next time! 👋');
+  setTimeout(() => speak('Quiz abandoned. See you next time!'), 200);
+});
+
+// Patch showResults to show partial banner when leaving mid-quiz
+const _origShowResults = showResults;
+// Mark partial answers (chosen === -2) as skipped in review
+// Already patched inside showResults by checking isPartial flag
+</script>
+</body>
+</html>
