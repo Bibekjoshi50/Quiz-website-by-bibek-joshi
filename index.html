@@ -3,85 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bibek Creative Quiz 5–10 🎓</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>Bibek Creative Quiz 🎓</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--crimson:#C0392B;--crimson2:#8B0000;--blue:#1A3C6E;--blue2:#122d52;--gold:#F4C430;--gold2:#c9960e;--green:#27AE60;--red:#E74C3C;--purple:#8E44AD;--orange:#E67E22;--bg:#FDF6EC;--card:#FFFFFF;--text:#1a1a2e;--muted:#7f8c8d;--radius:18px;--shadow:0 8px 32px rgba(26,60,110,.13)}
+:root{
+  --crimson:#A32638;--crimson2:#7A1B29;
+  --blue:#163457;--blue2:#0E2440;
+  --gold:#E8A33D;--gold2:#B87615;
+  --green:#2F9E5B;--red:#C1494F;--purple:#7C4FA0;--orange:#DB7F35;
+  --bg:#FBF3E4;--card:#FFFFFF;--text:#1E2530;--muted:#7C8794;
+  --radius:20px;--radius-sm:13px;
+  --shadow:0 10px 30px rgba(22,52,87,.13);
+  --shadow-sm:0 4px 14px rgba(22,52,87,.10);
+}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 8% 15%,rgba(192,57,43,.07) 0%,transparent 50%),radial-gradient(circle at 92% 85%,rgba(26,60,110,.07) 0%,transparent 50%),repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(244,196,48,.04) 40px,rgba(244,196,48,.04) 80px);pointer-events:none;z-index:0}
-.wrapper{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:16px 14px 70px}
-header{text-align:center;padding:24px 0 18px}
-.logo-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--crimson),var(--crimson2));color:#fff;border-radius:50px;padding:8px 18px;margin-bottom:12px;font-family:'Baloo 2',cursive;font-weight:800;font-size:.9rem;box-shadow:0 4px 14px rgba(192,57,43,.4)}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 8% 15%,rgba(163,38,56,.07) 0%,transparent 50%),radial-gradient(circle at 92% 85%,rgba(22,52,87,.07) 0%,transparent 50%),repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(232,163,61,.045) 40px,rgba(232,163,61,.045) 80px);pointer-events:none;z-index:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+.wrapper{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 14px 70px}
+
+/* ══ HEADER ══ */
+header{position:relative;text-align:center;padding:0 0 20px;overflow:hidden;border-radius:0 0 26px 26px}
+.header-inner{position:relative;z-index:2;padding:26px 10px 10px;animation:heroIn .7s cubic-bezier(.2,.8,.3,1) both}
+@keyframes heroIn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+.mountains{position:absolute;left:0;right:0;bottom:0;height:78px;z-index:1;opacity:.9}
+.logo-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--crimson),var(--crimson2));color:#fff;border-radius:50px;padding:8px 18px;margin-bottom:12px;font-family:'Baloo 2',cursive;font-weight:800;font-size:.9rem;box-shadow:0 4px 14px rgba(163,38,56,.4)}
 h1{font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(1.7rem,5vw,2.6rem);color:var(--blue);line-height:1.1}
-h1 span{color:var(--crimson)}
-.tagline{color:var(--muted);font-size:.9rem;margin-top:4px}
+h1 em{font-style:normal;color:var(--crimson);position:relative}
+.tagline{color:var(--muted);font-size:.9rem;margin-top:4px;font-weight:600}
+
 .screen{display:none;animation:fadeUp .35s ease}.screen.active{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:16px}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:16px;border:1px solid rgba(22,52,87,.05)}
 .card-title{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;color:var(--blue);margin-bottom:13px;display:flex;align-items:center;gap:7px}
 .setup-grid{display:grid;gap:13px}
-.field label{display:block;font-weight:800;font-size:.79rem;color:var(--blue);margin-bottom:6px;letter-spacing:.3px;text-transform:uppercase}
-.field select,.field input[type=text]{width:100%;padding:10px 14px;border:2.5px solid #e0e0e0;border-radius:11px;font-family:'Nunito',sans-serif;font-size:.95rem;color:var(--text);background:#fafafa;transition:border-color .2s;appearance:none}
-.field select:focus,.field input:focus{outline:none;border-color:var(--blue);background:#fff}
+.field label{display:block;font-weight:800;font-size:.79rem;color:var(--blue);margin-bottom:6px;letter-spacing:.2px}
+.field select,.field input[type=text]{width:100%;padding:11px 14px;border:2.5px solid #e6e1d6;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:.95rem;color:var(--text);background:#fafaf7;transition:border-color .2s,box-shadow .2s;appearance:none}
+.field select:focus,.field input:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(22,52,87,.08)}
 .select-wrap{position:relative}.select-wrap::after{content:'▾';position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--blue);pointer-events:none}
 .chip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px}
-.chip{padding:9px 5px;border-radius:11px;border:2.5px solid #e0e0e0;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.79rem;color:var(--text);text-align:center;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:2px}
-.chip .icon{font-size:1.4rem}.chip:hover{border-color:var(--blue);background:#eef2ff}.chip.selected{border-color:var(--blue);background:var(--blue);color:#fff}
+.chip{padding:9px 5px;border-radius:var(--radius-sm);border:2.5px solid #e6e1d6;background:#fafaf7;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.79rem;color:var(--text);text-align:center;transition:transform .12s,border-color .15s,background .15s,color .15s;display:flex;flex-direction:column;align-items:center;gap:2px}
+.chip .icon{font-size:1.4rem}.chip:hover{border-color:var(--blue);background:#eef2ff;transform:translateY(-1px)}.chip.selected{border-color:var(--blue);background:var(--blue);color:#fff;transform:translateY(-1px)}
 .diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.diff-chip{padding:11px 5px;border-radius:11px;border:2.5px solid #e0e0e0;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.79rem;color:var(--text);text-align:center;transition:all .15s}
+.diff-chip{padding:11px 5px;border-radius:var(--radius-sm);border:2.5px solid #e6e1d6;background:#fafaf7;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.79rem;color:var(--text);text-align:center;transition:transform .12s,border-color .15s,background .15s,color .15s}
+.diff-chip:hover{transform:translateY(-1px)}
 .diff-chip.sel-easy{border-color:var(--green);background:var(--green);color:#fff}
 .diff-chip.sel-medium{border-color:var(--gold2);background:var(--gold);color:#1a1a2e}
 .diff-chip.sel-hard{border-color:var(--orange);background:var(--orange);color:#fff}
 .diff-chip.sel-expert{border-color:var(--purple);background:var(--purple);color:#fff}
 .diff-chip.sel-mixed{border-color:var(--blue);background:var(--blue);color:#fff}
-.btn-start{width:100%;padding:14px;background:linear-gradient(135deg,var(--crimson),var(--crimson2));color:#fff;border:none;border-radius:13px;font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:700;cursor:pointer;margin-top:6px;box-shadow:0 6px 20px rgba(192,57,43,.35);transition:transform .15s,box-shadow .15s}
-.btn-start:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(192,57,43,.45)}
+.btn-start{width:100%;padding:14px;background:linear-gradient(135deg,var(--crimson),var(--crimson2));color:#fff;border:none;border-radius:var(--radius-sm);font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:700;cursor:pointer;margin-top:6px;box-shadow:0 6px 20px rgba(163,38,56,.35);transition:transform .15s,box-shadow .15s}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(163,38,56,.45)}
+.btn-start:active{transform:translateY(0)}
 .sec-label{font-size:.73rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;display:flex;align-items:center;gap:6px}
-.sec-label::after{content:'';flex:1;height:1px;background:#e8e8e8}
+.sec-label::after{content:'';flex:1;height:1px;background:#e8e2d4}
 /* QUIZ */
 .quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;flex-wrap:wrap;gap:7px}
 .quiz-meta{font-weight:800;color:var(--blue);font-size:.86rem;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.diff-badge{display:inline-block;padding:2px 9px;border-radius:50px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
-.diff-badge.easy{background:#eafaf1;color:var(--green)}.diff-badge.medium{background:#fef9e7;color:var(--gold2)}.diff-badge.hard{background:#fef0e7;color:var(--orange)}.diff-badge.expert{background:#f4ecf7;color:var(--purple)}.diff-badge.mixed{background:#eef2ff;color:var(--blue)}
+.diff-badge{display:inline-block;padding:2px 9px;border-radius:50px;font-size:.7rem;font-weight:800}
+.diff-badge.easy{background:#e6f7ec;color:var(--green)}.diff-badge.medium{background:#fdf1de;color:var(--gold2)}.diff-badge.hard{background:#fbe9de;color:var(--orange)}.diff-badge.expert{background:#f1e7f6;color:var(--purple)}.diff-badge.mixed{background:#eef2ff;color:var(--blue)}
 .timer-badge{background:var(--blue);color:#fff;border-radius:50px;padding:5px 13px;font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;min-width:60px;text-align:center;transition:background .3s}
 .timer-badge.urgent{background:var(--crimson);animation:pulse .7s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
-.progress-bar-wrap{height:8px;background:#e8e8e8;border-radius:50px;overflow:hidden;margin-bottom:16px}
+.progress-bar-wrap{height:8px;background:#ece5d6;border-radius:50px;overflow:hidden;margin-bottom:16px}
 .progress-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--crimson));border-radius:50px;transition:width .4s ease}
 .score-bar-live{display:flex;align-items:center;gap:7px;margin-bottom:11px}
 .score-bar-live span{font-size:.78rem;font-weight:800;color:var(--blue);white-space:nowrap}
-.score-bar-track{flex:1;height:6px;background:#e8e8e8;border-radius:50px;overflow:hidden}
+.score-bar-track{flex:1;height:6px;background:#ece5d6;border-radius:50px;overflow:hidden}
 .score-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:50px;transition:width .4s}
 .q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;flex-wrap:wrap;gap:3px}
-.q-number{font-size:.74rem;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
-.q-type-tag{font-size:.69rem;font-weight:800;padding:2px 8px;border-radius:50px;text-transform:uppercase;letter-spacing:.4px}
+.q-number{font-size:.74rem;font-weight:800;letter-spacing:.6px;color:var(--muted)}
+.q-type-tag{font-size:.69rem;font-weight:800;padding:2px 8px;border-radius:50px}
 .q-text{font-family:'Baloo 2',cursive;font-size:1.15rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:16px}
 .options{display:grid;gap:8px}
-.opt-btn{padding:11px 14px;border-radius:11px;border:2.5px solid #e0e0e0;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.93rem;font-weight:600;color:var(--text);text-align:left;transition:all .15s;display:flex;align-items:center;gap:9px}
-.opt-letter{width:25px;height:25px;border-radius:50%;background:#e8e8e8;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0;transition:all .15s}
-.opt-btn:hover:not(:disabled){border-color:var(--blue);background:#eef2ff}.opt-btn:hover:not(:disabled) .opt-letter{background:var(--blue);color:#fff}
-.opt-btn.correct{border-color:var(--green);background:#eafaf1;color:var(--green)}.opt-btn.correct .opt-letter{background:var(--green);color:#fff}
-.opt-btn.wrong{border-color:var(--red);background:#fdf2f2;color:var(--red)}.opt-btn.wrong .opt-letter{background:var(--red);color:#fff}
+.opt-btn{padding:11px 14px;border-radius:var(--radius-sm);border:2.5px solid #e6e1d6;background:#fafaf7;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.93rem;font-weight:600;color:var(--text);text-align:left;transition:border-color .15s,background .15s,transform .1s;display:flex;align-items:center;gap:9px}
+.opt-letter{width:25px;height:25px;border-radius:50%;background:#ece5d6;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0;transition:all .15s}
+.opt-btn:hover:not(:disabled){border-color:var(--blue);background:#eef2ff;transform:translateX(2px)}.opt-btn:hover:not(:disabled) .opt-letter{background:var(--blue);color:#fff}
+.opt-btn.correct{border-color:var(--green);background:#e6f7ec;color:#1e7a45}.opt-btn.correct .opt-letter{background:var(--green);color:#fff}
+.opt-btn.wrong{border-color:var(--red);background:#fbecec;color:#8f2f34}.opt-btn.wrong .opt-letter{background:var(--red);color:#fff}
 .opt-btn:disabled{cursor:default}
-.feedback-row{display:flex;align-items:flex-start;gap:8px;margin-top:12px;padding:11px;border-radius:11px;font-size:.88rem;line-height:1.5;opacity:0;transform:translateY(5px);transition:all .3s;pointer-events:none}
+.opt-hint{text-align:center;font-size:.72rem;color:var(--muted);margin-top:4px}
+.feedback-row{display:flex;align-items:flex-start;gap:8px;margin-top:12px;padding:11px;border-radius:var(--radius-sm);font-size:.88rem;line-height:1.5;opacity:0;transform:translateY(5px);transition:all .3s;pointer-events:none}
 .feedback-row.show{opacity:1;transform:none;pointer-events:auto}
-.feedback-row.correct-fb{background:#eafaf1;color:#1e8449}.feedback-row.wrong-fb{background:#fdf2f2;color:#922b21}
+.feedback-row.correct-fb{background:#e6f7ec;color:#1e7a45}.feedback-row.wrong-fb{background:#fbecec;color:#8f2f34}
 .feedback-icon{font-size:1.2rem;flex-shrink:0}
-.btn-next{margin-top:14px;width:100%;padding:12px;background:var(--blue);color:#fff;border:none;border-radius:11px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;cursor:pointer;transition:background .2s,transform .15s;display:none}
+.btn-next{margin-top:14px;width:100%;padding:12px;background:var(--blue);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;cursor:pointer;transition:background .2s,transform .15s;display:none}
 .btn-next:hover{background:var(--blue2);transform:translateY(-1px)}.btn-next.visible{display:block}
 
 /* ══ LEAVE QUIZ MODAL ══ */
 #leave-modal{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
 #leave-modal.show{opacity:1;pointer-events:auto}
-.leave-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(6px)}
+.leave-backdrop{position:absolute;inset:0;background:rgba(14,24,40,.6);backdrop-filter:blur(6px)}
 .leave-box{position:relative;z-index:1;background:#fff;border-radius:24px;padding:32px 28px;max-width:340px;width:90%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.25);transform:scale(.7) translateY(30px);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
 #leave-modal.show .leave-box{transform:scale(1) translateY(0)}
 .leave-icon{font-size:3.8rem;display:block;margin-bottom:10px;animation:warnShake .5s ease}
 @keyframes warnShake{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(8deg)}}
 .leave-title{font-family:'Baloo 2',cursive;font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:6px}
 .leave-sub{font-size:.9rem;color:var(--muted);line-height:1.5;margin-bottom:8px}
-.leave-progress-info{background:#f5f6fa;border-radius:12px;padding:12px 14px;margin:12px 0;text-align:left}
+.leave-progress-info{background:#f6f3ec;border-radius:12px;padding:12px 14px;margin:12px 0;text-align:left}
 .leave-progress-info .lpi-row{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;margin-bottom:4px}
 .leave-progress-info .lpi-row:last-child{margin-bottom:0}
 .leave-progress-info .lpi-label{color:var(--muted);font-weight:600}
@@ -89,19 +108,17 @@ h1 span{color:var(--crimson)}
 .leave-progress-info .lpi-val.green{color:var(--green)}
 .leave-progress-info .lpi-val.red{color:var(--red)}
 .leave-actions{display:grid;gap:9px;margin-top:18px}
-.btn-leave-confirm{padding:13px;background:linear-gradient(135deg,var(--crimson),var(--crimson2));color:#fff;border:none;border-radius:12px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(192,57,43,.3);transition:transform .15s}
+.btn-leave-confirm{padding:13px;background:linear-gradient(135deg,var(--crimson),var(--crimson2));color:#fff;border:none;border-radius:12px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(163,38,56,.3);transition:transform .15s}
 .btn-leave-confirm:hover{transform:translateY(-1px)}
-.btn-leave-stay{padding:13px;background:linear-gradient(135deg,var(--green),#1e8449);color:#fff;border:none;border-radius:12px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(39,174,96,.3);transition:transform .15s}
+.btn-leave-stay{padding:13px;background:linear-gradient(135deg,var(--green),#1e7a45);color:#fff;border:none;border-radius:12px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(47,158,91,.3);transition:transform .15s}
 .btn-leave-stay:hover{transform:translateY(-1px)}
 .btn-leave-save{padding:11px;background:transparent;border:2.5px solid var(--blue);color:var(--blue);border-radius:12px;font-family:'Baloo 2',cursive;font-size:.98rem;font-weight:700;cursor:pointer;transition:all .15s}
 .btn-leave-save:hover{background:var(--blue);color:#fff}
 
-/* Leave button in quiz header */
-.btn-leave-quiz{background:rgba(192,57,43,.1);border:2px solid rgba(192,57,43,.3);color:var(--crimson);border-radius:50px;padding:5px 12px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px}
+.btn-leave-quiz{background:rgba(163,38,56,.1);border:2px solid rgba(163,38,56,.3);color:var(--crimson);border-radius:50px;padding:5px 12px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px}
 .btn-leave-quiz:hover{background:var(--crimson);color:#fff;border-color:var(--crimson)}
 
-/* Partial result banner */
-.partial-banner{background:linear-gradient(135deg,#fef9e7,#fff8e1);border:2.5px solid var(--gold2);border-radius:14px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.partial-banner{background:linear-gradient(135deg,#fdf1de,#fff8ea);border:2.5px solid var(--gold2);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .partial-banner .pb-icon{font-size:1.8rem;flex-shrink:0}
 .partial-banner .pb-text .pb-title{font-family:'Baloo 2',cursive;font-weight:800;color:var(--gold2);font-size:.95rem}
 .partial-banner .pb-text .pb-sub{font-size:.8rem;color:var(--muted);margin-top:2px}
@@ -109,12 +126,12 @@ h1 span{color:var(--crimson)}
 /* ══ ANSWER OVERLAY POPUP ══ */
 #answer-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .25s}
 #answer-overlay.show{opacity:1;pointer-events:auto}
-.overlay-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
+.overlay-backdrop{position:absolute;inset:0;background:rgba(14,24,40,.5);backdrop-filter:blur(4px)}
 .overlay-box{position:relative;z-index:1;border-radius:28px;padding:36px 32px;text-align:center;max-width:360px;width:90%;transform:scale(.6) translateY(40px);transition:transform .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 30px 80px rgba(0,0,0,.35)}
 #answer-overlay.show .overlay-box{transform:scale(1) translateY(0)}
-.overlay-box.correct-box{background:linear-gradient(145deg,#1a7a4a,#27AE60)}
-.overlay-box.wrong-box{background:linear-gradient(145deg,#8B0000,#C0392B)}
-.overlay-box.timeout-box{background:linear-gradient(145deg,#7a5a00,#c9960e)}
+.overlay-box.correct-box{background:linear-gradient(145deg,#1e7a45,#2F9E5B)}
+.overlay-box.wrong-box{background:linear-gradient(145deg,#7A1B29,#A32638)}
+.overlay-box.timeout-box{background:linear-gradient(145deg,#8a5d0c,#B87615)}
 .overlay-main-icon{font-size:5rem;margin-bottom:8px;display:block;animation:iconBounce .6s cubic-bezier(.34,1.56,.64,1)}
 @keyframes iconBounce{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.2) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
 .overlay-title{font-family:'Baloo 2',cursive;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:6px}
@@ -122,7 +139,6 @@ h1 span{color:var(--crimson)}
 .overlay-pts{display:inline-block;background:rgba(255,255,255,.22);border-radius:50px;padding:6px 18px;font-family:'Baloo 2',cursive;font-weight:800;color:#fff;font-size:1.15rem;margin-bottom:16px}
 .overlay-close-btn{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);color:#fff;border-radius:12px;padding:10px 28px;font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s}
 .overlay-close-btn:hover{background:rgba(255,255,255,.35)}
-/* Auto-advance countdown ring */
 .auto-ring-wrap{margin:12px auto 0;position:relative;width:52px;height:52px;display:none}
 .auto-ring-wrap.show{display:block}
 .auto-ring-bg{fill:none;stroke:rgba(255,255,255,.25);stroke-width:5}
@@ -130,26 +146,21 @@ h1 span{color:var(--crimson)}
 .auto-ring-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',cursive;font-weight:800;font-size:1.1rem;color:#fff}
 .auto-ring-label{font-size:.72rem;color:rgba(255,255,255,.7);margin-top:4px;text-align:center}
 
-/* Streak fire animation */
 .streak-fire{font-size:2.5rem;animation:fireShake .4s infinite alternate}
 @keyframes fireShake{from{transform:rotate(-8deg) scale(1)}to{transform:rotate(8deg) scale(1.1)}}
 
-/* Screen flash effects */
 .correct-flash{animation:flashGreen .5s ease}
 .wrong-flash{animation:flashRed .5s ease}
-@keyframes flashGreen{0%,100%{background:var(--bg)}40%{background:#d5f5e3}}
-@keyframes flashRed{0%,100%{background:var(--bg)}40%{background:#fde8e8}}
+@keyframes flashGreen{0%,100%{background:var(--bg)}40%{background:#dcf3e4}}
+@keyframes flashRed{0%,100%{background:var(--bg)}40%{background:#f8dede}}
 
-/* Floating score pop */
 .score-pop{position:fixed;font-family:'Baloo 2',cursive;font-weight:800;font-size:1.6rem;color:var(--green);pointer-events:none;z-index:10000;animation:scorePop 1.2s forwards}
 @keyframes scorePop{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(1.3)}}
 
-/* Confetti canvas */
 #confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:9998}
 
-/* Audio toggle button */
-.audio-toggle{position:fixed;bottom:22px;right:16px;background:var(--blue);color:#fff;border:none;border-radius:50px;padding:8px 15px;font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:700;cursor:pointer;z-index:100;box-shadow:0 4px 14px rgba(26,60,110,.35);transition:background .2s}
-.audio-toggle:hover{background:var(--blue2)}
+.audio-toggle{position:fixed;bottom:22px;right:16px;background:var(--blue);color:#fff;border:none;border-radius:50px;padding:8px 15px;font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:700;cursor:pointer;z-index:100;box-shadow:0 4px 14px rgba(22,52,87,.35);transition:background .2s,transform .15s}
+.audio-toggle:hover{background:var(--blue2);transform:translateY(-1px)}
 
 /* RESULTS */
 .result-hero{text-align:center;padding:6px 0 18px}
@@ -160,27 +171,27 @@ h1 span{color:var(--crimson)}
 .result-label{color:var(--muted);font-size:.88rem;margin-top:3px}
 .result-name{font-family:'Baloo 2',cursive;font-size:.95rem;font-weight:700;color:var(--blue);margin-top:4px}
 .result-message{font-family:'Baloo 2',cursive;font-size:1.15rem;font-weight:700;color:var(--text);margin-top:9px}
-.iq-box{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:13px;padding:14px;margin:12px 0;text-align:center}
+.iq-box{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:var(--radius-sm);padding:14px;margin:12px 0;text-align:center;position:relative;overflow:hidden}
 .iq-box .iq-val{font-family:'Baloo 2',cursive;font-size:2.3rem;font-weight:800}
 .iq-box .iq-lbl{font-size:.79rem;opacity:.8;margin-top:2px}
 .iq-box .iq-desc{font-size:.87rem;margin-top:5px;font-weight:700}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
-.stat-box{text-align:center;padding:12px 4px;border-radius:11px;background:#f5f6fa}
+.stat-box{text-align:center;padding:12px 4px;border-radius:var(--radius-sm);background:#f6f3ec}
 .stat-box .val{font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800}
-.stat-box .lbl{font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.stat-box .lbl{font-size:.66rem;color:var(--muted);font-weight:700}
 .st-c .val{color:var(--green)}.st-w .val{color:var(--red)}.st-t .val{color:var(--gold2)}.st-s .val{color:var(--blue)}
 /* LEADERBOARD */
-.lb-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:11px;background:#f5f6fa;margin-bottom:7px;transition:background .15s}
+.lb-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius-sm);background:#f6f3ec;margin-bottom:7px;transition:background .15s}
 .lb-row:hover{background:#eef2ff}
 .lb-rank{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;color:var(--blue);width:28px;text-align:center;flex-shrink:0}
-.lb-rank.gold{color:#c9960e}.lb-rank.silver{color:#7f8c8d}.lb-rank.bronze{color:#a04000}
+.lb-rank.gold{color:#b87615}.lb-rank.silver{color:#7f8c8d}.lb-rank.bronze{color:#a04000}
 .lb-info{flex:1;min-width:0}
 .lb-name{font-weight:800;font-size:.9rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lb-sub{font-size:.75rem;color:var(--muted)}
 .lb-score{font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:800;color:var(--crimson);flex-shrink:0}
 .lb-pct{font-size:.75rem;color:var(--muted);text-align:right}
 /* HISTORY */
-.hist-item{padding:10px 13px;border-radius:11px;background:#f5f6fa;margin-bottom:7px;display:flex;align-items:center;gap:10px}
+.hist-item{padding:10px 13px;border-radius:var(--radius-sm);background:#f6f3ec;margin-bottom:7px;display:flex;align-items:center;gap:10px}
 .hist-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .hist-info{flex:1;min-width:0}
 .hist-title{font-weight:700;font-size:.87rem;color:var(--text)}
@@ -188,34 +199,31 @@ h1 span{color:var(--crimson)}
 .hist-score{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--blue);flex-shrink:0}
 /* TABS */
 .tab-bar{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px}
-.tab-btn{padding:8px 14px;border-radius:50px;border:2px solid #e0e0e0;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;color:var(--muted);white-space:nowrap;transition:all .15s;flex-shrink:0}
+.tab-btn{padding:8px 14px;border-radius:50px;border:2px solid #e6e1d6;background:#fafaf7;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;color:var(--muted);white-space:nowrap;transition:all .15s;flex-shrink:0}
 .tab-btn.active{border-color:var(--blue);background:var(--blue);color:#fff}
 .tab-content{display:none}.tab-content.active{display:block}
 /* REVIEW */
 .review-list{display:grid;gap:8px}
-.review-item{padding:11px;border-radius:11px;border-left:4px solid;background:#fafafa}
+.review-item{padding:11px;border-radius:var(--radius-sm);border-left:4px solid;background:#fafaf7}
 .review-item.r-c{border-color:var(--green)}.review-item.r-w{border-color:var(--red)}
 .r-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px}
-.r-tag{font-size:.66rem;font-weight:800;padding:2px 6px;border-radius:50px;text-transform:uppercase}
+.r-tag{font-size:.66rem;font-weight:800;padding:2px 6px;border-radius:50px}
 .r-q{font-weight:700;font-size:.86rem;margin-bottom:3px;color:var(--text)}
 .r-info{font-size:.8rem;color:var(--muted)}
 .ans-c{color:var(--green);font-weight:800}.ans-w{color:var(--red);font-weight:800}
 /* RESULT ACTIONS */
 .result-actions{display:grid;gap:8px;margin-top:14px}
-.btn-outline{padding:11px;border-radius:11px;border:2.5px solid var(--blue);background:transparent;color:var(--blue);font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;cursor:pointer;transition:all .15s}
+.btn-outline{padding:11px;border-radius:var(--radius-sm);border:2.5px solid var(--blue);background:transparent;color:var(--blue);font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;cursor:pointer;transition:all .15s}
 .btn-outline:hover{background:var(--blue);color:#fff}
-.btn-danger{padding:9px;border-radius:11px;border:2px solid var(--red);background:transparent;color:var(--red);font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .15s}
+.btn-danger{padding:9px;border-radius:var(--radius-sm);border:2px solid var(--red);background:transparent;color:var(--red);font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .15s}
 .btn-danger:hover{background:var(--red);color:#fff}
-.error-box{background:#fdf2f2;border:2px solid var(--red);border-radius:11px;padding:12px;margin-top:11px;color:var(--red);font-weight:700;text-align:center;font-size:.86rem}
-/* SAVE TOAST */
+.error-box{background:#fbecec;border:2px solid var(--red);border-radius:var(--radius-sm);padding:12px;margin-top:11px;color:var(--red);font-weight:700;text-align:center;font-size:.86rem}
 .save-toast{position:fixed;bottom:20px;right:20px;background:var(--green);color:#fff;padding:10px 18px;border-radius:50px;font-family:'Baloo 2',cursive;font-weight:700;font-size:.9rem;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
 .save-toast.show{opacity:1;transform:translateY(0)}
-/* LOADING */
 .loading-state{text-align:center;padding:40px 20px}
-.spinner{width:46px;height:46px;border-radius:50%;border:5px solid #e0e0e0;border-top-color:var(--crimson);animation:spin .8s linear infinite;margin:0 auto 14px}
+.spinner{width:46px;height:46px;border-radius:50%;border:5px solid #ece5d6;border-top-color:var(--crimson);animation:spin .8s linear infinite;margin:0 auto 14px}
 @keyframes spin{to{transform:rotate(360deg)}}
-/* WELCOME BACK */
-.welcome-back{background:linear-gradient(135deg,#eef2ff,#fff);border:2px solid var(--blue);border-radius:13px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.welcome-back{background:linear-gradient(135deg,#eef2ff,#fff);border:2px solid var(--blue);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
 .wb-icon{font-size:2rem;flex-shrink:0}
 .wb-info .wb-name{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--blue)}
 .wb-info .wb-sub{font-size:.8rem;color:var(--muted);margin-top:2px}
@@ -223,22 +231,21 @@ h1 span{color:var(--crimson)}
 .empty-state .empty-icon{font-size:3rem;margin-bottom:8px}
 .empty-state p{font-size:.9rem}
 @media(max-width:480px){.stats-row{grid-template-columns:repeat(2,1fr)}.diff-grid{grid-template-columns:repeat(2,1fr)}}
-
-/* ══ 2026 UI POLISH ══ */
-.card{transition:transform .2s ease,box-shadow .2s ease}.card:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(26,60,110,.16)}
-.chip,.diff-chip,.btn-start,.btn-next{transition:transform .16s ease,box-shadow .16s ease,background .16s ease}.chip:hover,.diff-chip:hover{transform:translateY(-2px)}
-.btn-start{position:relative;overflow:hidden}.btn-start::after{content:'';position:absolute;inset:-40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-120%) rotate(15deg);animation:shine 4s infinite}.btn-start>*{position:relative;z-index:1}@keyframes shine{45%,100%{transform:translateX(120%) rotate(15deg)}}
-.setup-grid{gap:14px}.field label{font-weight:800;color:var(--blue)}
-@media(min-width:760px){.wrapper{max-width:960px}.setup-grid{grid-template-columns:repeat(2,1fr)}.chip-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:520px){.wrapper{padding-left:10px;padding-right:10px}.card{border-radius:16px}.chip{min-height:54px}.btn-start{position:sticky;bottom:12px;z-index:50}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}}
 </style>
 </head>
 <body>
 <div class="wrapper">
 <header>
-  <div class="logo-badge"><span>🎓</span> Bibek Creative Quiz</div>
-  <h1>Learn. Play. <span>Shine.</span></h1>
-  <p class="tagline">with <strong>Bibek Sir</strong> · Classes 5–10 · Nepal 🇳🇵</p>
+  <svg class="mountains" viewBox="0 0 800 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <polygon points="0,90 0,55 90,10 170,50 240,20 320,55 400,15 470,50 560,25 650,55 730,20 800,50 800,90" fill="#163457" opacity="0.10"></polygon>
+    <polygon points="0,90 0,68 120,32 210,60 300,38 390,62 480,30 570,60 660,40 760,62 800,50 800,90" fill="#A32638" opacity="0.08"></polygon>
+  </svg>
+  <div class="header-inner">
+    <div class="logo-badge"><span>🎓</span> Bibek Creative Quiz</div>
+    <h1>Learn. Play. <em>Shine.</em></h1>
+    <p class="tagline">with <strong>Bibek Sir</strong> · Classes 5–10 · Nepal 🇳🇵</p>
+  </div>
 </header>
 
 <!-- SAVE TOAST -->
@@ -258,7 +265,8 @@ h1 span{color:var(--crimson)}
         <label>Your Class</label>
         <div class="select-wrap">
           <select id="sel-class">
-            <option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option>
+            <option value="5">Class 5</option>
+            <option value="6">Class 6</option><option value="7">Class 7</option>
             <option value="8" selected>Class 8</option><option value="9">Class 9</option>
             <option value="10">Class 10</option>
           </select>
@@ -306,7 +314,7 @@ h1 span{color:var(--crimson)}
           <select id="sel-count">
             <option value="5">5 (Quick)</option><option value="10" selected>10</option>
             <option value="15">15</option><option value="20">20</option>
-            <option value="25">25 (Full Test)</option><option value="30">30 (Mega)</option><option value="40">40 (Super)</option><option value="50">50 (Challenge)</option>
+            <option value="25">25 (Full Test)</option><option value="30">30 (Mega)</option>
           </select>
         </div>
       </div>
@@ -337,7 +345,6 @@ h1 span{color:var(--crimson)}
   </div>
   <button class="btn-start" id="btn-start">🚀 Start Quiz!</button>
   <div id="setup-error" class="error-box" style="display:none"></div>
-  <!-- MY STATS BUTTON -->
   <div style="margin-top:12px;display:grid;gap:8px">
     <button class="btn-outline" id="btn-view-stats" onclick="showScreen('screen-stats')">📊 My Stats &amp; Leaderboard</button>
   </div>
@@ -369,6 +376,7 @@ h1 span{color:var(--crimson)}
     </div>
     <div class="q-text" id="q-text">Loading…</div>
     <div class="options" id="options"></div>
+    <div class="opt-hint">Tip: press 1–4 on your keyboard to answer fast</div>
     <div class="feedback-row" id="feedback-row">
       <span class="feedback-icon" id="feedback-icon"></span>
       <span id="feedback-text"></span>
@@ -473,7 +481,7 @@ h1 span{color:var(--crimson)}
 
 <!-- ANSWER OVERLAY -->
 <div id="answer-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .25s">
-  <div id="overlay-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px)"></div>
+  <div id="overlay-backdrop" style="position:absolute;inset:0;background:rgba(14,24,40,.5);backdrop-filter:blur(4px)"></div>
   <div id="overlay-box" class="overlay-box">
     <span class="overlay-main-icon" id="overlay-icon">✅</span>
     <div class="overlay-title" id="overlay-title">Correct!</div>
@@ -488,6 +496,8 @@ h1 span{color:var(--crimson)}
       <div class="auto-ring-num" id="auto-ring-num">3</div>
     </div>
     <div class="auto-ring-label" id="auto-ring-label" style="display:none">auto-next</div>
+  </div>
+</div>
 
 <!-- AUDIO TOGGLE -->
 <button class="audio-toggle" id="audio-toggle">🔊 Audio ON</button>
@@ -497,15 +507,12 @@ h1 span{color:var(--crimson)}
 // 🎵 AUDIO + VISUAL FEEDBACK ENGINE
 // ══════════════════════════════════════════════
 let audioEnabled = true;
-let overlayCallback = null;
 
-// Audio toggle
 document.getElementById('audio-toggle').addEventListener('click', () => {
   audioEnabled = !audioEnabled;
   document.getElementById('audio-toggle').textContent = audioEnabled ? '🔊 Audio ON' : '🔇 Audio OFF';
 });
 
-// Web Audio Context for sound effects
 let audioCtx = null;
 function getAudioCtx() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -528,7 +535,6 @@ function playTone(freq, duration, type='sine', vol=0.3) {
 
 function playCorrectSound() {
   if (!audioEnabled) return;
-  // Happy ascending chime
   setTimeout(() => playTone(523, 0.15, 'sine', 0.3), 0);
   setTimeout(() => playTone(659, 0.15, 'sine', 0.3), 120);
   setTimeout(() => playTone(784, 0.15, 'sine', 0.3), 240);
@@ -537,7 +543,6 @@ function playCorrectSound() {
 
 function playWrongSound() {
   if (!audioEnabled) return;
-  // Sad descending buzz
   setTimeout(() => playTone(330, 0.18, 'sawtooth', 0.25), 0);
   setTimeout(() => playTone(277, 0.18, 'sawtooth', 0.22), 160);
   setTimeout(() => playTone(220, 0.35, 'sawtooth', 0.2), 320);
@@ -555,7 +560,6 @@ function playStreakSound() {
   [523,659,784,880,1047,1319].forEach((f,i) => setTimeout(() => playTone(f, 0.14, 'sine', 0.28), i*80));
 }
 
-// Web Speech API
 const CORRECT_PHRASES = [
   "Congratulations! You said the right answer!",
   "Excellent! That is correct! Well done!",
@@ -582,14 +586,12 @@ function speak(text) {
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(text);
   utt.lang = 'en-US'; utt.rate = 0.92; utt.pitch = 1.1; utt.volume = 1;
-  // Try to pick a nice voice
   const voices = window.speechSynthesis.getVoices();
   const pref = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Female') || v.name.includes('Google') || v.name.includes('Samantha') || v.name.includes('Karen')));
   if (pref) utt.voice = pref;
   window.speechSynthesis.speak(utt);
 }
 
-// Confetti engine
 const confCanvas = document.getElementById('confetti-canvas');
 const confCtx = confCanvas.getContext('2d');
 let confParticles = [];
@@ -602,7 +604,7 @@ function resizeConf() {
 resizeConf();
 window.addEventListener('resize', resizeConf);
 
-function launchConfetti(count = 90, colors = ['#F4C430','#27AE60','#1A3C6E','#fff','#C0392B','#8E44AD']) {
+function launchConfetti(count = 90, colors = ['#E8A33D','#2F9E5B','#163457','#fff','#A32638','#7C4FA0']) {
   resizeConf();
   confParticles = [];
   for (let i = 0; i < count; i++) {
@@ -627,7 +629,7 @@ function animConf() {
   confCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
   confParticles.forEach(p => {
     p.x += p.vx; p.y += p.vy; p.rot += p.vr;
-    p.vy += 0.08; // gravity
+    p.vy += 0.08;
     if (p.y > confCanvas.height - 20) p.alpha -= 0.04;
     confCtx.save();
     confCtx.globalAlpha = Math.max(0, p.alpha);
@@ -642,7 +644,6 @@ function animConf() {
   else confCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
 }
 
-// Floating +pts popup
 function showScorePop(pts, x, y) {
   const el = document.createElement('div');
   el.className = 'score-pop';
@@ -653,7 +654,6 @@ function showScorePop(pts, x, y) {
   setTimeout(() => el.remove(), 1300);
 }
 
-// Overlay system
 const overlay = document.getElementById('answer-overlay');
 const overlayBox = document.getElementById('overlay-box');
 const overlayIcon = document.getElementById('overlay-icon');
@@ -667,6 +667,7 @@ overlayCloseBtn.addEventListener('click', closeOverlay);
 
 let autoAdvanceTimer = null;
 let autoAdvanceInterval = null;
+let overlayCallback = null;
 
 function showOverlay(type, pts, streakCount, explanation) {
   overlay.classList.add('show');
@@ -693,7 +694,6 @@ function showOverlay(type, pts, streakCount, explanation) {
     overlayPts.style.display = 'none';
   }
 
-  // Auto-advance countdown ring
   const ringWrap = document.getElementById('auto-ring-wrap');
   const ringFg   = document.getElementById('auto-ring-fg');
   const ringNum  = document.getElementById('auto-ring-num');
@@ -709,7 +709,6 @@ function showOverlay(type, pts, streakCount, explanation) {
     ringLbl.style.display = 'block';
     ringNum.textContent = left;
     ringFg.style.strokeDashoffset = '0';
-    // tick every second
     autoAdvanceInterval = setInterval(() => {
       left--;
       ringNum.textContent = left;
@@ -719,7 +718,6 @@ function showOverlay(type, pts, streakCount, explanation) {
         closeOverlay();
       }
     }, 1000);
-    // fallback
     autoAdvanceTimer = setTimeout(closeOverlay, (total + 0.5) * 1000);
   } else {
     ringWrap.classList.remove('show');
@@ -736,363 +734,278 @@ function closeOverlay() {
   if (overlayCallback) { overlayCallback(); overlayCallback = null; }
 }
 
-// Flash the whole screen body
 function flashScreen(type) {
   document.body.classList.remove('correct-flash','wrong-flash');
-  void document.body.offsetWidth; // reflow
+  void document.body.offsetWidth;
   document.body.classList.add(type === 'correct' ? 'correct-flash' : 'wrong-flash');
   setTimeout(() => document.body.classList.remove('correct-flash','wrong-flash'), 600);
 }
 
 // ══════════════════════════════════════════════
 // MASSIVE BUILT-IN QUESTION BANK
+// Each question can optionally carry a "cls" field: the
+// minimum class level it's appropriate for. If omitted, it's
+// inferred from difficulty (Easy→5, Medium→7, Hard→9, Expert→10).
 // ══════════════════════════════════════════════
 const QB = {
   "Mathematics": [
-    {q:"What is the value of π (pi) approximately?",opts:["3.14","3.41","2.14","3.12"],ans:0,exp:"Pi (π) is approximately 3.14159... commonly rounded to 3.14.",diff:"Easy",type:"Math"},
-    {q:"What is the square root of 144?",opts:["11","12","13","14"],ans:1,exp:"12 × 12 = 144, so √144 = 12.",diff:"Easy",type:"Math"},
-    {q:"If a triangle has angles 60°, 70°, and x°, what is x?",opts:["40°","50°","60°","70°"],ans:1,exp:"Sum of angles in a triangle = 180°. So x = 180 - 60 - 70 = 50°.",diff:"Easy",type:"Math"},
-    {q:"What is 15% of 200?",opts:["25","30","35","40"],ans:1,exp:"15% of 200 = (15/100) × 200 = 30.",diff:"Easy",type:"Math"},
-    {q:"Simplify: 3/4 + 1/2",opts:["4/6","5/4","7/8","1/2"],ans:1,exp:"1/2 = 2/4, so 3/4 + 2/4 = 5/4.",diff:"Easy",type:"Math"},
-    {q:"What is 2³ × 2²?",opts:["2⁵","2⁶","4⁵","2⁴"],ans:0,exp:"When multiplying same base, add exponents: 2³ × 2² = 2^(3+2) = 2⁵ = 32.",diff:"Medium",type:"Math"},
-    {q:"The area of a circle with radius 7 cm is: (use π = 22/7)",opts:["154 cm²","144 cm²","132 cm²","176 cm²"],ans:0,exp:"Area = πr² = (22/7) × 7 × 7 = 22 × 7 = 154 cm².",diff:"Medium",type:"Math"},
-    {q:"If x + 5 = 13, what is 2x?",opts:["8","16","13","6"],ans:1,exp:"x = 13 - 5 = 8, therefore 2x = 16.",diff:"Easy",type:"Math"},
-    {q:"A shopkeeper buys goods for Rs.500 and sells for Rs.600. What is the profit percentage?",opts:["15%","20%","25%","10%"],ans:1,exp:"Profit = 100, Profit% = (100/500)×100 = 20%.",diff:"Medium",type:"Math"},
-    {q:"What is LCM of 12 and 18?",opts:["6","24","36","72"],ans:2,exp:"LCM of 12 and 18 is 36 (smallest number divisible by both).",diff:"Easy",type:"Math"},
-    {q:"Solve: 5x - 3 = 2x + 9",opts:["x=4","x=3","x=6","x=2"],ans:0,exp:"5x - 2x = 9 + 3 → 3x = 12 → x = 4.",diff:"Medium",type:"Math"},
-    {q:"What is the HCF of 48 and 64?",opts:["8","12","16","24"],ans:2,exp:"Factors: 48=2⁴×3, 64=2⁶. HCF = 2⁴ = 16.",diff:"Medium",type:"Math"},
-    {q:"The perimeter of a square with side 9 cm is:",opts:["27 cm","36 cm","45 cm","18 cm"],ans:1,exp:"Perimeter of square = 4 × side = 4 × 9 = 36 cm.",diff:"Easy",type:"Math"},
-    {q:"What is the value of (−3)²?",opts:["−9","9","6","−6"],ans:1,exp:"(−3)² = (−3) × (−3) = 9. Negative × negative = positive.",diff:"Easy",type:"Math"},
-    {q:"If a:b = 3:5 and b:c = 2:3, what is a:c?",opts:["2:5","6:15","1:5","3:10"],ans:1,exp:"a:b:c = 3×2 : 5×2 : 5×3 = 6:10:15, so a:c = 6:15.",diff:"Hard",type:"Math"},
-    {q:"The mean of 5, 10, 15, 20, 25 is:",opts:["10","12","15","20"],ans:2,exp:"Mean = (5+10+15+20+25)/5 = 75/5 = 15.",diff:"Easy",type:"Math"},
-    {q:"A train travels 360 km in 4 hours. What is its speed?",opts:["80 km/h","90 km/h","100 km/h","72 km/h"],ans:1,exp:"Speed = Distance/Time = 360/4 = 90 km/h.",diff:"Easy",type:"Math"},
-    {q:"What is the value of sin 90°?",opts:["0","1","−1","undefined"],ans:1,exp:"sin 90° = 1. This is a fundamental trigonometric value.",diff:"Medium",type:"Math"},
-    {q:"If compound interest on Rs.1000 at 10% per annum for 2 years, the amount is:",opts:["Rs.1200","Rs.1210","Rs.1100","Rs.1220"],ans:1,exp:"A = P(1+r/100)ⁿ = 1000(1.1)² = 1000×1.21 = Rs.1210.",diff:"Hard",type:"Math"},
-    {q:"The volume of a cube with side 5 cm is:",opts:["25 cm³","75 cm³","100 cm³","125 cm³"],ans:3,exp:"Volume of cube = side³ = 5³ = 125 cm³.",diff:"Easy",type:"Math"},
-    {q:"What is the sum of interior angles of a hexagon?",opts:["540°","720°","900°","360°"],ans:1,exp:"Sum = (n−2)×180 = (6−2)×180 = 4×180 = 720°.",diff:"Medium",type:"Math"},
-    {q:"Factorize: x² − 9",opts:["(x+3)(x−3)","(x−3)²","(x+9)(x−1)","(x+3)²"],ans:0,exp:"x²−9 = x²−3² = (x+3)(x−3) using difference of squares.",diff:"Medium",type:"Math"},
-    {q:"A pipe fills a tank in 6 hours. Another empties it in 12 hours. Both open: tank fills in?",opts:["4 hrs","12 hrs","6 hrs","9 hrs"],ans:1,exp:"Net rate = 1/6 − 1/12 = 1/12. Time = 12 hours.",diff:"Hard",type:"Math"},
-    {q:"What is the median of 3, 7, 2, 9, 5?",opts:["5","7","6","4"],ans:0,exp:"Arranged: 2,3,5,7,9. Middle value (3rd) = 5.",diff:"Easy",type:"Math"},
-    {q:"Simplify: (a²b³)² ÷ a²b⁴",opts:["a²b²","b²a","a⁴b⁶","a²b⁴"],ans:0,exp:"(a²b³)² = a⁴b⁶. Then a⁴b⁶ ÷ a²b⁴ = a²b².",diff:"Hard",type:"Math"},
+    {q:"What is the value of π (pi) approximately?",opts:["3.14","3.41","2.14","3.12"],ans:0,exp:"Pi (π) is approximately 3.14159... commonly rounded to 3.14.",diff:"Easy"},
+    {q:"What is the square root of 144?",opts:["11","12","13","14"],ans:1,exp:"12 × 12 = 144, so √144 = 12.",diff:"Easy"},
+    {q:"If a triangle has angles 60°, 70°, and x°, what is x?",opts:["40°","50°","60°","70°"],ans:1,exp:"Sum of angles in a triangle = 180°. So x = 180 - 60 - 70 = 50°.",diff:"Easy"},
+    {q:"What is 15% of 200?",opts:["25","30","35","40"],ans:1,exp:"15% of 200 = (15/100) × 200 = 30.",diff:"Easy"},
+    {q:"Simplify: 3/4 + 1/2",opts:["4/6","5/4","7/8","1/2"],ans:1,exp:"1/2 = 2/4, so 3/4 + 2/4 = 5/4.",diff:"Easy"},
+    {q:"What is 2³ × 2²?",opts:["2⁵","2⁶","4⁵","2⁴"],ans:0,exp:"When multiplying same base, add exponents: 2³ × 2² = 2^(3+2) = 2⁵ = 32.",diff:"Medium"},
+    {q:"The area of a circle with radius 7 cm is: (use π = 22/7)",opts:["154 cm²","144 cm²","132 cm²","176 cm²"],ans:0,exp:"Area = πr² = (22/7) × 7 × 7 = 22 × 7 = 154 cm².",diff:"Medium"},
+    {q:"If x + 5 = 13, what is 2x?",opts:["8","16","13","6"],ans:1,exp:"x = 13 - 5 = 8, therefore 2x = 16.",diff:"Easy"},
+    {q:"A shopkeeper buys goods for Rs.500 and sells for Rs.600. What is the profit percentage?",opts:["15%","20%","25%","10%"],ans:1,exp:"Profit = 100, Profit% = (100/500)×100 = 20%.",diff:"Medium"},
+    {q:"What is LCM of 12 and 18?",opts:["6","24","36","72"],ans:2,exp:"LCM of 12 and 18 is 36 (smallest number divisible by both).",diff:"Easy"},
+    {q:"Solve: 5x - 3 = 2x + 9",opts:["x=4","x=3","x=6","x=2"],ans:0,exp:"5x - 2x = 9 + 3 → 3x = 12 → x = 4.",diff:"Medium"},
+    {q:"What is the HCF of 48 and 64?",opts:["8","12","16","24"],ans:2,exp:"Factors: 48=2⁴×3, 64=2⁶. HCF = 2⁴ = 16.",diff:"Medium"},
+    {q:"The perimeter of a square with side 9 cm is:",opts:["27 cm","36 cm","45 cm","18 cm"],ans:1,exp:"Perimeter of square = 4 × side = 4 × 9 = 36 cm.",diff:"Easy"},
+    {q:"What is the value of (−3)²?",opts:["−9","9","6","−6"],ans:1,exp:"(−3)² = (−3) × (−3) = 9. Negative × negative = positive.",diff:"Easy"},
+    {q:"If a:b = 3:5 and b:c = 2:3, what is a:c?",opts:["2:5","6:15","1:5","3:10"],ans:1,exp:"a:b:c = 3×2 : 5×2 : 5×3 = 6:10:15, so a:c = 6:15.",diff:"Hard"},
+    {q:"The mean of 5, 10, 15, 20, 25 is:",opts:["10","12","15","20"],ans:2,exp:"Mean = (5+10+15+20+25)/5 = 75/5 = 15.",diff:"Easy"},
+    {q:"A train travels 360 km in 4 hours. What is its speed?",opts:["80 km/h","90 km/h","100 km/h","72 km/h"],ans:1,exp:"Speed = Distance/Time = 360/4 = 90 km/h.",diff:"Easy"},
+    {q:"What is the value of sin 90°?",opts:["0","1","−1","undefined"],ans:1,exp:"sin 90° = 1. This is a fundamental trigonometric value.",diff:"Medium"},
+    {q:"If compound interest on Rs.1000 at 10% per annum for 2 years, the amount is:",opts:["Rs.1200","Rs.1210","Rs.1100","Rs.1220"],ans:1,exp:"A = P(1+r/100)ⁿ = 1000(1.1)² = 1000×1.21 = Rs.1210.",diff:"Hard"},
+    {q:"The volume of a cube with side 5 cm is:",opts:["25 cm³","75 cm³","100 cm³","125 cm³"],ans:3,exp:"Volume of cube = side³ = 5³ = 125 cm³.",diff:"Easy"},
+    {q:"What is the sum of interior angles of a hexagon?",opts:["540°","720°","900°","360°"],ans:1,exp:"Sum = (n−2)×180 = (6−2)×180 = 4×180 = 720°.",diff:"Medium"},
+    {q:"Factorize: x² − 9",opts:["(x+3)(x−3)","(x−3)²","(x+9)(x−1)","(x+3)²"],ans:0,exp:"x²−9 = x²−3² = (x+3)(x−3) using difference of squares.",diff:"Medium"},
+    {q:"A pipe fills a tank in 6 hours. Another empties it in 12 hours. Both open: tank fills in?",opts:["4 hrs","12 hrs","6 hrs","9 hrs"],ans:1,exp:"Net rate = 1/6 − 1/12 = 1/12. Time = 12 hours.",diff:"Hard"},
+    {q:"What is the median of 3, 7, 2, 9, 5?",opts:["5","7","6","4"],ans:0,exp:"Arranged: 2,3,5,7,9. Middle value (3rd) = 5.",diff:"Easy"},
+    {q:"Simplify: (a²b³)² ÷ a²b⁴",opts:["a²b²","b²a","a⁴b⁶","a²b⁴"],ans:0,exp:"(a²b³)² = a⁴b⁶. Then a⁴b⁶ ÷ a²b⁴ = a²b².",diff:"Hard"},
+    {q:"What is 7 × 8?",opts:["54","56","58","64"],ans:1,exp:"7 × 8 = 56.",diff:"Easy",cls:5},
+    {q:"What is 100 − 45?",opts:["45","55","65","50"],ans:1,exp:"100 − 45 = 55.",diff:"Easy",cls:5},
+    {q:"Round 68 to the nearest ten.",opts:["60","65","70","80"],ans:2,exp:"68 is closer to 70 than to 60, so it rounds to 70.",diff:"Easy",cls:5},
+    {q:"Which fraction is greater: 1/2 or 1/3?",opts:["1/2","1/3","They are equal","Cannot tell"],ans:0,exp:"1/2 = 0.5 and 1/3 ≈ 0.33, so 1/2 is greater.",diff:"Easy",cls:5},
+    {q:"What is 1/4 written as a decimal?",opts:["0.4","0.2","0.25","0.14"],ans:2,exp:"1 ÷ 4 = 0.25.",diff:"Medium",cls:6},
+    {q:"Find x: 4x = 28",opts:["x = 6","x = 7","x = 8","x = 9"],ans:1,exp:"x = 28 ÷ 4 = 7.",diff:"Easy",cls:6},
   ],
   "Science": [
-    {q:"Which gas is most abundant in Earth's atmosphere?",opts:["Oxygen","Nitrogen","Carbon Dioxide","Argon"],ans:1,exp:"Nitrogen makes up about 78% of Earth's atmosphere.",diff:"Easy",type:"Science"},
-    {q:"What is the chemical formula of water?",opts:["H₂O","HO₂","H₂O₂","OH"],ans:0,exp:"Water consists of 2 hydrogen atoms and 1 oxygen atom: H₂O.",diff:"Easy",type:"Science"},
-    {q:"Which organ pumps blood throughout the body?",opts:["Liver","Lungs","Heart","Kidney"],ans:2,exp:"The heart is a muscular organ that pumps blood through the circulatory system.",diff:"Easy",type:"Science"},
-    {q:"What is the SI unit of force?",opts:["Joule","Watt","Newton","Pascal"],ans:2,exp:"Newton (N) is the SI unit of force. 1 Newton = 1 kg⋅m/s².",diff:"Easy",type:"Science"},
-    {q:"Photosynthesis occurs in which part of a plant?",opts:["Root","Stem","Flower","Chloroplast (in leaves)"],ans:3,exp:"Photosynthesis takes place in chloroplasts, found mainly in leaves.",diff:"Easy",type:"Science"},
-    {q:"What is the speed of light in vacuum?",opts:["3×10⁸ m/s","3×10⁶ m/s","3×10⁵ m/s","3×10⁹ m/s"],ans:0,exp:"Speed of light = 3×10⁸ m/s (300,000 km/s).",diff:"Medium",type:"Science"},
-    {q:"DNA stands for:",opts:["Deoxyribonucleic Acid","Dinitrogen Acid","Deoxyribose Nucleotide Acid","None"],ans:0,exp:"DNA = Deoxyribonucleic Acid — carries genetic information.",diff:"Medium",type:"Science"},
-    {q:"Which planet is called the Red Planet?",opts:["Venus","Jupiter","Mars","Saturn"],ans:2,exp:"Mars appears red due to iron oxide (rust) on its surface.",diff:"Easy",type:"Science"},
-    {q:"What is the powerhouse of the cell?",opts:["Nucleus","Ribosome","Mitochondria","Vacuole"],ans:2,exp:"Mitochondria produce energy (ATP) through cellular respiration — called the powerhouse.",diff:"Easy",type:"Science"},
-    {q:"Newton's First Law is also called:",opts:["Law of Gravitation","Law of Inertia","Law of Action-Reaction","Law of Acceleration"],ans:1,exp:"Newton's First Law (Law of Inertia): an object stays at rest or in motion unless acted upon by force.",diff:"Medium",type:"Science"},
-    {q:"Which acid is present in our stomach?",opts:["Sulfuric acid","Nitric acid","Hydrochloric acid","Acetic acid"],ans:2,exp:"Hydrochloric acid (HCl) in the stomach helps digest food.",diff:"Medium",type:"Science"},
-    {q:"The ozone layer protects Earth from:",opts:["Acid rain","UV radiation","Earthquakes","Volcanic eruptions"],ans:1,exp:"The ozone layer absorbs harmful ultraviolet (UV) radiation from the Sun.",diff:"Easy",type:"Science"},
-    {q:"Which blood group is the universal donor?",opts:["A","B","AB","O"],ans:3,exp:"Blood group O (negative) is the universal donor — can donate to any blood group.",diff:"Medium",type:"Science"},
-    {q:"Sound travels fastest through:",opts:["Air","Water","Vacuum","Steel"],ans:3,exp:"Sound travels fastest through solids like steel (~5100 m/s) because molecules are closely packed.",diff:"Hard",type:"Science"},
-    {q:"What is the chemical symbol for gold?",opts:["Go","Gd","Au","Ag"],ans:2,exp:"Gold's symbol Au comes from Latin 'Aurum'.",diff:"Medium",type:"Science"},
-    {q:"Malaria is caused by:",opts:["Bacteria","Virus","Protozoan (Plasmodium)","Fungus"],ans:2,exp:"Malaria is caused by Plasmodium protozoa, transmitted through Anopheles mosquito bites.",diff:"Medium",type:"Science"},
-    {q:"Which vitamin is produced by the skin in sunlight?",opts:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],ans:3,exp:"Skin produces Vitamin D when exposed to sunlight (UV-B rays).",diff:"Medium",type:"Science"},
-    {q:"What is the process of conversion of solid to gas called?",opts:["Evaporation","Condensation","Sublimation","Melting"],ans:2,exp:"Sublimation is direct conversion from solid to gas (e.g., dry ice, naphthalene).",diff:"Hard",type:"Science"},
-    {q:"The pH of pure water is:",opts:["5","6","7","8"],ans:2,exp:"Pure water has pH 7 — neutral (neither acidic nor basic).",diff:"Easy",type:"Science"},
-    {q:"Which gas do plants absorb during photosynthesis?",opts:["Oxygen","Nitrogen","Carbon Dioxide","Hydrogen"],ans:2,exp:"Plants absorb CO₂ from air and use sunlight + water to produce food and release oxygen.",diff:"Easy",type:"Science"},
+    {q:"Which gas is most abundant in Earth's atmosphere?",opts:["Oxygen","Nitrogen","Carbon Dioxide","Argon"],ans:1,exp:"Nitrogen makes up about 78% of Earth's atmosphere.",diff:"Easy"},
+    {q:"What is the chemical formula of water?",opts:["H₂O","HO₂","H₂O₂","OH"],ans:0,exp:"Water consists of 2 hydrogen atoms and 1 oxygen atom: H₂O.",diff:"Easy"},
+    {q:"Which organ pumps blood throughout the body?",opts:["Liver","Lungs","Heart","Kidney"],ans:2,exp:"The heart is a muscular organ that pumps blood through the circulatory system.",diff:"Easy"},
+    {q:"What is the SI unit of force?",opts:["Joule","Watt","Newton","Pascal"],ans:2,exp:"Newton (N) is the SI unit of force. 1 Newton = 1 kg⋅m/s².",diff:"Easy"},
+    {q:"Photosynthesis occurs in which part of a plant?",opts:["Root","Stem","Flower","Chloroplast (in leaves)"],ans:3,exp:"Photosynthesis takes place in chloroplasts, found mainly in leaves.",diff:"Easy"},
+    {q:"What is the speed of light in vacuum?",opts:["3×10⁸ m/s","3×10⁶ m/s","3×10⁵ m/s","3×10⁹ m/s"],ans:0,exp:"Speed of light = 3×10⁸ m/s (300,000 km/s).",diff:"Medium"},
+    {q:"DNA stands for:",opts:["Deoxyribonucleic Acid","Dinitrogen Acid","Deoxyribose Nucleotide Acid","None"],ans:0,exp:"DNA = Deoxyribonucleic Acid — carries genetic information.",diff:"Medium"},
+    {q:"Which planet is called the Red Planet?",opts:["Venus","Jupiter","Mars","Saturn"],ans:2,exp:"Mars appears red due to iron oxide (rust) on its surface.",diff:"Easy"},
+    {q:"What is the powerhouse of the cell?",opts:["Nucleus","Ribosome","Mitochondria","Vacuole"],ans:2,exp:"Mitochondria produce energy (ATP) through cellular respiration — called the powerhouse.",diff:"Easy"},
+    {q:"Newton's First Law is also called:",opts:["Law of Gravitation","Law of Inertia","Law of Action-Reaction","Law of Acceleration"],ans:1,exp:"Newton's First Law (Law of Inertia): an object stays at rest or in motion unless acted upon by force.",diff:"Medium"},
+    {q:"Which acid is present in our stomach?",opts:["Sulfuric acid","Nitric acid","Hydrochloric acid","Acetic acid"],ans:2,exp:"Hydrochloric acid (HCl) in the stomach helps digest food.",diff:"Medium"},
+    {q:"The ozone layer protects Earth from:",opts:["Acid rain","UV radiation","Earthquakes","Volcanic eruptions"],ans:1,exp:"The ozone layer absorbs harmful ultraviolet (UV) radiation from the Sun.",diff:"Easy"},
+    {q:"Which blood group is the universal donor?",opts:["A","B","AB","O"],ans:3,exp:"Blood group O (negative) is the universal donor — can donate to any blood group.",diff:"Medium"},
+    {q:"Sound travels fastest through:",opts:["Air","Water","Vacuum","Steel"],ans:3,exp:"Sound travels fastest through solids like steel (~5100 m/s) because molecules are closely packed.",diff:"Hard"},
+    {q:"What is the chemical symbol for gold?",opts:["Go","Gd","Au","Ag"],ans:2,exp:"Gold's symbol Au comes from Latin 'Aurum'.",diff:"Medium"},
+    {q:"Malaria is caused by:",opts:["Bacteria","Virus","Protozoan (Plasmodium)","Fungus"],ans:2,exp:"Malaria is caused by Plasmodium protozoa, transmitted through Anopheles mosquito bites.",diff:"Medium"},
+    {q:"Which vitamin is produced by the skin in sunlight?",opts:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],ans:3,exp:"Skin produces Vitamin D when exposed to sunlight (UV-B rays).",diff:"Medium"},
+    {q:"What is the process of conversion of solid to gas called?",opts:["Evaporation","Condensation","Sublimation","Melting"],ans:2,exp:"Sublimation is direct conversion from solid to gas (e.g., dry ice, naphthalene).",diff:"Hard"},
+    {q:"The pH of pure water is:",opts:["5","6","7","8"],ans:2,exp:"Pure water has pH 7 — neutral (neither acidic nor basic).",diff:"Easy"},
+    {q:"Which gas do plants absorb during photosynthesis?",opts:["Oxygen","Nitrogen","Carbon Dioxide","Hydrogen"],ans:2,exp:"Plants absorb CO₂ from air and use sunlight + water to produce food and release oxygen.",diff:"Easy"},
+    {q:"Which sense organ helps us see?",opts:["Ears","Eyes","Nose","Skin"],ans:1,exp:"The eyes are the sense organs that let us see light and images.",diff:"Easy",cls:5},
+    {q:"Animals that eat only plants are called:",opts:["Carnivores","Herbivores","Omnivores","Predators"],ans:1,exp:"Herbivores are animals that eat only plants, like cows and deer.",diff:"Easy",cls:5},
+    {q:"Which state of matter has a fixed shape and a fixed volume?",opts:["Gas","Liquid","Solid","Plasma"],ans:2,exp:"A solid keeps both its shape and volume, unlike liquids and gases.",diff:"Easy",cls:5},
+    {q:"What gas do we breathe in that our body needs to live?",opts:["Carbon dioxide","Nitrogen","Oxygen","Helium"],ans:2,exp:"We breathe in oxygen, which our body uses to release energy from food.",diff:"Easy",cls:5},
+    {q:"The process by which water turns into vapour is called:",opts:["Evaporation","Freezing","Condensation","Precipitation"],ans:0,exp:"Evaporation is the process where liquid water changes into water vapour due to heat.",diff:"Medium",cls:6},
   ],
   "Nepal GK": [
-    {q:"What is the national flower of Nepal?",opts:["Rose","Lotus","Rhododendron (Laligurans)","Marigold"],ans:2,exp:"Rhododendron (Laligurans in Nepali) is Nepal's national flower, found abundantly in the hills.",diff:"Easy",type:"Nepal GK"},
-    {q:"What is the national bird of Nepal?",opts:["Peacock","Eagle","Danfe (Himalayan Monal)","Crow"],ans:2,exp:"Danfe (Himalayan Monal) is Nepal's national bird — colorful and found in high mountains.",diff:"Easy",type:"Nepal GK"},
-    {q:"What is the national animal of Nepal?",opts:["Tiger","Elephant","Cow (Gai)","Snow Leopard"],ans:2,exp:"The Cow (Gai) is Nepal's national animal and is sacred in Hindu culture.",diff:"Easy",type:"Nepal GK"},
-    {q:"Nepal's national sport is:",opts:["Cricket","Football","Volleyball","Kabaddi"],ans:2,exp:"Volleyball was declared Nepal's national sport in 2017 BS.",diff:"Easy",type:"Nepal GK"},
-    {q:"What is unique about Nepal's national flag?",opts:["It is circular","It is the only non-rectangular national flag","It has 3 colors","It shows a dragon"],ans:1,exp:"Nepal's flag is the only non-rectangular (double pennon) national flag in the world.",diff:"Easy",type:"Nepal GK"},
-    {q:"How many provinces does Nepal have?",opts:["5","6","7","8"],ans:2,exp:"Nepal has 7 provinces since the 2015 constitution: Koshi, Madhesh, Bagmati, Gandaki, Lumbini, Karnali, Sudurpashchim.",diff:"Easy",type:"Nepal GK"},
-    {q:"The capital of Nepal is:",opts:["Pokhara","Biratnagar","Kathmandu","Lalitpur"],ans:2,exp:"Kathmandu is the capital and largest city of Nepal.",diff:"Easy",type:"Nepal GK"},
-    {q:"Nepal's currency is called:",opts:["Rupiah","Taka","Rupee","Dinar"],ans:2,exp:"Nepal uses the Nepali Rupee (रुपैयाँ) as its currency.",diff:"Easy",type:"Nepal GK"},
-    {q:"Which mountain is the highest in the world, located in Nepal?",opts:["K2","Kanchenjunga","Mount Everest","Makalu"],ans:2,exp:"Mount Everest (8,849 m) in Nepal is the highest peak in the world.",diff:"Easy",type:"Nepal GK"},
-    {q:"How many UNESCO World Heritage Sites are in the Kathmandu Valley?",opts:["5","6","7","8"],ans:2,exp:"Kathmandu Valley has 7 UNESCO sites: Pashupatinath, Boudhanath, Swayambhunath, Changu Narayan, and 3 Durbar Squares.",diff:"Medium",type:"Nepal GK"},
-    {q:"Where was Gautama Buddha born?",opts:["Kathmandu","Pokhara","Lumbini","Bhaktapur"],ans:2,exp:"Gautama Buddha was born in Lumbini, now in Rupandehi district of Nepal, around 563 BCE.",diff:"Easy",type:"Nepal GK"},
-    {q:"Nepal became a Federal Democratic Republic in which year (BS)?",opts:["2063","2065","2072","2060"],ans:1,exp:"Nepal was declared a Federal Democratic Republic on Jestha 15, 2065 BS (May 28, 2008 AD).",diff:"Medium",type:"Nepal GK"},
-    {q:"The total area of Nepal is approximately:",opts:["97,181 km²","147,181 km²","247,181 km²","47,181 km²"],ans:1,exp:"Nepal covers approximately 147,181 square kilometers.",diff:"Medium",type:"Nepal GK"},
-    {q:"Nepal shares its border with which two countries?",opts:["India and Pakistan","India and Bangladesh","India and China","China and Pakistan"],ans:2,exp:"Nepal is landlocked between India (south, east, west) and China/Tibet (north).",diff:"Easy",type:"Nepal GK"},
-    {q:"The first president of Nepal was:",opts:["Ram Baran Yadav","Bidhya Devi Bhandari","Yadav Prasad Pant","Pushpa Kamal Dahal"],ans:0,exp:"Ram Baran Yadav became Nepal's first President when Nepal was declared a Republic in 2008.",diff:"Medium",type:"Nepal GK"},
-    {q:"Nepal's national language is:",opts:["Maithili","Bhojpuri","Nepali","Newari"],ans:2,exp:"Nepali (also called Gorkhali) is Nepal's official and national language.",diff:"Easy",type:"Nepal GK"},
-    {q:"Sagarmatha National Park is famous for:",opts:["Rhinos","Tigers","Mount Everest","Snow Leopards only"],ans:2,exp:"Sagarmatha (Everest) National Park contains the world's highest peak and is a UNESCO site.",diff:"Easy",type:"Nepal GK"},
-    {q:"The tallest waterfall in Nepal is:",opts:["Jalbire Falls","Devi Falls","Seti Gorge","Kali Gandaki Falls"],ans:1,exp:"Devi Falls (Patale Chhango) in Pokhara is one of Nepal's most famous and powerful waterfalls.",diff:"Hard",type:"Nepal GK"},
-    {q:"Nepal's new constitution was promulgated in which year?",opts:["2063 BS","2070 BS","2072 BS","2075 BS"],ans:2,exp:"Nepal's constitution was promulgated on Ashwin 3, 2072 BS (September 20, 2015 AD).",diff:"Medium",type:"Nepal GK"},
-    {q:"The national anthem of Nepal begins with which word?",opts:["Sayaun","Nepal","Hamro","Priya"],ans:0,exp:"Nepal's national anthem begins with 'Sayaun thunga phulka hami...' meaning 'We are hundreds of flowers.'",diff:"Medium",type:"Nepal GK"},
+    {q:"What is the national flower of Nepal?",opts:["Rose","Lotus","Rhododendron (Laligurans)","Marigold"],ans:2,exp:"Rhododendron (Laligurans in Nepali) is Nepal's national flower, found abundantly in the hills.",diff:"Easy"},
+    {q:"What is the national bird of Nepal?",opts:["Peacock","Eagle","Danfe (Himalayan Monal)","Crow"],ans:2,exp:"Danfe (Himalayan Monal) is Nepal's national bird — colorful and found in high mountains.",diff:"Easy"},
+    {q:"What is the national animal of Nepal?",opts:["Tiger","Elephant","Cow (Gai)","Snow Leopard"],ans:2,exp:"The Cow (Gai) is Nepal's national animal and is sacred in Hindu culture.",diff:"Easy"},
+    {q:"Nepal's national sport is:",opts:["Cricket","Football","Volleyball","Kabaddi"],ans:2,exp:"Volleyball was declared Nepal's national sport in 2017 BS.",diff:"Easy"},
+    {q:"What is unique about Nepal's national flag?",opts:["It is circular","It is the only non-rectangular national flag","It has 3 colors","It shows a dragon"],ans:1,exp:"Nepal's flag is the only non-rectangular (double pennon) national flag in the world.",diff:"Easy"},
+    {q:"How many provinces does Nepal have?",opts:["5","6","7","8"],ans:2,exp:"Nepal has 7 provinces since the 2015 constitution: Koshi, Madhesh, Bagmati, Gandaki, Lumbini, Karnali, Sudurpashchim.",diff:"Easy"},
+    {q:"The capital of Nepal is:",opts:["Pokhara","Biratnagar","Kathmandu","Lalitpur"],ans:2,exp:"Kathmandu is the capital and largest city of Nepal.",diff:"Easy"},
+    {q:"Nepal's currency is called:",opts:["Rupiah","Taka","Rupee","Dinar"],ans:2,exp:"Nepal uses the Nepali Rupee (रुपैयाँ) as its currency.",diff:"Easy"},
+    {q:"Which mountain is the highest in the world, located in Nepal?",opts:["K2","Kanchenjunga","Mount Everest","Makalu"],ans:2,exp:"Mount Everest (8,849 m) in Nepal is the highest peak in the world.",diff:"Easy"},
+    {q:"How many UNESCO World Heritage Sites are in the Kathmandu Valley?",opts:["5","6","7","8"],ans:2,exp:"Kathmandu Valley has 7 UNESCO sites: Pashupatinath, Boudhanath, Swayambhunath, Changu Narayan, and 3 Durbar Squares.",diff:"Medium"},
+    {q:"Where was Gautama Buddha born?",opts:["Kathmandu","Pokhara","Lumbini","Bhaktapur"],ans:2,exp:"Gautama Buddha was born in Lumbini, now in Rupandehi district of Nepal, around 563 BCE.",diff:"Easy"},
+    {q:"Nepal became a Federal Democratic Republic in which year (BS)?",opts:["2063","2065","2072","2060"],ans:1,exp:"Nepal was declared a Federal Democratic Republic on Jestha 15, 2065 BS (May 28, 2008 AD).",diff:"Medium"},
+    {q:"The total area of Nepal is approximately:",opts:["97,181 km²","147,181 km²","247,181 km²","47,181 km²"],ans:1,exp:"Nepal covers approximately 147,181 square kilometers.",diff:"Medium"},
+    {q:"Nepal shares its border with which two countries?",opts:["India and Pakistan","India and Bangladesh","India and China","China and Pakistan"],ans:2,exp:"Nepal is landlocked between India (south, east, west) and China/Tibet (north).",diff:"Easy"},
+    {q:"The first president of Nepal was:",opts:["Ram Baran Yadav","Bidhya Devi Bhandari","Yadav Prasad Pant","Pushpa Kamal Dahal"],ans:0,exp:"Ram Baran Yadav became Nepal's first President when Nepal was declared a Republic in 2008.",diff:"Medium"},
+    {q:"Nepal's national language is:",opts:["Maithili","Bhojpuri","Nepali","Newari"],ans:2,exp:"Nepali (also called Gorkhali) is Nepal's official and national language.",diff:"Easy"},
+    {q:"Sagarmatha National Park is famous for:",opts:["Rhinos","Tigers","Mount Everest","Snow Leopards only"],ans:2,exp:"Sagarmatha (Everest) National Park contains the world's highest peak and is a UNESCO site.",diff:"Easy"},
+    {q:"The tallest waterfall in Nepal is:",opts:["Jalbire Falls","Devi Falls","Seti Gorge","Kali Gandaki Falls"],ans:1,exp:"Devi Falls (Patale Chhango) in Pokhara is one of Nepal's most famous and powerful waterfalls.",diff:"Hard"},
+    {q:"Nepal's new constitution was promulgated in which year?",opts:["2063 BS","2070 BS","2072 BS","2075 BS"],ans:2,exp:"Nepal's constitution was promulgated on Ashwin 3, 2072 BS (September 20, 2015 AD).",diff:"Medium"},
+    {q:"The national anthem of Nepal begins with which word?",opts:["Sayaun","Nepal","Hamro","Priya"],ans:0,exp:"Nepal's national anthem begins with 'Sayaun thunga phulka hami...' meaning 'We are hundreds of flowers.'",diff:"Medium"},
+    {q:"Which river flows through Kathmandu and is considered holy?",opts:["Koshi","Bagmati","Karnali","Gandaki"],ans:1,exp:"The Bagmati River flows through Kathmandu Valley and is considered sacred by Hindus and Buddhists.",diff:"Easy",cls:5},
+    {q:"Nepal's national tree is:",opts:["Pine","Sal (Shorea robusta)","Bamboo","Oak"],ans:1,exp:"Sal (Shorea robusta) is Nepal's national tree, valued for its strong timber.",diff:"Medium",cls:6},
+    {q:"Which temple in Kathmandu is dedicated to Lord Shiva and is a UNESCO site?",opts:["Boudhanath","Pashupatinath","Swayambhunath","Changu Narayan"],ans:1,exp:"Pashupatinath Temple, on the banks of the Bagmati River, is dedicated to Lord Shiva.",diff:"Easy",cls:5},
+    {q:"Nepal Rastra Bank is Nepal's:",opts:["Stock exchange","Central bank","Tax office","Postal service"],ans:1,exp:"Nepal Rastra Bank is the central bank of Nepal, responsible for issuing currency and monetary policy.",diff:"Medium",cls:7},
+    {q:"Which province of Nepal has Kathmandu as its capital?",opts:["Gandaki","Bagmati","Koshi","Lumbini"],ans:1,exp:"Bagmati Province has Kathmandu as its capital.",diff:"Easy",cls:5},
   ],
   "Nepali Culture": [
-    {q:"Dashain is celebrated to worship which goddess?",opts:["Saraswati","Laxmi","Durga","Parvati"],ans:2,exp:"Dashain celebrates the victory of goddess Durga over the demon Mahishasura — good over evil.",diff:"Easy",type:"Culture"},
-    {q:"How many days does Dashain last?",opts:["5 days","10 days","15 days","7 days"],ans:2,exp:"Dashain lasts 15 days, starting from Ghatasthapana to Kojagrat Purnima.",diff:"Easy",type:"Culture"},
-    {q:"The most important day of Tihar for brothers and sisters is:",opts:["Kaag Tihar","Kukur Tihar","Bhai Tika","Laxmi Puja"],ans:2,exp:"Bhai Tika (5th day of Tihar) is when sisters apply tika on brothers' foreheads for their long life.",diff:"Easy",type:"Culture"},
-    {q:"Kukur Tihar is a day to worship:",opts:["Crows","Dogs","Cows","Brothers"],ans:1,exp:"Kukur Tihar (2nd day of Tihar) is dedicated to worshipping dogs, who are considered Yama's messengers.",diff:"Easy",type:"Culture"},
-    {q:"Teej is mainly celebrated by:",opts:["Men","Children","Women","Elders"],ans:2,exp:"Teej is a Hindu festival where women fast and pray for their husband's health and long life.",diff:"Easy",type:"Culture"},
-    {q:"Gai Jatra is celebrated by which community?",opts:["Brahmin","Chhetri","Newar","Gurung"],ans:2,exp:"Gai Jatra is a Newar festival of the Kathmandu Valley, celebrating those who died the previous year.",diff:"Medium",type:"Culture"},
-    {q:"Indra Jatra festival takes place in:",opts:["Pokhara","Bhaktapur","Kathmandu","Lumbini"],ans:2,exp:"Indra Jatra is held in Kathmandu, featuring the Kumari chariot procession and worship of Lord Indra.",diff:"Easy",type:"Culture"},
-    {q:"Lhosar is the New Year festival of which groups?",opts:["Tharu people","Brahmin and Chhetri","Tamang, Gurung and Sherpa","Madhesi people"],ans:2,exp:"Lhosar is celebrated as New Year by Tamang, Gurung, Sherpa, and other Himalayan communities.",diff:"Medium",type:"Culture"},
-    {q:"The national dress of Nepali men is:",opts:["Kurta Suruwal","Dhoti","Daura Suruwal","Lungi"],ans:2,exp:"Daura Suruwal (with Dhaka topi) is Nepal's national dress for men.",diff:"Easy",type:"Culture"},
-    {q:"Momo is a type of:",opts:["Sweet dessert","Fried snack","Steamed dumpling","Curry"],ans:2,exp:"Momo is a traditional Nepali/Tibetan steamed dumpling filled with meat or vegetables.",diff:"Easy",type:"Culture"},
-    {q:"Sel Roti is traditionally made during which festival?",opts:["Holi","Teej and Tihar","Buddha Jayanti","Janai Purnima"],ans:1,exp:"Sel Roti — a ring-shaped fried bread — is traditionally prepared during Teej and Tihar festivals.",diff:"Medium",type:"Culture"},
-    {q:"The Kumari is a:",opts:["Goddess of music","Living goddess (virgin girl)","Festival dance","Sacred cow"],ans:1,exp:"Kumari is a living goddess — a prepubescent girl worshipped as the goddess Taleju in Nepal.",diff:"Medium",type:"Culture"},
-    {q:"Bisket Jatra (Nepali New Year festival) is celebrated in:",opts:["Kathmandu","Pokhara","Bhaktapur","Janakpur"],ans:2,exp:"Bisket Jatra is celebrated in Bhaktapur as the Newari New Year festival with a chariot procession.",diff:"Medium",type:"Culture"},
-    {q:"Chhath Puja is mainly celebrated in which region of Nepal?",opts:["Hilly region","Himalayan region","Terai (Madhesh)","Kathmandu Valley"],ans:2,exp:"Chhath Puja is a major festival in the Terai region, celebrating the Sun God (Surya).",diff:"Medium",type:"Culture"},
-    {q:"Janai Purnima is a festival for changing the:",opts:["Sacred thread (Janai)","Clothes","Name","House"],ans:0,exp:"On Janai Purnima, Brahmin and Chhetri men change their sacred thread (Janai/Yagyopavit).",diff:"Medium",type:"Culture"},
-    {q:"Maruni is a traditional dance of which community?",opts:["Newars","Tharus","Gurungs and Magars","Sherpas"],ans:2,exp:"Maruni is a popular folk dance of the Gurung and Magar communities performed during festivals.",diff:"Hard",type:"Culture"},
-    {q:"Gundruk is a Nepali food made from:",opts:["Fermented meat","Fermented leafy vegetables","Dried fish","Spiced lentils"],ans:1,exp:"Gundruk is a traditional Nepali food made from fermented green leafy vegetables (mustard, radish leaves).",diff:"Medium",type:"Culture"},
-    {q:"The Tharu people are indigenous to which region of Nepal?",opts:["Himalayan region","Hilly region","Terai","Kathmandu Valley"],ans:2,exp:"The Tharu are an indigenous group of the Terai (plains) region of Nepal.",diff:"Medium",type:"Culture"},
-    {q:"Dashain tika is given by:",opts:["Friends","Priests only","Elders/seniors of the family","Government officials"],ans:2,exp:"During Dashain (Vijaya Dashami), elders apply tika (red, white, and yellow mixture with jamara) to younger family members.",diff:"Easy",type:"Culture"},
-    {q:"Maghe Sankranti marks the beginning of which Nepali month?",opts:["Falgun","Chaitra","Magh","Poush"],ans:2,exp:"Maghe Sankranti (Makar Sankranti) marks the beginning of the month of Magh and the end of the cold season.",diff:"Medium",type:"Culture"},
+    {q:"Dashain is celebrated to worship which goddess?",opts:["Saraswati","Laxmi","Durga","Parvati"],ans:2,exp:"Dashain celebrates the victory of goddess Durga over the demon Mahishasura — good over evil.",diff:"Easy"},
+    {q:"How many days does Dashain last?",opts:["5 days","10 days","15 days","7 days"],ans:2,exp:"Dashain lasts 15 days, starting from Ghatasthapana to Kojagrat Purnima.",diff:"Easy"},
+    {q:"The most important day of Tihar for brothers and sisters is:",opts:["Kaag Tihar","Kukur Tihar","Bhai Tika","Laxmi Puja"],ans:2,exp:"Bhai Tika (5th day of Tihar) is when sisters apply tika on brothers' foreheads for their long life.",diff:"Easy"},
+    {q:"Kukur Tihar is a day to worship:",opts:["Crows","Dogs","Cows","Brothers"],ans:1,exp:"Kukur Tihar (2nd day of Tihar) is dedicated to worshipping dogs, who are considered Yama's messengers.",diff:"Easy"},
+    {q:"Teej is mainly celebrated by:",opts:["Men","Children","Women","Elders"],ans:2,exp:"Teej is a Hindu festival where women fast and pray for their husband's health and long life.",diff:"Easy"},
+    {q:"Gai Jatra is celebrated by which community?",opts:["Brahmin","Chhetri","Newar","Gurung"],ans:2,exp:"Gai Jatra is a Newar festival of the Kathmandu Valley, celebrating those who died the previous year.",diff:"Medium"},
+    {q:"Indra Jatra festival takes place in:",opts:["Pokhara","Bhaktapur","Kathmandu","Lumbini"],ans:2,exp:"Indra Jatra is held in Kathmandu, featuring the Kumari chariot procession and worship of Lord Indra.",diff:"Easy"},
+    {q:"Lhosar is the New Year festival of which groups?",opts:["Tharu people","Brahmin and Chhetri","Tamang, Gurung and Sherpa","Madhesi people"],ans:2,exp:"Lhosar is celebrated as New Year by Tamang, Gurung, Sherpa, and other Himalayan communities.",diff:"Medium"},
+    {q:"The national dress of Nepali men is:",opts:["Kurta Suruwal","Dhoti","Daura Suruwal","Lungi"],ans:2,exp:"Daura Suruwal (with Dhaka topi) is Nepal's national dress for men.",diff:"Easy"},
+    {q:"Momo is a type of:",opts:["Sweet dessert","Fried snack","Steamed dumpling","Curry"],ans:2,exp:"Momo is a traditional Nepali/Tibetan steamed dumpling filled with meat or vegetables.",diff:"Easy"},
+    {q:"Sel Roti is traditionally made during which festival?",opts:["Holi","Teej and Tihar","Buddha Jayanti","Janai Purnima"],ans:1,exp:"Sel Roti — a ring-shaped fried bread — is traditionally prepared during Teej and Tihar festivals.",diff:"Medium"},
+    {q:"The Kumari is a:",opts:["Goddess of music","Living goddess (virgin girl)","Festival dance","Sacred cow"],ans:1,exp:"Kumari is a living goddess — a prepubescent girl worshipped as the goddess Taleju in Nepal.",diff:"Medium"},
+    {q:"Bisket Jatra (Nepali New Year festival) is celebrated in:",opts:["Kathmandu","Pokhara","Bhaktapur","Janakpur"],ans:2,exp:"Bisket Jatra is celebrated in Bhaktapur as the Newari New Year festival with a chariot procession.",diff:"Medium"},
+    {q:"Chhath Puja is mainly celebrated in which region of Nepal?",opts:["Hilly region","Himalayan region","Terai (Madhesh)","Kathmandu Valley"],ans:2,exp:"Chhath Puja is a major festival in the Terai region, celebrating the Sun God (Surya).",diff:"Medium"},
+    {q:"Janai Purnima is a festival for changing the:",opts:["Sacred thread (Janai)","Clothes","Name","House"],ans:0,exp:"On Janai Purnima, Brahmin and Chhetri men change their sacred thread (Janai/Yagyopavit).",diff:"Medium"},
+    {q:"Maruni is a traditional dance of which community?",opts:["Newars","Tharus","Gurungs and Magars","Sherpas"],ans:2,exp:"Maruni is a popular folk dance of the Gurung and Magar communities performed during festivals.",diff:"Hard"},
+    {q:"Gundruk is a Nepali food made from:",opts:["Fermented meat","Fermented leafy vegetables","Dried fish","Spiced lentils"],ans:1,exp:"Gundruk is a traditional Nepali food made from fermented green leafy vegetables (mustard, radish leaves).",diff:"Medium"},
+    {q:"The Tharu people are indigenous to which region of Nepal?",opts:["Himalayan region","Hilly region","Terai","Kathmandu Valley"],ans:2,exp:"The Tharu are an indigenous group of the Terai (plains) region of Nepal.",diff:"Medium"},
+    {q:"Dashain tika is given by:",opts:["Friends","Priests only","Elders/seniors of the family","Government officials"],ans:2,exp:"During Dashain (Vijaya Dashami), elders apply tika (red, white, and yellow mixture with jamara) to younger family members.",diff:"Easy"},
+    {q:"Maghe Sankranti marks the beginning of which Nepali month?",opts:["Falgun","Chaitra","Magh","Poush"],ans:2,exp:"Maghe Sankranti (Makar Sankranti) marks the beginning of the month of Magh and the end of the cold season.",diff:"Medium"},
+    {q:"Which festival is famous for flying colourful kites in the sky?",opts:["Holi","Dashain","Chhath","Lhosar"],ans:1,exp:"During Dashain, flying kites is a favourite pastime, especially among children.",diff:"Easy",cls:5},
+    {q:"Singing 'Deusi Bhailo' door to door is part of which festival?",opts:["Dashain","Tihar","Teej","Holi"],ans:1,exp:"Deusi Bhailo songs are sung house to house during Tihar, wishing prosperity to families.",diff:"Easy",cls:5},
+    {q:"Holi is celebrated by playing with:",opts:["Kites","Fire","Colours and water","Boats"],ans:2,exp:"Holi, the festival of colours, is celebrated by playing with coloured powder and water.",diff:"Easy",cls:5},
   ],
   "Nepal History": [
-    {q:"Who unified Nepal in 1768 AD?",opts:["Mahendra Shah","Prithvi Narayan Shah","Tribhuvan Shah","Jung Bahadur Rana"],ans:1,exp:"Prithvi Narayan Shah, King of Gorkha, unified Nepal through military campaigns, making Kathmandu the capital.",diff:"Easy",type:"History"},
-    {q:"The Rana oligarchy started in Nepal after which event?",opts:["Unification of Nepal","Kot Massacre (1846)","Anglo-Nepal War","French Revolution"],ans:1,exp:"Jung Bahadur Rana seized power after the Kot Massacre in 1846 and established 104 years of Rana rule.",diff:"Medium",type:"History"},
-    {q:"The Anglo-Nepal War (Gorkha War) resulted in which treaty?",opts:["Treaty of Kathmandu","Treaty of Sagauli","Treaty of Delhi","Treaty of Pokhara"],ans:1,exp:"The Treaty of Sugauli (1816) ended the Anglo-Nepal War, Nepal ceded territory to British India.",diff:"Medium",type:"History"},
-    {q:"The first democracy movement in Nepal was in:",opts:["2007 BS (1950 AD)","2046 BS (1990 AD)","2062 BS (2006 AD)","2065 BS (2008 AD)"],ans:0,exp:"The first democracy movement in 2007 BS ended the Rana regime and restored King Tribhuvan's power.",diff:"Medium",type:"History"},
-    {q:"The Panchayat system in Nepal was introduced by King:",opts:["Tribhuvan","Mahendra","Birendra","Gyanendra"],ans:1,exp:"King Mahendra introduced the Partyless Panchayat system in 1960, abolishing multiparty democracy.",diff:"Medium",type:"History"},
-    {q:"Jana Andolan II (People's Movement II) occurred in:",opts:["1990","2006","2008","2001"],ans:1,exp:"Jana Andolan II (2006) ended direct royal rule, restored parliament and led to Nepal becoming a republic.",diff:"Medium",type:"History"},
-    {q:"Nepal was declared a Federal Democratic Republic in:",opts:["2006","2007","2008","2009"],ans:2,exp:"On May 28, 2008 (Jestha 15, 2065 BS), Nepal was officially declared a Federal Democratic Republic.",diff:"Medium",type:"History"},
-    {q:"The Kot Massacre took place in which year?",opts:["1840","1846","1856","1860"],ans:1,exp:"The Kot Massacre took place in 1846 AD when Jung Bahadur Rana killed many nobles and seized power.",diff:"Hard",type:"History"},
-    {q:"Which dynasty built the magnificent temples in the Kathmandu Valley?",opts:["Shah dynasty","Rana dynasty","Licchavi dynasty","Malla dynasty"],ans:3,exp:"The Malla dynasty (12th-18th century) built most of the famous temples, palaces, and art in Kathmandu Valley.",diff:"Medium",type:"History"},
-    {q:"King Tribhuvan of Nepal is called:",opts:["Father of the Nation","Unifier of Nepal","Father of Democracy","Light of Nepal"],ans:2,exp:"King Tribhuvan is called 'Father of Democracy' (Prajapitak) for leading the movement against Rana rule.",diff:"Easy",type:"History"},
-    {q:"The Licchavi period in Nepal is famous for:",opts:["Rana rule","Democracy","Art, architecture and cultural flourishing","Industrial development"],ans:2,exp:"The Licchavi period (300-879 AD) is considered a golden age — known for art, culture, and architecture in Nepal.",diff:"Hard",type:"History"},
-    {q:"Nepal's first elected prime minister after 1990 democracy was:",opts:["Man Mohan Adhikari","Girija Prasad Koirala","Krishna Prasad Bhattarai","Surya Bahadur Thapa"],ans:1,exp:"Girija Prasad Koirala of Nepali Congress became Nepal's first elected PM after the 1990 restoration of democracy.",diff:"Hard",type:"History"},
+    {q:"Who unified Nepal in 1768 AD?",opts:["Mahendra Shah","Prithvi Narayan Shah","Tribhuvan Shah","Jung Bahadur Rana"],ans:1,exp:"Prithvi Narayan Shah, King of Gorkha, unified Nepal through military campaigns, making Kathmandu the capital.",diff:"Easy"},
+    {q:"The Rana oligarchy started in Nepal after which event?",opts:["Unification of Nepal","Kot Massacre (1846)","Anglo-Nepal War","French Revolution"],ans:1,exp:"Jung Bahadur Rana seized power after the Kot Massacre in 1846 and established 104 years of Rana rule.",diff:"Medium"},
+    {q:"The Anglo-Nepal War (Gorkha War) resulted in which treaty?",opts:["Treaty of Kathmandu","Treaty of Sagauli","Treaty of Delhi","Treaty of Pokhara"],ans:1,exp:"The Treaty of Sugauli (1816) ended the Anglo-Nepal War, Nepal ceded territory to British India.",diff:"Medium"},
+    {q:"The first democracy movement in Nepal was in:",opts:["2007 BS (1950 AD)","2046 BS (1990 AD)","2062 BS (2006 AD)","2065 BS (2008 AD)"],ans:0,exp:"The first democracy movement in 2007 BS ended the Rana regime and restored King Tribhuvan's power.",diff:"Medium"},
+    {q:"The Panchayat system in Nepal was introduced by King:",opts:["Tribhuvan","Mahendra","Birendra","Gyanendra"],ans:1,exp:"King Mahendra introduced the Partyless Panchayat system in 1960, abolishing multiparty democracy.",diff:"Medium"},
+    {q:"Jana Andolan II (People's Movement II) occurred in:",opts:["1990","2006","2008","2001"],ans:1,exp:"Jana Andolan II (2006) ended direct royal rule, restored parliament and led to Nepal becoming a republic.",diff:"Medium"},
+    {q:"Nepal was declared a Federal Democratic Republic in:",opts:["2006","2007","2008","2009"],ans:2,exp:"On May 28, 2008 (Jestha 15, 2065 BS), Nepal was officially declared a Federal Democratic Republic.",diff:"Medium"},
+    {q:"The Kot Massacre took place in which year?",opts:["1840","1846","1856","1860"],ans:1,exp:"The Kot Massacre took place in 1846 AD when Jung Bahadur Rana killed many nobles and seized power.",diff:"Hard"},
+    {q:"Which dynasty built the magnificent temples in the Kathmandu Valley?",opts:["Shah dynasty","Rana dynasty","Licchavi dynasty","Malla dynasty"],ans:3,exp:"The Malla dynasty (12th-18th century) built most of the famous temples, palaces, and art in Kathmandu Valley.",diff:"Medium"},
+    {q:"King Tribhuvan of Nepal is called:",opts:["Father of the Nation","Unifier of Nepal","Father of Democracy","Light of Nepal"],ans:2,exp:"King Tribhuvan is called 'Father of Democracy' (Prajapitak) for leading the movement against Rana rule.",diff:"Easy"},
+    {q:"The Licchavi period in Nepal is famous for:",opts:["Rana rule","Democracy","Art, architecture and cultural flourishing","Industrial development"],ans:2,exp:"The Licchavi period (300-879 AD) is considered a golden age — known for art, culture, and architecture in Nepal.",diff:"Hard"},
+    {q:"Nepal's first elected prime minister after 1990 democracy was:",opts:["Man Mohan Adhikari","Girija Prasad Koirala","Krishna Prasad Bhattarai","Surya Bahadur Thapa"],ans:1,exp:"Girija Prasad Koirala of Nepali Congress became Nepal's first elected PM after the 1990 restoration of democracy.",diff:"Hard"},
+    {q:"Prithvi Narayan Shah was originally the king of which kingdom?",opts:["Kathmandu","Gorkha","Bhaktapur","Lalitpur"],ans:1,exp:"Prithvi Narayan Shah was king of the small hill kingdom of Gorkha before he unified Nepal.",diff:"Easy",cls:5},
+    {q:"Roughly how long did Rana family rule last in Nepal?",opts:["50 years","104 years","20 years","150 years"],ans:1,exp:"The Rana oligarchy ruled Nepal for about 104 years, from 1846 to 1951.",diff:"Medium",cls:7},
   ],
   "Nepal Geography": [
-    {q:"Mount Everest is located in which district of Nepal?",opts:["Solukhumbu","Taplejung","Sankhuwasabha","Dolpa"],ans:0,exp:"Mount Everest (Sagarmatha) is located in Solukhumbu district of Koshi Province.",diff:"Medium",type:"Geography"},
-    {q:"The three ecological zones of Nepal are:",opts:["Desert, Forest, Grassland","Terai, Hills, Mountains","Rivers, Lakes, Glaciers","East, Middle, West"],ans:1,exp:"Nepal has three ecological zones: Terai (plains), Pahad (hills), and Himal (Himalayan mountains).",diff:"Easy",type:"Geography"},
-    {q:"Which is the deepest lake in Nepal?",opts:["Phewa Lake","Rara Lake","Tilicho Lake","Gosaikunda"],ans:1,exp:"Rara Lake in Mugu district is Nepal's deepest and largest freshwater lake.",diff:"Medium",type:"Geography"},
-    {q:"Chitwan National Park is famous for:",opts:["Snow leopards","One-horned rhinoceros","Himalayan Monal","Red pandas"],ans:1,exp:"Chitwan National Park is UNESCO-listed and famous for its one-horned rhinoceros and Bengal tigers.",diff:"Easy",type:"Geography"},
-    {q:"The province with the capital Pokhara is:",opts:["Lumbini","Bagmati","Gandaki","Karnali"],ans:2,exp:"Gandaki Province has Pokhara as its capital — known as the 'Tourism Capital of Nepal.'",diff:"Medium",type:"Geography"},
-    {q:"Koshi, Gandaki, and Karnali are Nepal's:",opts:["Provinces","Mountain ranges","Major river systems","National parks"],ans:2,exp:"Koshi, Gandaki, and Karnali are Nepal's three major river drainage systems flowing from north to south.",diff:"Medium",type:"Geography"},
-    {q:"Nepal's southernmost region is called:",opts:["Himalayan region","Hilly region","Terai","Midhill"],ans:2,exp:"The Terai is Nepal's flat southern plains region bordering India, with the most fertile land.",diff:"Easy",type:"Geography"},
-    {q:"The highest lake in the world, located in Nepal, is:",opts:["Rara Lake","Phewa Lake","Tilicho Lake","Gosaikunda"],ans:2,exp:"Tilicho Lake (4,919 m) in Manang district is one of the world's highest lakes.",diff:"Hard",type:"Geography"},
-    {q:"Kanchenjunga, the world's 3rd highest peak, is on the border of Nepal and:",opts:["China","Bhutan","India","Bangladesh"],ans:2,exp:"Kanchenjunga (8,586 m) sits on the Nepal-India (Sikkim) border.",diff:"Medium",type:"Geography"},
-    {q:"The capital of Sudurpashchim Province is:",opts:["Surkhet","Dhangadhi","Darchula","Mahendranagar"],ans:1,exp:"Dhangadhi is the capital city of Sudurpashchim (Far-Western) Province of Nepal.",diff:"Medium",type:"Geography"},
-    {q:"Pokhara is famous for its view of which mountain range?",opts:["Everest range","Annapurna range","Langtang range","Kangchenjunga range"],ans:1,exp:"Pokhara offers breathtaking views of the Annapurna range, including Machhapuchhre (Fishtail Mountain).",diff:"Easy",type:"Geography"},
-    {q:"Lumbini, birthplace of Buddha, is in which province?",opts:["Gandaki","Bagmati","Lumbini Province","Karnali"],ans:2,exp:"Lumbini is in Lumbini Province (Rupandehi district) — the province was named after this UNESCO site.",diff:"Easy",type:"Geography"},
+    {q:"Mount Everest is located in which district of Nepal?",opts:["Solukhumbu","Taplejung","Sankhuwasabha","Dolpa"],ans:0,exp:"Mount Everest (Sagarmatha) is located in Solukhumbu district of Koshi Province.",diff:"Medium"},
+    {q:"The three ecological zones of Nepal are:",opts:["Desert, Forest, Grassland","Terai, Hills, Mountains","Rivers, Lakes, Glaciers","East, Middle, West"],ans:1,exp:"Nepal has three ecological zones: Terai (plains), Pahad (hills), and Himal (Himalayan mountains).",diff:"Easy"},
+    {q:"Which is the deepest lake in Nepal?",opts:["Phewa Lake","Rara Lake","Tilicho Lake","Gosaikunda"],ans:1,exp:"Rara Lake in Mugu district is Nepal's deepest and largest freshwater lake.",diff:"Medium"},
+    {q:"Chitwan National Park is famous for:",opts:["Snow leopards","One-horned rhinoceros","Himalayan Monal","Red pandas"],ans:1,exp:"Chitwan National Park is UNESCO-listed and famous for its one-horned rhinoceros and Bengal tigers.",diff:"Easy"},
+    {q:"The province with the capital Pokhara is:",opts:["Lumbini","Bagmati","Gandaki","Karnali"],ans:2,exp:"Gandaki Province has Pokhara as its capital — known as the 'Tourism Capital of Nepal.'",diff:"Medium"},
+    {q:"Koshi, Gandaki, and Karnali are Nepal's:",opts:["Provinces","Mountain ranges","Major river systems","National parks"],ans:2,exp:"Koshi, Gandaki, and Karnali are Nepal's three major river drainage systems flowing from north to south.",diff:"Medium"},
+    {q:"Nepal's southernmost region is called:",opts:["Himalayan region","Hilly region","Terai","Midhill"],ans:2,exp:"The Terai is Nepal's flat southern plains region bordering India, with the most fertile land.",diff:"Easy"},
+    {q:"The highest lake in the world, located in Nepal, is:",opts:["Rara Lake","Phewa Lake","Tilicho Lake","Gosaikunda"],ans:2,exp:"Tilicho Lake (4,919 m) in Manang district is one of the world's highest lakes.",diff:"Hard"},
+    {q:"Kanchenjunga, the world's 3rd highest peak, is on the border of Nepal and:",opts:["China","Bhutan","India","Bangladesh"],ans:2,exp:"Kanchenjunga (8,586 m) sits on the Nepal-India (Sikkim) border.",diff:"Medium"},
+    {q:"The capital of Sudurpashchim Province is:",opts:["Surkhet","Dhangadhi","Darchula","Mahendranagar"],ans:1,exp:"Dhangadhi is the capital city of Sudurpashchim (Far-Western) Province of Nepal.",diff:"Medium"},
+    {q:"Pokhara is famous for its view of which mountain range?",opts:["Everest range","Annapurna range","Langtang range","Kangchenjunga range"],ans:1,exp:"Pokhara offers breathtaking views of the Annapurna range, including Machhapuchhre (Fishtail Mountain).",diff:"Easy"},
+    {q:"Lumbini, birthplace of Buddha, is in which province?",opts:["Gandaki","Bagmati","Lumbini Province","Karnali"],ans:2,exp:"Lumbini is in Lumbini Province (Rupandehi district) — the province was named after this UNESCO site.",diff:"Easy"},
+    {q:"Nepal is located on which continent?",opts:["Africa","Asia","Europe","Australia"],ans:1,exp:"Nepal is a landlocked country located in South Asia, part of the continent of Asia.",diff:"Easy",cls:5},
+    {q:"Which is the longest river of Nepal?",opts:["Bagmati","Karnali","Koshi","Rapti"],ans:1,exp:"The Karnali River is Nepal's longest river, originating from the Tibetan plateau.",diff:"Medium",cls:7},
   ],
   "IQ and Logic": [
-    {q:"Find the next number: 2, 4, 8, 16, ?",opts:["24","32","30","28"],ans:1,exp:"Each number is doubled: 2×2=4, 4×2=8, 8×2=16, 16×2=32.",diff:"Easy",type:"IQ"},
-    {q:"Find the next letter: A, C, E, G, ?",opts:["H","I","J","K"],ans:1,exp:"Alternate letters of the alphabet: A, C, E, G, I (skipping B,D,F,H).",diff:"Easy",type:"IQ"},
-    {q:"Book is to Author as Painting is to:",opts:["Canvas","Museum","Artist","Color"],ans:2,exp:"A book is created by an author; a painting is created by an artist. Same creator relationship.",diff:"Easy",type:"IQ"},
-    {q:"Which one does NOT belong? Apple, Mango, Banana, Carrot",opts:["Apple","Mango","Banana","Carrot"],ans:3,exp:"Apple, Mango, Banana are fruits. Carrot is a vegetable — the odd one out.",diff:"Easy",type:"IQ"},
-    {q:"If NEPAL = 14-5-16-1-12 (A=1, B=2...), what is the code for CAT?",opts:["3-1-20","2-1-19","4-2-21","3-2-19"],ans:0,exp:"C=3, A=1, T=20. CAT = 3-1-20.",diff:"Medium",type:"IQ"},
-    {q:"Hari is facing North. He turns 90° clockwise, then 180° clockwise. Which direction is he facing?",opts:["North","East","West","South"],ans:2,exp:"North → turn 90° clockwise → East → turn 180° → West.",diff:"Medium",type:"IQ"},
-    {q:"A is B's father. C is B's sister. D is C's mother. What is A to D?",opts:["Son","Brother","Husband","Uncle"],ans:2,exp:"A is B's father, D (C's mother) is B's mother. So A and D are husband and wife.",diff:"Medium",type:"IQ"},
-    {q:"Find the odd one out: 121, 144, 169, 196, 210",opts:["121","196","210","169"],ans:2,exp:"121=11², 144=12², 169=13², 196=14² are all perfect squares. 210 is not a perfect square.",diff:"Medium",type:"IQ"},
-    {q:"Series: 1, 4, 9, 16, 25, ?",opts:["30","36","42","49"],ans:1,exp:"This is the sequence of perfect squares: 1², 2², 3², 4², 5², 6² = 36.",diff:"Easy",type:"IQ"},
-    {q:"If 5 workers build a wall in 12 days, 3 workers will build it in how many days?",opts:["15 days","20 days","25 days","18 days"],ans:1,exp:"Total work = 5×12 = 60 worker-days. For 3 workers: 60÷3 = 20 days.",diff:"Medium",type:"IQ"},
-    {q:"Which number should replace ?: 2, 6, 12, 20, 30, ?",opts:["40","42","44","45"],ans:1,exp:"Differences: +4, +6, +8, +10, +12. So 30+12=42. Pattern: n(n+1).",diff:"Hard",type:"IQ"},
-    {q:"Sita is older than Gita. Gita is older than Rita. Who is the youngest?",opts:["Sita","Gita","Rita","Cannot say"],ans:2,exp:"Sita > Gita > Rita. Rita is the youngest.",diff:"Easy",type:"IQ"},
-    {q:"A clock shows 3:15. What is the angle between hour and minute hands?",opts:["0°","7.5°","15°","22.5°"],ans:1,exp:"At 3:15, minute hand is at 90°. Hour hand: 3h×30 + 15×0.5 = 90+7.5=97.5°. Angle = 97.5-90=7.5°.",diff:"Expert",type:"IQ"},
-    {q:"If all Roses are Flowers, and some Flowers are Red, which statement MUST be true?",opts:["All roses are red","Some roses are red","No roses are red","Some roses may be red"],ans:3,exp:"Since only 'some' flowers are red, roses may or may not be red — we can only say some roses may be red.",diff:"Hard",type:"IQ"},
-    {q:"Complete: 3, 7, 13, 21, 31, ?",opts:["41","43","45","42"],ans:1,exp:"Differences: +4, +6, +8, +10, +12. Next: 31+12=43.",diff:"Medium",type:"IQ"},
-    {q:"Unscramble: ALPNE is an anagram of which country?",opts:["PLANE","PANEL","NEPAL","PENAL"],ans:2,exp:"ALPNE rearranged = NEPAL (our own country!).",diff:"Easy",type:"IQ"},
+    {q:"Find the next number: 2, 4, 8, 16, ?",opts:["24","32","30","28"],ans:1,exp:"Each number is doubled: 2×2=4, 4×2=8, 8×2=16, 16×2=32.",diff:"Easy"},
+    {q:"Find the next letter: A, C, E, G, ?",opts:["H","I","J","K"],ans:1,exp:"Alternate letters of the alphabet: A, C, E, G, I (skipping B,D,F,H).",diff:"Easy"},
+    {q:"Book is to Author as Painting is to:",opts:["Canvas","Museum","Artist","Color"],ans:2,exp:"A book is created by an author; a painting is created by an artist. Same creator relationship.",diff:"Easy"},
+    {q:"Which one does NOT belong? Apple, Mango, Banana, Carrot",opts:["Apple","Mango","Banana","Carrot"],ans:3,exp:"Apple, Mango, Banana are fruits. Carrot is a vegetable — the odd one out.",diff:"Easy"},
+    {q:"If NEPAL = 14-5-16-1-12 (A=1, B=2...), what is the code for CAT?",opts:["3-1-20","2-1-19","4-2-21","3-2-19"],ans:0,exp:"C=3, A=1, T=20. CAT = 3-1-20.",diff:"Medium"},
+    {q:"Hari is facing North. He turns 90° clockwise, then 180° clockwise. Which direction is he facing?",opts:["North","East","West","South"],ans:2,exp:"North → turn 90° clockwise → East → turn 180° → West.",diff:"Medium"},
+    {q:"A is B's father. C is B's sister. D is C's mother. What is A to D?",opts:["Son","Brother","Husband","Uncle"],ans:2,exp:"A is B's father, D (C's mother) is B's mother. So A and D are husband and wife.",diff:"Medium"},
+    {q:"Find the odd one out: 121, 144, 169, 196, 210",opts:["121","196","210","169"],ans:2,exp:"121=11², 144=12², 169=13², 196=14² are all perfect squares. 210 is not a perfect square.",diff:"Medium"},
+    {q:"Series: 1, 4, 9, 16, 25, ?",opts:["30","36","42","49"],ans:1,exp:"This is the sequence of perfect squares: 1², 2², 3², 4², 5², 6² = 36.",diff:"Easy"},
+    {q:"If 5 workers build a wall in 12 days, 3 workers will build it in how many days?",opts:["15 days","20 days","25 days","18 days"],ans:1,exp:"Total work = 5×12 = 60 worker-days. For 3 workers: 60÷3 = 20 days.",diff:"Medium"},
+    {q:"Which number should replace ?: 2, 6, 12, 20, 30, ?",opts:["40","42","44","45"],ans:1,exp:"Differences: +4, +6, +8, +10, +12. So 30+12=42. Pattern: n(n+1).",diff:"Hard"},
+    {q:"Sita is older than Gita. Gita is older than Rita. Who is the youngest?",opts:["Sita","Gita","Rita","Cannot say"],ans:2,exp:"Sita > Gita > Rita. Rita is the youngest.",diff:"Easy"},
+    {q:"A clock shows 3:15. What is the angle between hour and minute hands?",opts:["0°","7.5°","15°","22.5°"],ans:1,exp:"At 3:15, minute hand is at 90°. Hour hand: 3h×30 + 15×0.5 = 90+7.5=97.5°. Angle = 97.5-90=7.5°.",diff:"Expert"},
+    {q:"If all Roses are Flowers, and some Flowers are Red, which statement MUST be true?",opts:["All roses are red","Some roses are red","No roses are red","Some roses may be red"],ans:3,exp:"Since only 'some' flowers are red, roses may or may not be red — we can only say some roses may be red.",diff:"Hard"},
+    {q:"Complete: 3, 7, 13, 21, 31, ?",opts:["41","43","45","42"],ans:1,exp:"Differences: +4, +6, +8, +10, +12. Next: 31+12=43.",diff:"Medium"},
+    {q:"Unscramble: ALPNE is an anagram of which country?",opts:["PLANE","PANEL","NEPAL","PENAL"],ans:2,exp:"ALPNE rearranged = NEPAL (our own country!).",diff:"Easy"},
+    {q:"Find the next number: 5, 10, 15, 20, ?",opts:["22","24","25","30"],ans:2,exp:"Each number increases by 5: 5,10,15,20,25.",diff:"Easy",cls:5},
+    {q:"Which shape has exactly 3 sides?",opts:["Square","Triangle","Pentagon","Circle"],ans:1,exp:"A triangle is a shape with exactly 3 sides and 3 angles.",diff:"Easy",cls:5},
+    {q:"If today is Monday, what day will it be after 3 days?",opts:["Wednesday","Thursday","Friday","Tuesday"],ans:1,exp:"Monday + 3 days = Tuesday, Wednesday, Thursday. So it will be Thursday.",diff:"Easy",cls:5},
+    {q:"Which number is missing? 2, ?, 6, 8, 10",opts:["3","4","5","7"],ans:1,exp:"The sequence increases by 2 each time: 2, 4, 6, 8, 10.",diff:"Easy",cls:5},
   ],
   "English": [
-    {q:"Choose the correct sentence:",opts:["She don't know","She doesn't knows","She doesn't know","She not know"],ans:2,exp:"'She doesn't know' is correct. With he/she/it, use 'doesn't' + base verb.",diff:"Easy",type:"English"},
-    {q:"The plural of 'child' is:",opts:["Childs","Childes","Children","Childrens"],ans:2,exp:"'Children' is the irregular plural of 'child'.",diff:"Easy",type:"English"},
-    {q:"Choose the correct spelling:",opts:["Recieve","Receive","Receve","Receeve"],ans:1,exp:"'Receive' is correct. Remember: 'i before e except after c'.",diff:"Easy",type:"English"},
-    {q:"What is the past tense of 'teach'?",opts:["Teached","Taught","Tought","Teacht"],ans:1,exp:"'Taught' is the irregular past tense of 'teach'.",diff:"Easy",type:"English"},
-    {q:"Which word is an antonym of 'brave'?",opts:["Bold","Fearless","Cowardly","Courageous"],ans:2,exp:"'Cowardly' means lacking courage — the opposite (antonym) of brave.",diff:"Easy",type:"English"},
-    {q:"Identify the noun in: 'The beautiful butterfly flew away.'",opts:["Beautiful","Flew","Butterfly","Away"],ans:2,exp:"'Butterfly' is the noun (a naming word) in this sentence.",diff:"Easy",type:"English"},
-    {q:"Which sentence is in Passive Voice?",opts:["Ram ate the apple","The apple was eaten by Ram","Ram is eating the apple","Ram will eat the apple"],ans:1,exp:"Passive voice: subject receives the action. 'The apple was eaten by Ram' — apple is the subject receiving action.",diff:"Medium",type:"English"},
-    {q:"Choose the correct article: '__ honest man'",opts:["A","An","The","No article"],ans:1,exp:"Use 'an' before vowel sounds. 'Honest' starts with a vowel sound (h is silent): 'an honest man'.",diff:"Medium",type:"English"},
-    {q:"What is a synonym of 'happy'?",opts:["Sad","Joyful","Angry","Tired"],ans:1,exp:"'Joyful' means feeling great happiness — a synonym of happy.",diff:"Easy",type:"English"},
-    {q:"The comparative form of 'good' is:",opts:["Gooder","More good","Better","Betterer"],ans:2,exp:"'Good' has an irregular comparative: better. Not 'more good' or 'gooder'.",diff:"Easy",type:"English"},
-    {q:"Fill in: She ____ in Kathmandu since 2015.",opts:["lives","lived","has been living","is living"],ans:2,exp:"'Has been living' (present perfect continuous) is used for actions continuing from a past time to now.",diff:"Hard",type:"English"},
-    {q:"What type of sentence is: 'Close the door.'",opts:["Declarative","Interrogative","Imperative","Exclamatory"],ans:2,exp:"Imperative sentences give commands or instructions. 'Close the door' is a command.",diff:"Medium",type:"English"},
+    {q:"Choose the correct sentence:",opts:["She don't know","She doesn't knows","She doesn't know","She not know"],ans:2,exp:"'She doesn't know' is correct. With he/she/it, use 'doesn't' + base verb.",diff:"Easy"},
+    {q:"The plural of 'child' is:",opts:["Childs","Childes","Children","Childrens"],ans:2,exp:"'Children' is the irregular plural of 'child'.",diff:"Easy"},
+    {q:"Choose the correct spelling:",opts:["Recieve","Receive","Receve","Receeve"],ans:1,exp:"'Receive' is correct. Remember: 'i before e except after c'.",diff:"Easy"},
+    {q:"What is the past tense of 'teach'?",opts:["Teached","Taught","Tought","Teacht"],ans:1,exp:"'Taught' is the irregular past tense of 'teach'.",diff:"Easy"},
+    {q:"Which word is an antonym of 'brave'?",opts:["Bold","Fearless","Cowardly","Courageous"],ans:2,exp:"'Cowardly' means lacking courage — the opposite (antonym) of brave.",diff:"Easy"},
+    {q:"Identify the noun in: 'The beautiful butterfly flew away.'",opts:["Beautiful","Flew","Butterfly","Away"],ans:2,exp:"'Butterfly' is the noun (a naming word) in this sentence.",diff:"Easy"},
+    {q:"Which sentence is in Passive Voice?",opts:["Ram ate the apple","The apple was eaten by Ram","Ram is eating the apple","Ram will eat the apple"],ans:1,exp:"Passive voice: subject receives the action. 'The apple was eaten by Ram' — apple is the subject receiving action.",diff:"Medium"},
+    {q:"Choose the correct article: '__ honest man'",opts:["A","An","The","No article"],ans:1,exp:"Use 'an' before vowel sounds. 'Honest' starts with a vowel sound (h is silent): 'an honest man'.",diff:"Medium"},
+    {q:"What is a synonym of 'happy'?",opts:["Sad","Joyful","Angry","Tired"],ans:1,exp:"'Joyful' means feeling great happiness — a synonym of happy.",diff:"Easy"},
+    {q:"The comparative form of 'good' is:",opts:["Gooder","More good","Better","Betterer"],ans:2,exp:"'Good' has an irregular comparative: better. Not 'more good' or 'gooder'.",diff:"Easy"},
+    {q:"Fill in: She ____ in Kathmandu since 2015.",opts:["lives","lived","has been living","is living"],ans:2,exp:"'Has been living' (present perfect continuous) is used for actions continuing from a past time to now.",diff:"Hard"},
+    {q:"What type of sentence is: 'Close the door.'",opts:["Declarative","Interrogative","Imperative","Exclamatory"],ans:2,exp:"Imperative sentences give commands or instructions. 'Close the door' is a command.",diff:"Medium"},
+    {q:"What is the opposite of 'up'?",opts:["Down","Left","Over","Above"],ans:0,exp:"'Down' is the opposite (antonym) of 'up'.",diff:"Easy",cls:5},
+    {q:"Which word means the same as 'big'?",opts:["Tiny","Small","Large","Short"],ans:2,exp:"'Large' is a synonym of 'big', meaning great in size.",diff:"Easy",cls:5},
+    {q:"Choose the correct plural of 'mouse':",opts:["Mouses","Mice","Mices","Mousees"],ans:1,exp:"'Mice' is the irregular plural form of 'mouse'.",diff:"Medium",cls:6},
+    {q:"Which word is a verb in: 'The dog runs fast.'",opts:["Dog","Runs","Fast","The"],ans:1,exp:"'Runs' is the verb — the action word in the sentence.",diff:"Easy",cls:5},
   ],
   "Nepali Language": [
-    {q:"'आमा' शब्दको अर्थ के हो? (What does 'Aama' mean?)",opts:["Father","Mother","Sister","Brother"],ans:1,exp:"'आमा (Aama)' means Mother in Nepali.",diff:"Easy",type:"Nepali"},
-    {q:"Nepali script is called:",opts:["Arabic script","Roman script","Devanagari script","Bengali script"],ans:2,exp:"Nepali is written in Devanagari script, the same script used for Hindi and Sanskrit.",diff:"Easy",type:"Nepali"},
-    {q:"Which of these is a Nepali vowel (स्वर)?",opts:["क","ख","अ","ग"],ans:2,exp:"'अ' is a vowel (स्वर) in Nepali. क, ख, ग are consonants (व्यञ्जन).",diff:"Easy",type:"Nepali"},
-    {q:"'सानो' को विपरीतार्थक शब्द के हो? (Antonym of 'Sano'/small?)",opts:["राम्रो","ठूलो","नराम्रो","पातलो"],ans:1,exp:"'ठूलो (Thulo)' means big/large — the opposite of 'सानो (Sano)' meaning small.",diff:"Easy",type:"Nepali"},
-    {q:"Nepali belongs to which language family?",opts:["Dravidian","Sino-Tibetan","Indo-Aryan (Indo-European)","Austro-Asiatic"],ans:2,exp:"Nepali is an Indo-Aryan language, derived from Sanskrit, part of the Indo-European family.",diff:"Medium",type:"Nepali"},
-    {q:"'पुस्तक' को अर्थ के हो? (What is 'Pustak'?)",opts:["Pen","Pencil","Book","Notebook"],ans:2,exp:"'पुस्तक (Pustak)' means Book in Nepali.",diff:"Easy",type:"Nepali"},
-    {q:"How many letters are in the Nepali/Devanagari alphabet?",opts:["26","36","46","52"],ans:2,exp:"The Devanagari/Nepali alphabet has 46 letters (13 vowels and 33 consonants).",diff:"Hard",type:"Nepali"},
-    {q:"'नेपाली' भाषाको राष्ट्रिय भाषा कुन हो? Which is NOT a Nepali word for a family member?",opts:["दाइ (Dai)","बुबा (Buba)","दिदी (Didi)","टेबल (Table)"],ans:3,exp:"'टेबल (Table)' is an English borrowed word, not a traditional Nepali family term. Others: दाइ=elder brother, बुबा=father, दिदी=elder sister.",diff:"Medium",type:"Nepali"},
+    {q:"'आमा' शब्दको अर्थ के हो? (What does 'Aama' mean?)",opts:["Father","Mother","Sister","Brother"],ans:1,exp:"'आमा (Aama)' means Mother in Nepali.",diff:"Easy"},
+    {q:"Nepali script is called:",opts:["Arabic script","Roman script","Devanagari script","Bengali script"],ans:2,exp:"Nepali is written in Devanagari script, the same script used for Hindi and Sanskrit.",diff:"Easy"},
+    {q:"Which of these is a Nepali vowel (स्वर)?",opts:["क","ख","अ","ग"],ans:2,exp:"'अ' is a vowel (स्वर) in Nepali. क, ख, ग are consonants (व्यञ्जन).",diff:"Easy"},
+    {q:"'सानो' को विपरीतार्थक शब्द के हो? (Antonym of 'Sano'/small?)",opts:["राम्रो","ठूलो","नराम्रो","पातलो"],ans:1,exp:"'ठूलो (Thulo)' means big/large — the opposite of 'सानो (Sano)' meaning small.",diff:"Easy"},
+    {q:"Nepali belongs to which language family?",opts:["Dravidian","Sino-Tibetan","Indo-Aryan (Indo-European)","Austro-Asiatic"],ans:2,exp:"Nepali is an Indo-Aryan language, derived from Sanskrit, part of the Indo-European family.",diff:"Medium"},
+    {q:"'पुस्तक' को अर्थ के हो? (What is 'Pustak'?)",opts:["Pen","Pencil","Book","Notebook"],ans:2,exp:"'पुस्तक (Pustak)' means Book in Nepali.",diff:"Easy"},
+    {q:"How many letters are in the Nepali/Devanagari alphabet?",opts:["26","36","46","52"],ans:2,exp:"The Devanagari/Nepali alphabet has 46 letters (13 vowels and 33 consonants).",diff:"Hard"},
+    {q:"Which of these words is borrowed from English rather than a traditional Nepali family term?",opts:["दाइ (Dai)","बुबा (Buba)","दिदी (Didi)","टेबल (Table)"],ans:3,exp:"'टेबल (Table)' is an English borrowed word. दाइ=elder brother, बुबा=father, दिदी=elder sister are traditional Nepali terms.",diff:"Medium"},
+    {q:"'विद्यालय जाने बालकलाई के भनिन्छ?' (What is a child who goes to school called?)",opts:["शिक्षक","विद्यार्थी","डाक्टर","किसान"],ans:1,exp:"'विद्यार्थी (Bidyarthi)' means student — a person who studies at school.",diff:"Easy",cls:5},
+    {q:"'पानी' शब्दको अर्थ अंग्रेजीमा के हो?",opts:["Fire","Water","Air","Earth"],ans:1,exp:"'पानी (Pani)' means Water in English.",diff:"Easy",cls:5},
   ],
   "Computer Science": [
-    {q:"What does CPU stand for?",opts:["Central Processing Unit","Computer Processing Unit","Core Power Unit","Central Power Unit"],ans:0,exp:"CPU = Central Processing Unit — the 'brain' of a computer that processes instructions.",diff:"Easy",type:"Computer"},
-    {q:"Which of these is an input device?",opts:["Monitor","Printer","Keyboard","Speaker"],ans:2,exp:"Keyboard is an input device — it sends data TO the computer. Monitor, Printer, Speaker are output devices.",diff:"Easy",type:"Computer"},
-    {q:"What does HTML stand for?",opts:["Hyper Text Markup Language","High Transfer Markup Language","Hyper Text Making Language","Home Tool Markup Language"],ans:0,exp:"HTML = HyperText Markup Language — used to create web pages.",diff:"Easy",type:"Computer"},
-    {q:"Which is the smallest unit of data in a computer?",opts:["Byte","Kilobyte","Bit","Nibble"],ans:2,exp:"A Bit (Binary digit) is the smallest unit of data — it is either 0 or 1.",diff:"Easy",type:"Computer"},
-    {q:"1 Kilobyte (KB) = ?",opts:["100 Bytes","512 Bytes","1024 Bytes","2048 Bytes"],ans:2,exp:"1 Kilobyte = 1024 Bytes (= 2¹⁰ bytes).",diff:"Easy",type:"Computer"},
-    {q:"Which of these is an Operating System?",opts:["MS Word","Google Chrome","Windows 11","VLC Player"],ans:2,exp:"Windows 11 is an Operating System (OS) — software that manages computer hardware and software. Others are applications.",diff:"Easy",type:"Computer"},
-    {q:"The Internet was invented by:",opts:["Bill Gates","Tim Berners-Lee","Steve Jobs","Mark Zuckerberg"],ans:1,exp:"Tim Berners-Lee invented the World Wide Web (WWW) in 1989, often credited as creating the modern Internet.",diff:"Medium",type:"Computer"},
-    {q:"Which programming language is used for web styling?",opts:["Python","Java","CSS","C++"],ans:2,exp:"CSS (Cascading Style Sheets) is used to style and visually format web pages.",diff:"Medium",type:"Computer"},
-    {q:"RAM stands for:",opts:["Read Access Memory","Random Access Memory","Rapid Application Memory","Read And Modify"],ans:1,exp:"RAM = Random Access Memory — temporary/volatile memory that stores data currently in use.",diff:"Easy",type:"Computer"},
-    {q:"What does 'URL' stand for?",opts:["Universal Resource Locator","Uniform Resource Locator","United Research Link","Universal Research Locator"],ans:1,exp:"URL = Uniform Resource Locator — the web address of a page (e.g., https://www.google.com).",diff:"Easy",type:"Computer"},
-    {q:"Which of these is NOT a social media platform?",opts:["Facebook","Instagram","Microsoft Word","TikTok"],ans:2,exp:"Microsoft Word is a word processing application, not a social media platform.",diff:"Easy",type:"Computer"},
-    {q:"In binary, what is 1+1?",opts:["2","11","10","01"],ans:2,exp:"In binary: 1+1=10 (which represents decimal 2). Binary only uses 0 and 1.",diff:"Medium",type:"Computer"},
+    {q:"What does CPU stand for?",opts:["Central Processing Unit","Computer Processing Unit","Core Power Unit","Central Power Unit"],ans:0,exp:"CPU = Central Processing Unit — the 'brain' of a computer that processes instructions.",diff:"Easy"},
+    {q:"Which of these is an input device?",opts:["Monitor","Printer","Keyboard","Speaker"],ans:2,exp:"Keyboard is an input device — it sends data TO the computer. Monitor, Printer, Speaker are output devices.",diff:"Easy"},
+    {q:"What does HTML stand for?",opts:["Hyper Text Markup Language","High Transfer Markup Language","Hyper Text Making Language","Home Tool Markup Language"],ans:0,exp:"HTML = HyperText Markup Language — used to create web pages.",diff:"Easy"},
+    {q:"Which is the smallest unit of data in a computer?",opts:["Byte","Kilobyte","Bit","Nibble"],ans:2,exp:"A Bit (Binary digit) is the smallest unit of data — it is either 0 or 1.",diff:"Easy"},
+    {q:"1 Kilobyte (KB) = ?",opts:["100 Bytes","512 Bytes","1024 Bytes","2048 Bytes"],ans:2,exp:"1 Kilobyte = 1024 Bytes (= 2¹⁰ bytes).",diff:"Easy"},
+    {q:"Which of these is an Operating System?",opts:["MS Word","Google Chrome","Windows 11","VLC Player"],ans:2,exp:"Windows 11 is an Operating System (OS) — software that manages computer hardware and software. Others are applications.",diff:"Easy"},
+    {q:"The Internet was invented by:",opts:["Bill Gates","Tim Berners-Lee","Steve Jobs","Mark Zuckerberg"],ans:1,exp:"Tim Berners-Lee invented the World Wide Web (WWW) in 1989, often credited as creating the modern Internet.",diff:"Medium"},
+    {q:"Which programming language is used for web styling?",opts:["Python","Java","CSS","C++"],ans:2,exp:"CSS (Cascading Style Sheets) is used to style and visually format web pages.",diff:"Medium"},
+    {q:"RAM stands for:",opts:["Read Access Memory","Random Access Memory","Rapid Application Memory","Read And Modify"],ans:1,exp:"RAM = Random Access Memory — temporary/volatile memory that stores data currently in use.",diff:"Easy"},
+    {q:"What does 'URL' stand for?",opts:["Universal Resource Locator","Uniform Resource Locator","United Research Link","Universal Research Locator"],ans:1,exp:"URL = Uniform Resource Locator — the web address of a page (e.g., https://www.google.com).",diff:"Easy"},
+    {q:"Which of these is NOT a social media platform?",opts:["Facebook","Instagram","Microsoft Word","TikTok"],ans:2,exp:"Microsoft Word is a word processing application, not a social media platform.",diff:"Easy"},
+    {q:"In binary, what is 1+1?",opts:["2","11","10","01"],ans:2,exp:"In binary: 1+1=10 (which represents decimal 2). Binary only uses 0 and 1.",diff:"Medium"},
+    {q:"Which key is used to create a space between words while typing?",opts:["Enter","Shift","Spacebar","Tab"],ans:2,exp:"The Spacebar is the long key pressed with the thumb to add a space between words.",diff:"Easy",cls:5},
+    {q:"A computer virus is:",opts:["A useful program","A type of malicious program","A hardware part","A type of printer"],ans:1,exp:"A computer virus is a malicious program that can damage files or slow down a computer.",diff:"Medium",cls:7},
+    {q:"Which device is used to print documents from a computer?",opts:["Scanner","Printer","Mouse","Speaker"],ans:1,exp:"A printer is an output device used to print documents on paper.",diff:"Easy",cls:5},
   ],
   "Social Studies": [
-    {q:"Who wrote the Declaration of Human Rights?",opts:["United Nations","NATO","World Bank","UNESCO"],ans:0,exp:"The Universal Declaration of Human Rights was adopted by the United Nations General Assembly on December 10, 1948.",diff:"Medium",type:"Social"},
-    {q:"The headquarters of the United Nations is in:",opts:["Geneva","Paris","London","New York"],ans:3,exp:"The UN headquarters is located in New York City, USA.",diff:"Easy",type:"Social"},
-    {q:"What is democracy?",opts:["Rule by one person","Rule by the military","Rule by the people","Rule by religion"],ans:2,exp:"Democracy is a system of government where citizens exercise power through voting and elected representatives.",diff:"Easy",type:"Social"},
-    {q:"Which is the largest continent by area?",opts:["Africa","North America","Europe","Asia"],ans:3,exp:"Asia is the world's largest continent, covering about 44.6 million km² — about 30% of Earth's land area.",diff:"Easy",type:"Social"},
-    {q:"The Silk Road was an ancient trade route connecting:",opts:["Europe and Africa","China and Europe","India and Australia","America and Asia"],ans:1,exp:"The Silk Road was a network of trade routes connecting China to Europe, facilitating trade and cultural exchange.",diff:"Medium",type:"Social"},
-    {q:"SAARC stands for:",opts:["South Asian Association for Regional Cooperation","South American Association for Regional Cooperation","Southeast Asian Alliance for Regional Countries","South Asian Alliance for Rural Cooperation"],ans:0,exp:"SAARC = South Asian Association for Regional Cooperation. Nepal is a founding member. Headquarters: Kathmandu.",diff:"Medium",type:"Social"},
-    {q:"Nepal is a member of which international organization?",opts:["ASEAN","NATO","SAARC","European Union"],ans:2,exp:"Nepal is a founding member of SAARC (South Asian Association for Regional Cooperation), formed in 1985.",diff:"Easy",type:"Social"},
-    {q:"What is the capital of India?",opts:["Mumbai","Chennai","Kolkata","New Delhi"],ans:3,exp:"New Delhi is the capital of India — Nepal's largest neighboring country.",diff:"Easy",type:"Social"},
-    {q:"The Constitution is:",opts:["A type of tax","The supreme law of a country","A military order","An international treaty"],ans:1,exp:"The Constitution is the supreme law of a country that defines government structure, rights, and duties of citizens.",diff:"Easy",type:"Social"},
-    {q:"Which river is the longest in Asia?",opts:["Ganges","Indus","Yangtze","Mekong"],ans:2,exp:"The Yangtze River in China (~6,300 km) is the longest river in Asia.",diff:"Medium",type:"Social"},
-  ]
-
-};
-
-// ══════════════════════════════════════════════
-// CLASS 5 FOUNDATION PACK — easy, curriculum-friendly questions
-// These are tagged with classes:[5] so they stay focused on Class 5.
-// To add/edit questions, copy any object below and change q/opts/ans/exp.
-// ══════════════════════════════════════════════
-const CLASS5 = {
-  "Mathematics": [
-    {q:"What is 3,456 + 2,125?",opts:["5,581","5,571","5,681","5,481"],ans:0,exp:"3,456 + 2,125 = 5,581.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"What is 8,000 − 3,275?",opts:["4,625","4,725","4,825","5,725"],ans:1,exp:"8,000 − 3,275 = 4,725.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"What is 25 × 12?",opts:["250","275","300","325"],ans:2,exp:"25 × 12 = 300.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"What is 144 ÷ 12?",opts:["10","11","12","13"],ans:2,exp:"12 × 12 = 144, so 144 ÷ 12 = 12.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"Which fraction is equal to one-half?",opts:["2/3","3/6","4/5","5/8"],ans:1,exp:"3/6 simplifies to 1/2.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"What is 0.5 as a fraction?",opts:["1/5","1/2","5/10 only","2/5"],ans:1,exp:"0.5 = 5/10 = 1/2.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"A rectangle is 8 cm long and 5 cm wide. What is its area?",opts:["13 cm²","26 cm²","40 cm²","80 cm²"],ans:2,exp:"Area = length × width = 8 × 5 = 40 cm².",diff:"Medium",type:"Math",classes:[5]},
-    {q:"How many minutes are in 2 hours?",opts:["60","90","120","180"],ans:2,exp:"1 hour = 60 minutes, so 2 hours = 120 minutes.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"What is the place value of 7 in 57,432?",opts:["7","70","700","7,000"],ans:3,exp:"In 57,432, the 7 is in the thousands place, so its value is 7,000.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"Which is the smallest prime number?",opts:["0","1","2","3"],ans:2,exp:"2 is the smallest prime number and the only even prime.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"What is the perimeter of a square with side 6 cm?",opts:["12 cm","18 cm","24 cm","36 cm"],ans:2,exp:"Perimeter = 4 × 6 = 24 cm.",diff:"Easy",type:"Math",classes:[5]},
-    {q:"If one notebook costs Rs. 45, how much do 4 cost?",opts:["Rs. 160","Rs. 170","Rs. 180","Rs. 200"],ans:2,exp:"45 × 4 = Rs. 180.",diff:"Easy",type:"Math",classes:[5]},
-  ],
-  "Science": [
-    {q:"Which organ helps us breathe?",opts:["Heart","Lungs","Stomach","Brain"],ans:1,exp:"The lungs take oxygen into the body and remove carbon dioxide.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"Which part of a plant absorbs water from the soil?",opts:["Flower","Leaf","Root","Fruit"],ans:2,exp:"Roots absorb water and minerals from the soil.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"Which force pulls objects toward Earth?",opts:["Magnetic force","Gravity","Friction","Light"],ans:1,exp:"Gravity attracts objects toward Earth.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"Water changes into ice when it is:",opts:["Heated","Frozen/cooled","Boiled","Mixed"],ans:1,exp:"Cooling water enough causes it to freeze into ice.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"Which planet do we live on?",opts:["Mars","Venus","Earth","Jupiter"],ans:2,exp:"Earth is the planet on which we live.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"Which of these is a source of light?",opts:["Moon","Sun","Mirror","Book"],ans:1,exp:"The Sun produces its own light; the Moon mainly reflects sunlight.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"What do humans need to breathe?",opts:["Oxygen","Sand","Smoke","Plastic"],ans:0,exp:"Humans need oxygen for respiration.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"Which material is attracted by a magnet?",opts:["Wood","Iron","Paper","Glass"],ans:1,exp:"Iron is a magnetic material and is attracted to magnets.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"Which state of matter has a fixed shape?",opts:["Solid","Liquid","Gas","Steam"],ans:0,exp:"A solid has a definite shape and volume.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"What is the main source of energy for Earth?",opts:["The Sun","The Moon","Clouds","Rocks"],ans:0,exp:"The Sun provides most of Earth's energy.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"Which sense organ is used for hearing?",opts:["Eye","Ear","Nose","Skin"],ans:1,exp:"Our ears detect sound and help us hear.",diff:"Easy",type:"Science",classes:[5]},
-    {q:"Why should we wash our hands before eating?",opts:["To make them cold","To remove germs","To change skin color","To grow taller"],ans:1,exp:"Handwashing removes germs and helps prevent disease.",diff:"Easy",type:"Science",classes:[5]},
-  ],
-  "English": [
-    {q:"Choose the correct plural of 'book'.",opts:["Bookes","Books","Bookies","Book's"],ans:1,exp:"The plural of book is books.",diff:"Easy",type:"English",classes:[5]},
-    {q:"Choose the correct sentence.",opts:["He are happy.","He is happy.","He am happy.","He be happy."],ans:1,exp:"With 'he', the correct present form is 'is'.",diff:"Easy",type:"English",classes:[5]},
-    {q:"What is the opposite of 'early'?",opts:["Fast","Late","Soon","Quick"],ans:1,exp:"Late is the opposite of early.",diff:"Easy",type:"English",classes:[5]},
-    {q:"Which word is a verb?",opts:["Run","Blue","School","Happy"],ans:0,exp:"Run is an action word, so it is a verb.",diff:"Easy",type:"English",classes:[5]},
-    {q:"Fill in: She ___ a mango.",opts:["eat","eats","eating","eaten"],ans:1,exp:"For 'she' in the simple present, use 'eats'.",diff:"Easy",type:"English",classes:[5]},
-    {q:"Which word is a noun?",opts:["Beautiful","Jump","Teacher","Quickly"],ans:2,exp:"Teacher names a person, so it is a noun.",diff:"Easy",type:"English",classes:[5]},
-    {q:"Choose the correct article: ___ apple",opts:["A","An","Thee","No"],ans:1,exp:"Use 'an' before the vowel sound in apple.",diff:"Easy",type:"English",classes:[5]},
-    {q:"What is the past tense of 'go'?",opts:["Goed","Gone","Went","Going"],ans:2,exp:"The past tense of go is went.",diff:"Easy",type:"English",classes:[5]},
-    {q:"Which punctuation mark ends a question?",opts:[".","!","?",", "],ans:2,exp:"A question ends with a question mark (?).",diff:"Easy",type:"English",classes:[5]},
-    {q:"What is a synonym of 'big'?",opts:["Small","Large","Thin","Short"],ans:1,exp:"Large has a similar meaning to big.",diff:"Easy",type:"English",classes:[5]},
-    {q:"Choose the correct spelling.",opts:["Beautifull","Beutiful","Beautiful","Beautifal"],ans:2,exp:"The correct spelling is beautiful.",diff:"Easy",type:"English",classes:[5]},
-    {q:"Which sentence is an instruction?",opts:["I like rice.","Please open the book.","Where are you?","What a beautiful day!"],ans:1,exp:"'Please open the book' gives an instruction or command.",diff:"Medium",type:"English",classes:[5]},
-  ],
-  "Nepali Language": [
-    {q:"'विद्यालय' को अर्थ के हो?",opts:["घर","स्कुल/School","बजार","खेत"],ans:1,exp:"विद्यालय means school.",diff:"Easy",type:"Nepali",classes:[5]},
-    {q:"'ठूलो' को विपरीतार्थक शब्द कुन हो?",opts:["सानो","लामो","मोटो","राम्रो"],ans:0,exp:"सानो means small and is the opposite of ठूलो.",diff:"Easy",type:"Nepali",classes:[5]},
-    {q:"'आकाश' को अर्थ के हो?",opts:["Sky","Water","Earth","Tree"],ans:0,exp:"आकाश means sky.",diff:"Easy",type:"Nepali",classes:[5]},
-    {q:"'राम विद्यालय जान्छ।' वाक्यमा कर्ता को हो?",opts:["विद्यालय","जान्छ","राम","वाक्य"],ans:2,exp:"राम is the person doing the action, so it is the subject/कर्ता.",diff:"Medium",type:"Nepali",classes:[5]},
-    {q:"नेपाली भाषा कुन लिपिमा लेखिन्छ?",opts:["रोमन","देवनागरी","अरबी","चिनियाँ"],ans:1,exp:"Nepali is written in the Devanagari script.",diff:"Easy",type:"Nepali",classes:[5]},
-    {q:"'दिन' को विपरीतार्थक शब्द कुन हो?",opts:["बिहान","रात","साँझ","घाम"],ans:1,exp:"रात means night, the opposite of दिन (day).",diff:"Easy",type:"Nepali",classes:[5]},
-    {q:"'फूल' को बहुवचन कुन हो?",opts:["फूला","फूलहरू","फूलको","फूले"],ans:1,exp:"फूलहरू is a plural form of फूल.",diff:"Easy",type:"Nepali",classes:[5]},
-    {q:"'म' कुन पुरुष हो?",opts:["प्रथम पुरुष","द्वितीय पुरुष","तृतीय पुरुष","कुनै होइन"],ans:0,exp:"म refers to the speaker, so it is first person.",diff:"Medium",type:"Nepali",classes:[5]},
-    {q:"'सुन्दर' को समानार्थी शब्द कुन हो?",opts:["राम्रो","नराम्रो","सानो","टाढा"],ans:0,exp:"राम्रो can mean good/beautiful and is a suitable synonym here.",diff:"Easy",type:"Nepali",classes:[5]},
-    {q:"वाक्यको अन्त्यमा प्रश्न जनाउन कुन चिन्ह प्रयोग हुन्छ?",opts:["।","?",",","!"],ans:1,exp:"The question mark (?) is used for questions.",diff:"Easy",type:"Nepali",classes:[5]},
-    {q:"'खानु' शब्दले के जनाउँछ?",opts:["नाम","काम/क्रिया","गुण","स्थान"],ans:1,exp:"खानु describes an action, so it is a verb/क्रिया.",diff:"Easy",type:"Nepali",classes:[5]},
-    {q:"'ईमानदार' को विपरीतार्थक शब्द कुन हो?",opts:["सत्यवादी","बेइमान","दयालु","मेहनती"],ans:1,exp:"बेइमान means dishonest, the opposite of ईमानदार.",diff:"Medium",type:"Nepali",classes:[5]},
-  ],
-  "Social Studies": [
-    {q:"What is the capital city of Nepal?",opts:["Pokhara","Kathmandu","Dharan","Nepalgunj"],ans:1,exp:"Kathmandu is the capital of Nepal.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"How many provinces are there in Nepal?",opts:["5","6","7","8"],ans:2,exp:"Nepal has 7 provinces.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"Which is a natural resource?",opts:["Water","Plastic","Computer","Road"],ans:0,exp:"Water occurs naturally and is a natural resource.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"Which direction does the Sun appear to rise from?",opts:["West","North","East","South"],ans:2,exp:"The Sun appears to rise in the east and set in the west.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"What is a family?",opts:["A group of related people","A type of road","A mountain","A river"],ans:0,exp:"A family is a group of people related by blood, marriage, adoption, or close family ties.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"Which festival is widely celebrated in Nepal?",opts:["Dashain","Thanksgiving only","Easter only","Halloween only"],ans:0,exp:"Dashain is one of Nepal's major festivals.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"What should a good citizen do?",opts:["Break laws","Protect public property","Pollute rivers","Ignore others"],ans:1,exp:"Good citizens respect laws and help protect public property.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"Which is a means of communication?",opts:["Telephone","Mountain","River","Tree"],ans:0,exp:"A telephone is used to communicate with others.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"Which map direction is opposite to north?",opts:["East","West","South","North-east"],ans:2,exp:"South is opposite to north.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"What is the national flag of Nepal special for?",opts:["It is circular","It is non-rectangular","It has no colors","It is square"],ans:1,exp:"Nepal has the world's only national flag that is not rectangular or square.",diff:"Medium",type:"Social",classes:[5]},
-    {q:"Which place is famous as the birthplace of Gautama Buddha?",opts:["Lumbini","Pokhara","Janakpur","Birgunj"],ans:0,exp:"Lumbini in Nepal is traditionally recognized as the birthplace of Gautama Buddha.",diff:"Easy",type:"Social",classes:[5]},
-    {q:"What do we call rules made for a community or country?",opts:["Laws","Games","Songs","Stories"],ans:0,exp:"Laws are rules that guide behavior in a society.",diff:"Easy",type:"Social",classes:[5]},
-  ],
-  "Computer Science": [
-    {q:"Which device is mainly used to type letters?",opts:["Keyboard","Monitor","Speaker","Printer"],ans:0,exp:"A keyboard is used to enter letters, numbers, and commands.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"Which device shows pictures and text from a computer?",opts:["Monitor","Mouse","Keyboard","Microphone"],ans:0,exp:"A monitor displays visual output from the computer.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"What is a mouse used for?",opts:["Pointing and selecting","Printing paper","Making sound","Storing electricity"],ans:0,exp:"A mouse controls the pointer and helps select items on screen.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"Which of these is used to print documents?",opts:["Scanner","Printer","Mouse","Webcam"],ans:1,exp:"A printer produces a paper copy of a document.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"Which one is a computer file type?",opts:[".jpg",".tree",".water",".road"],ans:0,exp:".jpg is a common image file extension.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"What should you do with a strong password?",opts:["Share it publicly","Keep it private","Post it online","Write it on a public wall"],ans:1,exp:"Passwords should be kept private and not shared with others.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"Which key is commonly used to create a space while typing?",opts:["Enter","Spacebar","Shift","Esc"],ans:1,exp:"The spacebar inserts spaces between words.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"What does WWW stand for?",opts:["World Wide Web","World Web Window","Wide World Word","Web World Work"],ans:0,exp:"WWW stands for World Wide Web.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"Which is safer online?",opts:["Click every unknown link","Use trusted websites","Share passwords","Download unknown files"],ans:1,exp:"Using trusted websites reduces online safety risks.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"Which device can take a photo for a computer?",opts:["Webcam","Keyboard","Printer","Speaker"],ans:0,exp:"A webcam can capture images and video.",diff:"Easy",type:"Computer",classes:[5]},
-    {q:"What is the brain of a computer commonly called?",opts:["CPU","Mouse","Monitor","Keyboard"],ans:0,exp:"The CPU processes instructions and is commonly called the computer's brain.",diff:"Medium",type:"Computer",classes:[5]},
-    {q:"Which one is an example of software?",opts:["Keyboard","Monitor","Paint app","Mouse"],ans:2,exp:"A Paint application is software; the others are hardware devices.",diff:"Easy",type:"Computer",classes:[5]},
-  ],
-  "Nepal GK": [
-    {q:"What is the national flower of Nepal?",opts:["Rose","Laligurans","Sunflower","Jasmine"],ans:1,exp:"Laligurans (rhododendron) is Nepal's national flower.",diff:"Easy",type:"Nepal GK",classes:[5]},
-    {q:"What is Nepal's national bird?",opts:["Danfe","Crow","Parrot","Peacock"],ans:0,exp:"Danfe (Himalayan monal) is Nepal's national bird.",diff:"Easy",type:"Nepal GK",classes:[5]},
-    {q:"What is Nepal's national animal?",opts:["Tiger","Cow","Elephant","Yak"],ans:1,exp:"The cow is Nepal's national animal.",diff:"Easy",type:"Nepal GK",classes:[5]},
-    {q:"Which is the highest mountain in the world?",opts:["K2","Mount Everest","Makalu","Annapurna"],ans:1,exp:"Mount Everest is the world's highest mountain above sea level.",diff:"Easy",type:"Nepal GK",classes:[5]},
-    {q:"What is the currency of Nepal?",opts:["Nepali Rupee","Dollar","Taka","Yen"],ans:0,exp:"Nepal uses the Nepali Rupee as its currency.",diff:"Easy",type:"Nepal GK",classes:[5]},
-    {q:"How many sides does Nepal's national flag shape have at its outer edge?",opts:["4","6","It is made of two pennants","8"],ans:2,exp:"Nepal's flag is formed by two joined triangular pennants.",diff:"Medium",type:"Nepal GK",classes:[5]},
-    {q:"Where is Mount Everest located?",opts:["Nepal's Himalayas","Terai only","Kathmandu city","Pokhara city"],ans:0,exp:"Mount Everest lies in the Himalayas on the Nepal–China border region.",diff:"Easy",type:"Nepal GK",classes:[5]},
-    {q:"Which city is known as the City of Lakes in Nepal?",opts:["Pokhara","Dharan","Butwal","Biratnagar"],ans:0,exp:"Pokhara is famous for its lakes and mountain views.",diff:"Easy",type:"Nepal GK",classes:[5]},
-    {q:"What is the capital of Sudurpashchim Province?",opts:["Dhangadhi","Mahendranagar","Dadeldhura","Tikapur"],ans:0,exp:"Dhangadhi is the provincial capital of Sudurpashchim Province.",diff:"Medium",type:"Nepal GK",classes:[5]},
-    {q:"Which national park is famous for one-horned rhinoceroses?",opts:["Chitwan National Park","Sagarmatha National Park","Rara National Park","Khaptad National Park"],ans:0,exp:"Chitwan National Park is famous for the greater one-horned rhinoceros.",diff:"Easy",type:"Nepal GK",classes:[5]},
-    {q:"What is Nepal's national sport?",opts:["Football","Cricket","Volleyball","Basketball"],ans:2,exp:"Volleyball is Nepal's national sport.",diff:"Easy",type:"Nepal GK",classes:[5]},
-    {q:"Which sacred site is traditionally recognized as Buddha's birthplace?",opts:["Lumbini","Pashupatinath","Muktinath","Janaki Mandir"],ans:0,exp:"Lumbini is recognized as the birthplace of Gautama Buddha.",diff:"Easy",type:"Nepal GK",classes:[5]},
-  ],
-  "Nepali Culture": [
-    {q:"Which festival is known for tika and jamara?",opts:["Dashain","Holi","Tihar","Teej"],ans:0,exp:"Dashain is associated with tika and jamara traditions.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"Which festival is popularly called the festival of lights?",opts:["Dashain","Tihar","Teej","Maghe Sankranti"],ans:1,exp:"Tihar is widely known as the festival of lights.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"Which festival is strongly associated with playing colors?",opts:["Holi","Tihar","Dashain","Buddha Jayanti"],ans:0,exp:"Holi is celebrated with colors and marks the arrival of spring.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"Teej is especially celebrated by many:",opts:["Women","Only soldiers","Only farmers","Only children"],ans:0,exp:"Teej is a major Hindu festival traditionally observed especially by women in Nepal.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"What is a traditional Nepali musical instrument?",opts:["Madal","Guitar only","Piano only","Violin only"],ans:0,exp:"Madal is a traditional Nepali percussion instrument.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"Which food is a popular Nepali dumpling?",opts:["Momo","Pizza","Sushi","Taco"],ans:0,exp:"Momo is a popular dumpling found throughout Nepal.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"Which greeting is commonly used in Nepal?",opts:["Namaste","Bonjour only","Hola only","Ciao only"],ans:0,exp:"Namaste is a widely used respectful greeting in Nepal.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"What is a traditional Nepali cap called?",opts:["Dhaka topi","Fedora","Sombrero","Beret"],ans:0,exp:"Dhaka topi is a traditional Nepali cap.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"Which festival honors the bond between brothers and sisters?",opts:["Bhai Tika","Holi","Teej","Gai Jatra"],ans:0,exp:"Bhai Tika is a Tihar tradition celebrating the sibling bond.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"What is a common traditional Nepali dress for men?",opts:["Daura Suruwal","Kimono","Kilt","Toga"],ans:0,exp:"Daura Suruwal is a traditional Nepali men's dress.",diff:"Easy",type:"Culture",classes:[5]},
-    {q:"Which celebration is associated with worship of the goddess Durga?",opts:["Dashain","Losar","Holi","Indra Jatra"],ans:0,exp:"Dashain prominently celebrates the victory of Durga over evil.",diff:"Medium",type:"Culture",classes:[5]},
-    {q:"Losar is celebrated as a New Year festival by several:",opts:["Himalayan communities","Only tourists","Only athletes","Only shopkeepers"],ans:0,exp:"Losar is a New Year celebration observed by several Himalayan ethnic communities.",diff:"Medium",type:"Culture",classes:[5]},
-  ],
-  "IQ and Logic": [
-    {q:"What comes next: 2, 4, 6, 8, __?",opts:["9","10","11","12"],ans:1,exp:"The numbers increase by 2, so the next number is 10.",diff:"Easy",type:"IQ",classes:[5]},
-    {q:"Which is different from the others?",opts:["Apple","Mango","Banana","Carrot"],ans:3,exp:"Carrot is a vegetable; the others are fruits.",diff:"Easy",type:"IQ",classes:[5]},
-    {q:"If CAT has 3 letters, how many letters are in TIGER?",opts:["4","5","6","7"],ans:1,exp:"T-I-G-E-R has 5 letters.",diff:"Easy",type:"IQ",classes:[5]},
-    {q:"Complete the pattern: A, C, E, G, __",opts:["H","I","J","K"],ans:1,exp:"The pattern skips one letter each time: A, C, E, G, I.",diff:"Easy",type:"IQ",classes:[5]},
-    {q:"If today is Monday, what day is after 2 days?",opts:["Tuesday","Wednesday","Thursday","Friday"],ans:1,exp:"One day after Monday is Tuesday; two days after is Wednesday.",diff:"Easy",type:"IQ",classes:[5]},
-    {q:"Which number does not belong: 3, 5, 7, 10, 11?",opts:["3","7","10","11"],ans:2,exp:"10 is the only even number; the others are odd primes.",diff:"Medium",type:"IQ",classes:[5]},
-    {q:"A clock shows 3:00. Where does the minute hand point?",opts:["3","6","9","12"],ans:3,exp:"At exactly 3:00, the minute hand points to 12.",diff:"Easy",type:"IQ",classes:[5]},
-    {q:"If 1 pencil costs Rs.10, how much do 5 pencils cost?",opts:["Rs. 20","Rs. 40","Rs. 50","Rs. 60"],ans:2,exp:"5 × Rs.10 = Rs.50.",diff:"Easy",type:"IQ",classes:[5]},
-    {q:"Which shape has no corners?",opts:["Square","Triangle","Circle","Rectangle"],ans:2,exp:"A circle has no corners or vertices.",diff:"Easy",type:"IQ",classes:[5]},
-    {q:"Find the missing number: 5, 10, 15, __, 25",opts:["18","20","21","30"],ans:1,exp:"The pattern adds 5 each time, so 20 comes next.",diff:"Easy",type:"IQ",classes:[5]},
-    {q:"If all birds have wings and a sparrow is a bird, what can we say?",opts:["A sparrow has wings","A sparrow is a fish","A sparrow has no wings","Nothing"],ans:0,exp:"From the given statements, a sparrow has wings.",diff:"Medium",type:"IQ",classes:[5]},
-    {q:"Which word can be made by rearranging 'NEPAL'?",opts:["PLANE","PANEL","NEPAL","Both PANEL and NEPAL"],ans:3,exp:"PANEL and NEPAL use the same five letters in different orders.",diff:"Medium",type:"IQ",classes:[5]},
+    {q:"Who wrote the Declaration of Human Rights?",opts:["United Nations","NATO","World Bank","UNESCO"],ans:0,exp:"The Universal Declaration of Human Rights was adopted by the United Nations General Assembly on December 10, 1948.",diff:"Medium"},
+    {q:"The headquarters of the United Nations is in:",opts:["Geneva","Paris","London","New York"],ans:3,exp:"The UN headquarters is located in New York City, USA.",diff:"Easy"},
+    {q:"What is democracy?",opts:["Rule by one person","Rule by the military","Rule by the people","Rule by religion"],ans:2,exp:"Democracy is a system of government where citizens exercise power through voting and elected representatives.",diff:"Easy"},
+    {q:"Which is the largest continent by area?",opts:["Africa","North America","Europe","Asia"],ans:3,exp:"Asia is the world's largest continent, covering about 44.6 million km² — about 30% of Earth's land area.",diff:"Easy"},
+    {q:"The Silk Road was an ancient trade route connecting:",opts:["Europe and Africa","China and Europe","India and Australia","America and Asia"],ans:1,exp:"The Silk Road was a network of trade routes connecting China to Europe, facilitating trade and cultural exchange.",diff:"Medium"},
+    {q:"SAARC stands for:",opts:["South Asian Association for Regional Cooperation","South American Association for Regional Cooperation","Southeast Asian Alliance for Regional Countries","South Asian Alliance for Rural Cooperation"],ans:0,exp:"SAARC = South Asian Association for Regional Cooperation. Nepal is a founding member. Headquarters: Kathmandu.",diff:"Medium"},
+    {q:"Nepal is a member of which international organization?",opts:["ASEAN","NATO","SAARC","European Union"],ans:2,exp:"Nepal is a founding member of SAARC (South Asian Association for Regional Cooperation), formed in 1985.",diff:"Easy"},
+    {q:"What is the capital of India?",opts:["Mumbai","Chennai","Kolkata","New Delhi"],ans:3,exp:"New Delhi is the capital of India — Nepal's largest neighboring country.",diff:"Easy"},
+    {q:"The Constitution is:",opts:["A type of tax","The supreme law of a country","A military order","An international treaty"],ans:1,exp:"The Constitution is the supreme law of a country that defines government structure, rights, and duties of citizens.",diff:"Easy"},
+    {q:"Which river is the longest in Asia?",opts:["Ganges","Indus","Yangtze","Mekong"],ans:2,exp:"The Yangtze River in China (~6,300 km) is the longest river in Asia.",diff:"Medium"},
+    {q:"The buying and selling of goods between different countries is called:",opts:["Trade","Farming","Banking","Voting"],ans:0,exp:"Trade (or international trade) is the exchange of goods and services between countries.",diff:"Medium",cls:7},
+    {q:"Which continent is Nepal part of?",opts:["Africa","Asia","Europe","South America"],ans:1,exp:"Nepal is located in South Asia, which is part of the continent of Asia.",diff:"Easy",cls:5},
+    {q:"A group of people who help run a school, like the head teacher and staff, is called the school's:",opts:["Administration","Parliament","Army","Cabinet"],ans:0,exp:"The people who manage and run a school are called its administration.",diff:"Easy",cls:5},
   ]
 };
 
-Object.entries(CLASS5).forEach(([subject, questions]) => {
-  if (!QB[subject]) QB[subject] = [];
-  QB[subject].push(...questions);
-});
+// Tag every question with a class level if it doesn't already have one,
+// inferred from difficulty, so Class 5 students get age-appropriate questions.
+const DIFF_TO_CLASS = { Easy: 5, Medium: 7, Hard: 9, Expert: 10 };
+Object.values(QB).forEach(list => list.forEach(q => {
+  if (!q.cls) q.cls = DIFF_TO_CLASS[q.diff] || 6;
+  if (!q.type) q.type = q.diff; // fallback subject-tag, real 'type' set per-subject below
+}));
+// Assign display "type" tags per subject (kept close to original short labels)
+const TYPE_LABELS = {
+  "Mathematics":"Math","Science":"Science","Nepal GK":"Nepal GK","Nepali Culture":"Culture",
+  "Nepal History":"History","Nepal Geography":"Geography","IQ and Logic":"IQ","English":"English",
+  "Nepali Language":"Nepali","Computer Science":"Computer","Social Studies":"Social"
+};
+Object.entries(QB).forEach(([subj, list]) => list.forEach(q => { q.type = TYPE_LABELS[subj] || subj; }));
 
 // Mixed All pulls from all categories
-function getMixedQuestions(count, diffFilter) {
+function getMixedQuestions(count, diffFilter, cls) {
   const all = [];
   Object.values(QB).forEach(qs => all.push(...qs));
-  return filterAndSample(all, count, diffFilter);
+  return filterAndSample(all, count, diffFilter, cls);
 }
 
-function filterAndSample(pool, count, diffFilter) {
-  const classNo = Number(S.cls || 8);
-  const classPool = pool.filter(q => !q.classes || q.classes.includes(classNo));
-  let filtered = diffFilter === 'Mixed' ? classPool :
-    classPool.filter(q => q.diff === diffFilter);
-  if (filtered.length < count) filtered = classPool.length ? classPool : pool; // fallback
-  // Shuffle
+function filterAndSample(pool, count, diffFilter, cls) {
+  const byDiff = q => diffFilter === 'Mixed' || q.diff === diffFilter;
+  // Prefer questions at or below the student's class level, but relax if too few.
+  let filtered = pool.filter(q => byDiff(q) && (!cls || q.cls <= cls));
+  if (filtered.length < count) filtered = pool.filter(byDiff);
+  if (filtered.length < count) filtered = pool;
   const shuffled = [...filtered].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, count);
 }
@@ -1125,21 +1038,17 @@ function showToast(msg) {
 
 function saveQuizResult(result) {
   const store = loadStore();
-  // Add to history (keep last 50)
   store.history.unshift(result);
   if (store.history.length > 50) store.history = store.history.slice(0, 50);
-  // Update leaderboard (top score per name)
   const existIdx = store.leaderboard.findIndex(e => e.name === result.name && e.subject === result.subject);
   if (existIdx === -1) {
     store.leaderboard.push({ name: result.name, subject: result.subject, score: result.score, pct: result.pct, cls: result.cls, date: result.date });
   } else if (result.score > store.leaderboard[existIdx].score) {
     store.leaderboard[existIdx] = { name: result.name, subject: result.subject, score: result.score, pct: result.pct, cls: result.cls, date: result.date };
   }
-  // Sort leaderboard
   store.leaderboard.sort((a,b) => b.score - a.score || b.pct - a.pct);
   if (store.leaderboard.length > 100) store.leaderboard = store.leaderboard.slice(0, 100);
   store.totalQuizzes = (store.totalQuizzes || 0) + 1;
-  // Save settings
   store.settings = { name: result.name, cls: result.cls, subject: result.subject, diff: result.diff, autoAdvance: result.autoAdvance, timePerQ: result.timePerQ };
   saveStore(store);
 }
@@ -1196,14 +1105,12 @@ window.addEventListener('load', () => {
     </div>`;
     $('student-name').value = store.settings.name;
     $('sel-class').value = store.settings.cls || 8;
-    // Restore subject
     if (store.settings.subject) {
       selSubj = store.settings.subject;
       document.querySelectorAll('[data-subj]').forEach(b => {
         b.classList.toggle('selected', b.dataset.subj === selSubj);
       });
     }
-    // Restore difficulty
     if (store.settings.diff) {
       selDiff = store.settings.diff;
       document.querySelectorAll('[data-diff]').forEach(b => {
@@ -1236,22 +1143,23 @@ $('btn-start').addEventListener('click', () => {
   });
   startQuiz();
 });
+$('student-name').addEventListener('keydown', e => { if (e.key === 'Enter') $('btn-start').click(); });
 
 function showErr(m) { const b=$('setup-error'); b.textContent=m; b.style.display='block'; }
 
 // ── Get Questions ──
 function getQuestions() {
-  if (S.subject === 'Mixed All') return getMixedQuestions(S.count, S.difficulty);
+  if (S.subject === 'Mixed All') return getMixedQuestions(S.count, S.difficulty, S.cls);
   const pool = QB[S.subject] || QB['Nepal GK'];
-  return filterAndSample(pool, S.count, S.difficulty);
+  return filterAndSample(pool, S.count, S.difficulty, S.cls);
 }
 
 // ── Quiz ──
 const DC = {
-  Easy:{bg:'#eafaf1',color:'var(--green)'},
-  Medium:{bg:'#fef9e7',color:'var(--gold2)'},
-  Hard:{bg:'#fef0e7',color:'var(--orange)'},
-  Expert:{bg:'#f4ecf7',color:'var(--purple)'},
+  Easy:{bg:'#e6f7ec',color:'var(--green)'},
+  Medium:{bg:'#fdf1de',color:'var(--gold2)'},
+  Hard:{bg:'#fbe9de',color:'var(--orange)'},
+  Expert:{bg:'#f1e7f6',color:'var(--purple)'},
 };
 
 function startQuiz() {
@@ -1302,6 +1210,16 @@ function updateTimer() {
   t.classList.toggle('urgent', S.timeLeft <= 7);
 }
 
+// Keyboard shortcuts: press 1-4 to answer during an active quiz question
+document.addEventListener('keydown', e => {
+  if (!$('screen-quiz').classList.contains('active')) return;
+  if (overlay.classList.contains('show') || leaveModal.classList.contains('show')) return;
+  const idx = { '1':0, '2':1, '3':2, '4':3 }[e.key];
+  if (idx === undefined) return;
+  const btns = $('options').querySelectorAll('.opt-btn');
+  if (btns[idx] && !btns[idx].disabled) btns[idx].click();
+});
+
 function calcPts(diff, tLeft, tPer) {
   const base = {Easy:5, Medium:10, Hard:15, Expert:20}[diff] || 10;
   return base + Math.round(base * (tLeft/tPer) * 0.5);
@@ -1313,7 +1231,6 @@ function pick(chosen) {
   const q = S.questions[S.current], correct = q.ans;
   S.answers.push({chosen, correct, diff:q.diff, type:q.type});
 
-  // Disable options and mark correct/wrong
   $('options').querySelectorAll('.opt-btn').forEach((b, i) => {
     b.disabled = true;
     if (i === correct) b.classList.add('correct');
@@ -1324,7 +1241,6 @@ function pick(chosen) {
   const nextLabel = S.current < S.questions.length-1 ? 'Next Question →' : 'See Results 🏁';
 
   if (chosen === -1) {
-    // ── TIMEOUT ──
     S.streak = 0;
     fb.classList.add('wrong-fb','show');
     $('feedback-icon').textContent = '⏰';
@@ -1340,7 +1256,6 @@ function pick(chosen) {
     };
 
   } else if (chosen === correct) {
-    // ── CORRECT ──
     const p = calcPts(q.diff, S.timeLeft, S.timePerQ);
     S.score += p; S.streak++; if(S.streak>S.bestStreak) S.bestStreak=S.streak;
     fb.classList.add('correct-fb','show');
@@ -1349,7 +1264,6 @@ function pick(chosen) {
     flashScreen('correct');
     if (S.streak >= 3) { playStreakSound(); launchConfetti(120); }
     else { playCorrectSound(); launchConfetti(60); }
-    // Floating score pop at random position near center
     showScorePop(p, window.innerWidth/2 - 30 + (Math.random()-0.5)*60, window.innerHeight*0.4);
     const phrase = CORRECT_PHRASES[Math.floor(Math.random()*CORRECT_PHRASES.length)];
     setTimeout(() => speak(phrase + (S.streak>=3 ? ` Amazing ${S.streak} in a row!` : '') + ' ' + q.exp), 150);
@@ -1361,7 +1275,6 @@ function pick(chosen) {
     };
 
   } else {
-    // ── WRONG ──
     S.streak = 0;
     fb.classList.add('wrong-fb','show');
     $('feedback-icon').textContent = '❌';
@@ -1388,13 +1301,11 @@ function updateLive() {
   $('streak-label').textContent = S.streak >= 3 ? `🔥×${S.streak}` : '';
 }
 
-// Preload voices (some browsers load them async)
 if ('speechSynthesis' in window) {
   window.speechSynthesis.getVoices();
   window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
 
-// Stop speech when navigating away
 $('btn-next').addEventListener('click', () => {
   window.speechSynthesis && window.speechSynthesis.cancel();
   S.current++;
@@ -1419,7 +1330,6 @@ function showResults() {
   showScreen('screen-results');
   window.speechSynthesis && window.speechSynthesis.cancel();
 
-  // Inject partial banner if left early
   const existBanner = document.getElementById('partial-quiz-banner');
   if (existBanner) existBanner.remove();
   if (S.isPartial) {
@@ -1459,10 +1369,8 @@ function showResults() {
   $('result-emoji').textContent = emoji;
   $('result-message').textContent = msg;
 
-  // 🎵 Victory fanfare + speech
   if (pct >= 75) {
-    launchConfetti(160, ['#F4C430','#27AE60','#1A3C6E','#fff','#8E44AD','#E67E22','#C0392B']);
-    // Rising fanfare
+    launchConfetti(160, ['#E8A33D','#2F9E5B','#163457','#fff','#7C4FA0','#DB7F35','#A32638']);
     [523,659,784,880,1047].forEach((f,i) => setTimeout(()=>playTone(f,.2,'sine',.32),i*100));
     setTimeout(()=>playTone(1319,.5,'sine',.3),550);
   } else if (pct >= 50) {
@@ -1473,7 +1381,6 @@ function showResults() {
   }
   setTimeout(()=>speak(`Quiz complete! ${S.name}, you scored ${correct} out of ${total}. That is ${pct} percent. ${msg}`), 800);
 
-  // Review
   const list = $('review-list'); list.innerHTML = '';
   S.questions.forEach((q,i) => {
     const a = S.answers[i], ok = a.chosen === a.correct;
@@ -1493,7 +1400,6 @@ function showResults() {
     list.appendChild(div);
   });
 
-  // AUTO-SAVE RESULT
   const now = new Date();
   saveQuizResult({
     name: S.name, cls: S.cls, subject: S.subject, diff: S.difficulty,
@@ -1589,7 +1495,6 @@ function renderSubjectStats(store) {
     el.innerHTML = `<div class="empty-state"><div class="empty-icon">📊</div><p>No data yet! Complete some quizzes.</p></div>`;
     return;
   }
-  // Aggregate by subject
   const agg = {};
   store.history.forEach(e => {
     if (!agg[e.subject]) agg[e.subject] = {total:0, correct:0, quizzes:0, best:0};
@@ -1618,7 +1523,6 @@ function renderSubjectStats(store) {
   });
 }
 
-// Clear data
 $('btn-clear-data').addEventListener('click', () => {
   if (confirm('Are you sure you want to delete ALL your quiz data? This cannot be undone.')) {
     localStorage.removeItem(STORE_KEY);
@@ -1633,18 +1537,13 @@ $('btn-clear-data').addEventListener('click', () => {
 const leaveModal = document.getElementById('leave-modal');
 
 function openLeaveModal() {
-  // Pause timer
   clearInterval(S.timerInterval);
   window.speechSynthesis && window.speechSynthesis.cancel();
 
-  // Update progress info
-  const done = S.current; // questions answered so far (before current)
-  // Count answered ones
+  const done = S.current;
   const answeredCorrect = S.answers.filter(a => a.chosen === a.correct).length;
   const totalQ = S.questions.length;
-  const elapsed = S.timings.length
-    ? S.timings.reduce((a,b) => a+b, 0)
-    : 0;
+  const elapsed = S.timings.length ? S.timings.reduce((a,b) => a+b, 0) : 0;
 
   $('lpi-done').textContent = `${done} / ${totalQ}`;
   $('lpi-correct').textContent = answeredCorrect;
@@ -1652,13 +1551,11 @@ function openLeaveModal() {
   $('lpi-time').textContent = `${elapsed}s`;
 
   leaveModal.classList.add('show');
-  // Speak warning
   setTimeout(() => speak('Are you sure you want to leave the quiz?'), 100);
 }
 
 function closeLeaveModal() {
   leaveModal.classList.remove('show');
-  // Resume timer if there is a current question not yet answered
   if (S.current < S.questions.length && S.timeLeft > 0 && S.answers.length < S.current + 1) {
     S.timerInterval = setInterval(() => {
       S.timeLeft--;
@@ -1668,18 +1565,15 @@ function closeLeaveModal() {
   }
 }
 
-// Leave button
 $('btn-leave-quiz').addEventListener('click', openLeaveModal);
 document.getElementById('leave-backdrop').addEventListener('click', closeLeaveModal);
 
-// Stay — resume quiz
 $('btn-leave-stay').addEventListener('click', () => {
   closeLeaveModal();
   showToast('▶ Quiz resumed!');
   speak('Good! Let\'s continue the quiz!');
 });
 
-// Save partial & leave — compute partial result and save it
 $('btn-leave-save').addEventListener('click', () => {
   leaveModal.classList.remove('show');
   window.speechSynthesis && window.speechSynthesis.cancel();
@@ -1691,39 +1585,28 @@ $('btn-leave-save').addEventListener('click', () => {
     return;
   }
 
-  // Build partial result and go to results screen
-  // Fill unanswered questions as skipped
   const answeredCount = S.answers.length;
   const totalQ = S.questions.length;
-  // Pad remaining with "skipped"
   for (let i = answeredCount; i < totalQ; i++) {
     S.answers.push({ chosen: -2, correct: S.questions[i].ans, diff: S.questions[i].diff, type: S.questions[i].type });
   }
-  S.current = totalQ; // mark as done
+  S.current = totalQ;
 
-  // Show partial banner flag
   S.isPartial = true;
   showResults();
   showToast('💾 Partial result saved!');
 });
 
-// Quit without saving
 $('btn-leave-confirm').addEventListener('click', () => {
   leaveModal.classList.remove('show');
   clearInterval(S.timerInterval);
   window.speechSynthesis && window.speechSynthesis.cancel();
-  // Play a little whoosh
   playWrongSound();
   Object.assign(S, { questions:[], answers:[], timings:[], current:0, score:0, streak:0, bestStreak:0, isPartial:false });
   showScreen('screen-setup');
   showToast('Quiz left. See you next time! 👋');
   setTimeout(() => speak('Quiz abandoned. See you next time!'), 200);
 });
-
-// Patch showResults to show partial banner when leaving mid-quiz
-const _origShowResults = showResults;
-// Mark partial answers (chosen === -2) as skipped in review
-// Already patched inside showResults by checking isPartial flag
 </script>
 </body>
 </html>
