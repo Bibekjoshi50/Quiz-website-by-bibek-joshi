@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bibek Creative Quiz 🎓</title>
+<title>Bibek Creative Quiz 5–10 🎓</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--crimson:#C0392B;--crimson2:#8B0000;--blue:#1A3C6E;--blue2:#122d52;--gold:#F4C430;--gold2:#c9960e;--green:#27AE60;--red:#E74C3C;--purple:#8E44AD;--orange:#E67E22;--bg:#FDF6EC;--card:#FFFFFF;--text:#1a1a2e;--muted:#7f8c8d;--radius:18px;--shadow:0 8px 32px rgba(26,60,110,.13)}
@@ -223,6 +223,14 @@ h1 span{color:var(--crimson)}
 .empty-state .empty-icon{font-size:3rem;margin-bottom:8px}
 .empty-state p{font-size:.9rem}
 @media(max-width:480px){.stats-row{grid-template-columns:repeat(2,1fr)}.diff-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ══ 2026 UI POLISH ══ */
+.card{transition:transform .2s ease,box-shadow .2s ease}.card:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(26,60,110,.16)}
+.chip,.diff-chip,.btn-start,.btn-next{transition:transform .16s ease,box-shadow .16s ease,background .16s ease}.chip:hover,.diff-chip:hover{transform:translateY(-2px)}
+.btn-start{position:relative;overflow:hidden}.btn-start::after{content:'';position:absolute;inset:-40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-120%) rotate(15deg);animation:shine 4s infinite}.btn-start>*{position:relative;z-index:1}@keyframes shine{45%,100%{transform:translateX(120%) rotate(15deg)}}
+.setup-grid{gap:14px}.field label{font-weight:800;color:var(--blue)}
+@media(min-width:760px){.wrapper{max-width:960px}.setup-grid{grid-template-columns:repeat(2,1fr)}.chip-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:520px){.wrapper{padding-left:10px;padding-right:10px}.card{border-radius:16px}.chip{min-height:54px}.btn-start{position:sticky;bottom:12px;z-index:50}}
 </style>
 </head>
 <body>
@@ -230,7 +238,7 @@ h1 span{color:var(--crimson)}
 <header>
   <div class="logo-badge"><span>🎓</span> Bibek Creative Quiz</div>
   <h1>Learn. Play. <span>Shine.</span></h1>
-  <p class="tagline">with <strong>Bibek Sir</strong> · Classes 6–10 · Nepal 🇳🇵</p>
+  <p class="tagline">with <strong>Bibek Sir</strong> · Classes 5–10 · Nepal 🇳🇵</p>
 </header>
 
 <!-- SAVE TOAST -->
@@ -250,7 +258,7 @@ h1 span{color:var(--crimson)}
         <label>Your Class</label>
         <div class="select-wrap">
           <select id="sel-class">
-            <option value="6">Class 6</option><option value="7">Class 7</option>
+            <option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option>
             <option value="8" selected>Class 8</option><option value="9">Class 9</option>
             <option value="10">Class 10</option>
           </select>
@@ -298,7 +306,7 @@ h1 span{color:var(--crimson)}
           <select id="sel-count">
             <option value="5">5 (Quick)</option><option value="10" selected>10</option>
             <option value="15">15</option><option value="20">20</option>
-            <option value="25">25 (Full Test)</option><option value="30">30 (Mega)</option>
+            <option value="25">25 (Full Test)</option><option value="30">30 (Mega)</option><option value="40">40 (Super)</option><option value="50">50 (Challenge)</option>
           </select>
         </div>
       </div>
@@ -929,7 +937,147 @@ const QB = {
     {q:"The Constitution is:",opts:["A type of tax","The supreme law of a country","A military order","An international treaty"],ans:1,exp:"The Constitution is the supreme law of a country that defines government structure, rights, and duties of citizens.",diff:"Easy",type:"Social"},
     {q:"Which river is the longest in Asia?",opts:["Ganges","Indus","Yangtze","Mekong"],ans:2,exp:"The Yangtze River in China (~6,300 km) is the longest river in Asia.",diff:"Medium",type:"Social"},
   ]
+
 };
+
+// ══════════════════════════════════════════════
+// CLASS 5 FOUNDATION PACK — easy, curriculum-friendly questions
+// These are tagged with classes:[5] so they stay focused on Class 5.
+// To add/edit questions, copy any object below and change q/opts/ans/exp.
+// ══════════════════════════════════════════════
+const CLASS5 = {
+  "Mathematics": [
+    {q:"What is 3,456 + 2,125?",opts:["5,581","5,571","5,681","5,481"],ans:0,exp:"3,456 + 2,125 = 5,581.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"What is 8,000 − 3,275?",opts:["4,625","4,725","4,825","5,725"],ans:1,exp:"8,000 − 3,275 = 4,725.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"What is 25 × 12?",opts:["250","275","300","325"],ans:2,exp:"25 × 12 = 300.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"What is 144 ÷ 12?",opts:["10","11","12","13"],ans:2,exp:"12 × 12 = 144, so 144 ÷ 12 = 12.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"Which fraction is equal to one-half?",opts:["2/3","3/6","4/5","5/8"],ans:1,exp:"3/6 simplifies to 1/2.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"What is 0.5 as a fraction?",opts:["1/5","1/2","5/10 only","2/5"],ans:1,exp:"0.5 = 5/10 = 1/2.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"A rectangle is 8 cm long and 5 cm wide. What is its area?",opts:["13 cm²","26 cm²","40 cm²","80 cm²"],ans:2,exp:"Area = length × width = 8 × 5 = 40 cm².",diff:"Medium",type:"Math",classes:[5]},
+    {q:"How many minutes are in 2 hours?",opts:["60","90","120","180"],ans:2,exp:"1 hour = 60 minutes, so 2 hours = 120 minutes.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"What is the place value of 7 in 57,432?",opts:["7","70","700","7,000"],ans:3,exp:"In 57,432, the 7 is in the thousands place, so its value is 7,000.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"Which is the smallest prime number?",opts:["0","1","2","3"],ans:2,exp:"2 is the smallest prime number and the only even prime.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"What is the perimeter of a square with side 6 cm?",opts:["12 cm","18 cm","24 cm","36 cm"],ans:2,exp:"Perimeter = 4 × 6 = 24 cm.",diff:"Easy",type:"Math",classes:[5]},
+    {q:"If one notebook costs Rs. 45, how much do 4 cost?",opts:["Rs. 160","Rs. 170","Rs. 180","Rs. 200"],ans:2,exp:"45 × 4 = Rs. 180.",diff:"Easy",type:"Math",classes:[5]},
+  ],
+  "Science": [
+    {q:"Which organ helps us breathe?",opts:["Heart","Lungs","Stomach","Brain"],ans:1,exp:"The lungs take oxygen into the body and remove carbon dioxide.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"Which part of a plant absorbs water from the soil?",opts:["Flower","Leaf","Root","Fruit"],ans:2,exp:"Roots absorb water and minerals from the soil.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"Which force pulls objects toward Earth?",opts:["Magnetic force","Gravity","Friction","Light"],ans:1,exp:"Gravity attracts objects toward Earth.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"Water changes into ice when it is:",opts:["Heated","Frozen/cooled","Boiled","Mixed"],ans:1,exp:"Cooling water enough causes it to freeze into ice.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"Which planet do we live on?",opts:["Mars","Venus","Earth","Jupiter"],ans:2,exp:"Earth is the planet on which we live.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"Which of these is a source of light?",opts:["Moon","Sun","Mirror","Book"],ans:1,exp:"The Sun produces its own light; the Moon mainly reflects sunlight.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"What do humans need to breathe?",opts:["Oxygen","Sand","Smoke","Plastic"],ans:0,exp:"Humans need oxygen for respiration.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"Which material is attracted by a magnet?",opts:["Wood","Iron","Paper","Glass"],ans:1,exp:"Iron is a magnetic material and is attracted to magnets.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"Which state of matter has a fixed shape?",opts:["Solid","Liquid","Gas","Steam"],ans:0,exp:"A solid has a definite shape and volume.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"What is the main source of energy for Earth?",opts:["The Sun","The Moon","Clouds","Rocks"],ans:0,exp:"The Sun provides most of Earth's energy.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"Which sense organ is used for hearing?",opts:["Eye","Ear","Nose","Skin"],ans:1,exp:"Our ears detect sound and help us hear.",diff:"Easy",type:"Science",classes:[5]},
+    {q:"Why should we wash our hands before eating?",opts:["To make them cold","To remove germs","To change skin color","To grow taller"],ans:1,exp:"Handwashing removes germs and helps prevent disease.",diff:"Easy",type:"Science",classes:[5]},
+  ],
+  "English": [
+    {q:"Choose the correct plural of 'book'.",opts:["Bookes","Books","Bookies","Book's"],ans:1,exp:"The plural of book is books.",diff:"Easy",type:"English",classes:[5]},
+    {q:"Choose the correct sentence.",opts:["He are happy.","He is happy.","He am happy.","He be happy."],ans:1,exp:"With 'he', the correct present form is 'is'.",diff:"Easy",type:"English",classes:[5]},
+    {q:"What is the opposite of 'early'?",opts:["Fast","Late","Soon","Quick"],ans:1,exp:"Late is the opposite of early.",diff:"Easy",type:"English",classes:[5]},
+    {q:"Which word is a verb?",opts:["Run","Blue","School","Happy"],ans:0,exp:"Run is an action word, so it is a verb.",diff:"Easy",type:"English",classes:[5]},
+    {q:"Fill in: She ___ a mango.",opts:["eat","eats","eating","eaten"],ans:1,exp:"For 'she' in the simple present, use 'eats'.",diff:"Easy",type:"English",classes:[5]},
+    {q:"Which word is a noun?",opts:["Beautiful","Jump","Teacher","Quickly"],ans:2,exp:"Teacher names a person, so it is a noun.",diff:"Easy",type:"English",classes:[5]},
+    {q:"Choose the correct article: ___ apple",opts:["A","An","Thee","No"],ans:1,exp:"Use 'an' before the vowel sound in apple.",diff:"Easy",type:"English",classes:[5]},
+    {q:"What is the past tense of 'go'?",opts:["Goed","Gone","Went","Going"],ans:2,exp:"The past tense of go is went.",diff:"Easy",type:"English",classes:[5]},
+    {q:"Which punctuation mark ends a question?",opts:[".","!","?",", "],ans:2,exp:"A question ends with a question mark (?).",diff:"Easy",type:"English",classes:[5]},
+    {q:"What is a synonym of 'big'?",opts:["Small","Large","Thin","Short"],ans:1,exp:"Large has a similar meaning to big.",diff:"Easy",type:"English",classes:[5]},
+    {q:"Choose the correct spelling.",opts:["Beautifull","Beutiful","Beautiful","Beautifal"],ans:2,exp:"The correct spelling is beautiful.",diff:"Easy",type:"English",classes:[5]},
+    {q:"Which sentence is an instruction?",opts:["I like rice.","Please open the book.","Where are you?","What a beautiful day!"],ans:1,exp:"'Please open the book' gives an instruction or command.",diff:"Medium",type:"English",classes:[5]},
+  ],
+  "Nepali Language": [
+    {q:"'विद्यालय' को अर्थ के हो?",opts:["घर","स्कुल/School","बजार","खेत"],ans:1,exp:"विद्यालय means school.",diff:"Easy",type:"Nepali",classes:[5]},
+    {q:"'ठूलो' को विपरीतार्थक शब्द कुन हो?",opts:["सानो","लामो","मोटो","राम्रो"],ans:0,exp:"सानो means small and is the opposite of ठूलो.",diff:"Easy",type:"Nepali",classes:[5]},
+    {q:"'आकाश' को अर्थ के हो?",opts:["Sky","Water","Earth","Tree"],ans:0,exp:"आकाश means sky.",diff:"Easy",type:"Nepali",classes:[5]},
+    {q:"'राम विद्यालय जान्छ।' वाक्यमा कर्ता को हो?",opts:["विद्यालय","जान्छ","राम","वाक्य"],ans:2,exp:"राम is the person doing the action, so it is the subject/कर्ता.",diff:"Medium",type:"Nepali",classes:[5]},
+    {q:"नेपाली भाषा कुन लिपिमा लेखिन्छ?",opts:["रोमन","देवनागरी","अरबी","चिनियाँ"],ans:1,exp:"Nepali is written in the Devanagari script.",diff:"Easy",type:"Nepali",classes:[5]},
+    {q:"'दिन' को विपरीतार्थक शब्द कुन हो?",opts:["बिहान","रात","साँझ","घाम"],ans:1,exp:"रात means night, the opposite of दिन (day).",diff:"Easy",type:"Nepali",classes:[5]},
+    {q:"'फूल' को बहुवचन कुन हो?",opts:["फूला","फूलहरू","फूलको","फूले"],ans:1,exp:"फूलहरू is a plural form of फूल.",diff:"Easy",type:"Nepali",classes:[5]},
+    {q:"'म' कुन पुरुष हो?",opts:["प्रथम पुरुष","द्वितीय पुरुष","तृतीय पुरुष","कुनै होइन"],ans:0,exp:"म refers to the speaker, so it is first person.",diff:"Medium",type:"Nepali",classes:[5]},
+    {q:"'सुन्दर' को समानार्थी शब्द कुन हो?",opts:["राम्रो","नराम्रो","सानो","टाढा"],ans:0,exp:"राम्रो can mean good/beautiful and is a suitable synonym here.",diff:"Easy",type:"Nepali",classes:[5]},
+    {q:"वाक्यको अन्त्यमा प्रश्न जनाउन कुन चिन्ह प्रयोग हुन्छ?",opts:["।","?",",","!"],ans:1,exp:"The question mark (?) is used for questions.",diff:"Easy",type:"Nepali",classes:[5]},
+    {q:"'खानु' शब्दले के जनाउँछ?",opts:["नाम","काम/क्रिया","गुण","स्थान"],ans:1,exp:"खानु describes an action, so it is a verb/क्रिया.",diff:"Easy",type:"Nepali",classes:[5]},
+    {q:"'ईमानदार' को विपरीतार्थक शब्द कुन हो?",opts:["सत्यवादी","बेइमान","दयालु","मेहनती"],ans:1,exp:"बेइमान means dishonest, the opposite of ईमानदार.",diff:"Medium",type:"Nepali",classes:[5]},
+  ],
+  "Social Studies": [
+    {q:"What is the capital city of Nepal?",opts:["Pokhara","Kathmandu","Dharan","Nepalgunj"],ans:1,exp:"Kathmandu is the capital of Nepal.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"How many provinces are there in Nepal?",opts:["5","6","7","8"],ans:2,exp:"Nepal has 7 provinces.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"Which is a natural resource?",opts:["Water","Plastic","Computer","Road"],ans:0,exp:"Water occurs naturally and is a natural resource.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"Which direction does the Sun appear to rise from?",opts:["West","North","East","South"],ans:2,exp:"The Sun appears to rise in the east and set in the west.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"What is a family?",opts:["A group of related people","A type of road","A mountain","A river"],ans:0,exp:"A family is a group of people related by blood, marriage, adoption, or close family ties.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"Which festival is widely celebrated in Nepal?",opts:["Dashain","Thanksgiving only","Easter only","Halloween only"],ans:0,exp:"Dashain is one of Nepal's major festivals.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"What should a good citizen do?",opts:["Break laws","Protect public property","Pollute rivers","Ignore others"],ans:1,exp:"Good citizens respect laws and help protect public property.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"Which is a means of communication?",opts:["Telephone","Mountain","River","Tree"],ans:0,exp:"A telephone is used to communicate with others.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"Which map direction is opposite to north?",opts:["East","West","South","North-east"],ans:2,exp:"South is opposite to north.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"What is the national flag of Nepal special for?",opts:["It is circular","It is non-rectangular","It has no colors","It is square"],ans:1,exp:"Nepal has the world's only national flag that is not rectangular or square.",diff:"Medium",type:"Social",classes:[5]},
+    {q:"Which place is famous as the birthplace of Gautama Buddha?",opts:["Lumbini","Pokhara","Janakpur","Birgunj"],ans:0,exp:"Lumbini in Nepal is traditionally recognized as the birthplace of Gautama Buddha.",diff:"Easy",type:"Social",classes:[5]},
+    {q:"What do we call rules made for a community or country?",opts:["Laws","Games","Songs","Stories"],ans:0,exp:"Laws are rules that guide behavior in a society.",diff:"Easy",type:"Social",classes:[5]},
+  ],
+  "Computer Science": [
+    {q:"Which device is mainly used to type letters?",opts:["Keyboard","Monitor","Speaker","Printer"],ans:0,exp:"A keyboard is used to enter letters, numbers, and commands.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"Which device shows pictures and text from a computer?",opts:["Monitor","Mouse","Keyboard","Microphone"],ans:0,exp:"A monitor displays visual output from the computer.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"What is a mouse used for?",opts:["Pointing and selecting","Printing paper","Making sound","Storing electricity"],ans:0,exp:"A mouse controls the pointer and helps select items on screen.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"Which of these is used to print documents?",opts:["Scanner","Printer","Mouse","Webcam"],ans:1,exp:"A printer produces a paper copy of a document.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"Which one is a computer file type?",opts:[".jpg",".tree",".water",".road"],ans:0,exp:".jpg is a common image file extension.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"What should you do with a strong password?",opts:["Share it publicly","Keep it private","Post it online","Write it on a public wall"],ans:1,exp:"Passwords should be kept private and not shared with others.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"Which key is commonly used to create a space while typing?",opts:["Enter","Spacebar","Shift","Esc"],ans:1,exp:"The spacebar inserts spaces between words.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"What does WWW stand for?",opts:["World Wide Web","World Web Window","Wide World Word","Web World Work"],ans:0,exp:"WWW stands for World Wide Web.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"Which is safer online?",opts:["Click every unknown link","Use trusted websites","Share passwords","Download unknown files"],ans:1,exp:"Using trusted websites reduces online safety risks.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"Which device can take a photo for a computer?",opts:["Webcam","Keyboard","Printer","Speaker"],ans:0,exp:"A webcam can capture images and video.",diff:"Easy",type:"Computer",classes:[5]},
+    {q:"What is the brain of a computer commonly called?",opts:["CPU","Mouse","Monitor","Keyboard"],ans:0,exp:"The CPU processes instructions and is commonly called the computer's brain.",diff:"Medium",type:"Computer",classes:[5]},
+    {q:"Which one is an example of software?",opts:["Keyboard","Monitor","Paint app","Mouse"],ans:2,exp:"A Paint application is software; the others are hardware devices.",diff:"Easy",type:"Computer",classes:[5]},
+  ],
+  "Nepal GK": [
+    {q:"What is the national flower of Nepal?",opts:["Rose","Laligurans","Sunflower","Jasmine"],ans:1,exp:"Laligurans (rhododendron) is Nepal's national flower.",diff:"Easy",type:"Nepal GK",classes:[5]},
+    {q:"What is Nepal's national bird?",opts:["Danfe","Crow","Parrot","Peacock"],ans:0,exp:"Danfe (Himalayan monal) is Nepal's national bird.",diff:"Easy",type:"Nepal GK",classes:[5]},
+    {q:"What is Nepal's national animal?",opts:["Tiger","Cow","Elephant","Yak"],ans:1,exp:"The cow is Nepal's national animal.",diff:"Easy",type:"Nepal GK",classes:[5]},
+    {q:"Which is the highest mountain in the world?",opts:["K2","Mount Everest","Makalu","Annapurna"],ans:1,exp:"Mount Everest is the world's highest mountain above sea level.",diff:"Easy",type:"Nepal GK",classes:[5]},
+    {q:"What is the currency of Nepal?",opts:["Nepali Rupee","Dollar","Taka","Yen"],ans:0,exp:"Nepal uses the Nepali Rupee as its currency.",diff:"Easy",type:"Nepal GK",classes:[5]},
+    {q:"How many sides does Nepal's national flag shape have at its outer edge?",opts:["4","6","It is made of two pennants","8"],ans:2,exp:"Nepal's flag is formed by two joined triangular pennants.",diff:"Medium",type:"Nepal GK",classes:[5]},
+    {q:"Where is Mount Everest located?",opts:["Nepal's Himalayas","Terai only","Kathmandu city","Pokhara city"],ans:0,exp:"Mount Everest lies in the Himalayas on the Nepal–China border region.",diff:"Easy",type:"Nepal GK",classes:[5]},
+    {q:"Which city is known as the City of Lakes in Nepal?",opts:["Pokhara","Dharan","Butwal","Biratnagar"],ans:0,exp:"Pokhara is famous for its lakes and mountain views.",diff:"Easy",type:"Nepal GK",classes:[5]},
+    {q:"What is the capital of Sudurpashchim Province?",opts:["Dhangadhi","Mahendranagar","Dadeldhura","Tikapur"],ans:0,exp:"Dhangadhi is the provincial capital of Sudurpashchim Province.",diff:"Medium",type:"Nepal GK",classes:[5]},
+    {q:"Which national park is famous for one-horned rhinoceroses?",opts:["Chitwan National Park","Sagarmatha National Park","Rara National Park","Khaptad National Park"],ans:0,exp:"Chitwan National Park is famous for the greater one-horned rhinoceros.",diff:"Easy",type:"Nepal GK",classes:[5]},
+    {q:"What is Nepal's national sport?",opts:["Football","Cricket","Volleyball","Basketball"],ans:2,exp:"Volleyball is Nepal's national sport.",diff:"Easy",type:"Nepal GK",classes:[5]},
+    {q:"Which sacred site is traditionally recognized as Buddha's birthplace?",opts:["Lumbini","Pashupatinath","Muktinath","Janaki Mandir"],ans:0,exp:"Lumbini is recognized as the birthplace of Gautama Buddha.",diff:"Easy",type:"Nepal GK",classes:[5]},
+  ],
+  "Nepali Culture": [
+    {q:"Which festival is known for tika and jamara?",opts:["Dashain","Holi","Tihar","Teej"],ans:0,exp:"Dashain is associated with tika and jamara traditions.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"Which festival is popularly called the festival of lights?",opts:["Dashain","Tihar","Teej","Maghe Sankranti"],ans:1,exp:"Tihar is widely known as the festival of lights.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"Which festival is strongly associated with playing colors?",opts:["Holi","Tihar","Dashain","Buddha Jayanti"],ans:0,exp:"Holi is celebrated with colors and marks the arrival of spring.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"Teej is especially celebrated by many:",opts:["Women","Only soldiers","Only farmers","Only children"],ans:0,exp:"Teej is a major Hindu festival traditionally observed especially by women in Nepal.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"What is a traditional Nepali musical instrument?",opts:["Madal","Guitar only","Piano only","Violin only"],ans:0,exp:"Madal is a traditional Nepali percussion instrument.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"Which food is a popular Nepali dumpling?",opts:["Momo","Pizza","Sushi","Taco"],ans:0,exp:"Momo is a popular dumpling found throughout Nepal.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"Which greeting is commonly used in Nepal?",opts:["Namaste","Bonjour only","Hola only","Ciao only"],ans:0,exp:"Namaste is a widely used respectful greeting in Nepal.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"What is a traditional Nepali cap called?",opts:["Dhaka topi","Fedora","Sombrero","Beret"],ans:0,exp:"Dhaka topi is a traditional Nepali cap.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"Which festival honors the bond between brothers and sisters?",opts:["Bhai Tika","Holi","Teej","Gai Jatra"],ans:0,exp:"Bhai Tika is a Tihar tradition celebrating the sibling bond.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"What is a common traditional Nepali dress for men?",opts:["Daura Suruwal","Kimono","Kilt","Toga"],ans:0,exp:"Daura Suruwal is a traditional Nepali men's dress.",diff:"Easy",type:"Culture",classes:[5]},
+    {q:"Which celebration is associated with worship of the goddess Durga?",opts:["Dashain","Losar","Holi","Indra Jatra"],ans:0,exp:"Dashain prominently celebrates the victory of Durga over evil.",diff:"Medium",type:"Culture",classes:[5]},
+    {q:"Losar is celebrated as a New Year festival by several:",opts:["Himalayan communities","Only tourists","Only athletes","Only shopkeepers"],ans:0,exp:"Losar is a New Year celebration observed by several Himalayan ethnic communities.",diff:"Medium",type:"Culture",classes:[5]},
+  ],
+  "IQ and Logic": [
+    {q:"What comes next: 2, 4, 6, 8, __?",opts:["9","10","11","12"],ans:1,exp:"The numbers increase by 2, so the next number is 10.",diff:"Easy",type:"IQ",classes:[5]},
+    {q:"Which is different from the others?",opts:["Apple","Mango","Banana","Carrot"],ans:3,exp:"Carrot is a vegetable; the others are fruits.",diff:"Easy",type:"IQ",classes:[5]},
+    {q:"If CAT has 3 letters, how many letters are in TIGER?",opts:["4","5","6","7"],ans:1,exp:"T-I-G-E-R has 5 letters.",diff:"Easy",type:"IQ",classes:[5]},
+    {q:"Complete the pattern: A, C, E, G, __",opts:["H","I","J","K"],ans:1,exp:"The pattern skips one letter each time: A, C, E, G, I.",diff:"Easy",type:"IQ",classes:[5]},
+    {q:"If today is Monday, what day is after 2 days?",opts:["Tuesday","Wednesday","Thursday","Friday"],ans:1,exp:"One day after Monday is Tuesday; two days after is Wednesday.",diff:"Easy",type:"IQ",classes:[5]},
+    {q:"Which number does not belong: 3, 5, 7, 10, 11?",opts:["3","7","10","11"],ans:2,exp:"10 is the only even number; the others are odd primes.",diff:"Medium",type:"IQ",classes:[5]},
+    {q:"A clock shows 3:00. Where does the minute hand point?",opts:["3","6","9","12"],ans:3,exp:"At exactly 3:00, the minute hand points to 12.",diff:"Easy",type:"IQ",classes:[5]},
+    {q:"If 1 pencil costs Rs.10, how much do 5 pencils cost?",opts:["Rs. 20","Rs. 40","Rs. 50","Rs. 60"],ans:2,exp:"5 × Rs.10 = Rs.50.",diff:"Easy",type:"IQ",classes:[5]},
+    {q:"Which shape has no corners?",opts:["Square","Triangle","Circle","Rectangle"],ans:2,exp:"A circle has no corners or vertices.",diff:"Easy",type:"IQ",classes:[5]},
+    {q:"Find the missing number: 5, 10, 15, __, 25",opts:["18","20","21","30"],ans:1,exp:"The pattern adds 5 each time, so 20 comes next.",diff:"Easy",type:"IQ",classes:[5]},
+    {q:"If all birds have wings and a sparrow is a bird, what can we say?",opts:["A sparrow has wings","A sparrow is a fish","A sparrow has no wings","Nothing"],ans:0,exp:"From the given statements, a sparrow has wings.",diff:"Medium",type:"IQ",classes:[5]},
+    {q:"Which word can be made by rearranging 'NEPAL'?",opts:["PLANE","PANEL","NEPAL","Both PANEL and NEPAL"],ans:3,exp:"PANEL and NEPAL use the same five letters in different orders.",diff:"Medium",type:"IQ",classes:[5]},
+  ]
+};
+
+Object.entries(CLASS5).forEach(([subject, questions]) => {
+  if (!QB[subject]) QB[subject] = [];
+  QB[subject].push(...questions);
+});
 
 // Mixed All pulls from all categories
 function getMixedQuestions(count, diffFilter) {
@@ -939,9 +1087,11 @@ function getMixedQuestions(count, diffFilter) {
 }
 
 function filterAndSample(pool, count, diffFilter) {
-  let filtered = diffFilter === 'Mixed' ? pool :
-    pool.filter(q => q.diff === diffFilter);
-  if (filtered.length < count) filtered = pool; // fallback
+  const classNo = Number(S.cls || 8);
+  const classPool = pool.filter(q => !q.classes || q.classes.includes(classNo));
+  let filtered = diffFilter === 'Mixed' ? classPool :
+    classPool.filter(q => q.diff === diffFilter);
+  if (filtered.length < count) filtered = classPool.length ? classPool : pool; // fallback
   // Shuffle
   const shuffled = [...filtered].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, count);
